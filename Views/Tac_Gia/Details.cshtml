@@ -1,0 +1,35 @@
+﻿@model CNPM_Project_web.Model.Tac_Gia
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Home/About.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Tac_Gia</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TEN_TAC_GIA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TEN_TAC_GIA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MO_TA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MO_TA)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_TAC_GIA }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,58 @@
+﻿@model CNPM_Project_web.Model.USER
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>USER</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.PASSWORD)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.PASSWORD)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.EMAIL)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.EMAIL)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Khach_Hang.HO_TEN_KH)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Khach_Hang.HO_TEN_KH)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Role.TEN_ROLE)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Role.TEN_ROLE)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.USERNAME }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>
