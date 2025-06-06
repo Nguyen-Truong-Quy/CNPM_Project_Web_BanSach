@@ -1,0 +1,141 @@
+CREATE DATABASE DEMO_CNPM_WEB_BAN_HANG;
+
+USE DEMO_CNPM_WEB_BAN_HANG;
+GO
+-- Bảng Roles (Phân quyền người dùng)
+CREATE TABLE Roles (
+    ID_ROLE INT PRIMARY KEY,
+    TEN_ROLE NVARCHAR(50) NOT NULL -- Ví dụ: Admin, KhachHang, NhanVien
+);
+-- Bảng Tac_Gia (Quản lý thông tin tác giả)
+CREATE TABLE Tac_Gia (
+    ID_TAC_GIA INT IDENTITY(1,1) PRIMARY KEY,
+    TEN_TAC_GIA NVARCHAR(100) NOT NULL,
+    MO_TA NVARCHAR(500) -- Thông tin tiểu sử tác giả
+);
+CREATE TABLE Nha_Xuat_Ban (
+    ID_NXB INT IDENTITY(1,1) PRIMARY KEY,
+    TEN_NXB NVARCHAR(100) NOT NULL,
+    DIA_CHI NVARCHAR(200),
+    EMAIL NVARCHAR(100)
+);
+
+-- Bảng Khach_Hang
+CREATE TABLE Khach_Hang (
+    MA_KH NVARCHAR(20) PRIMARY KEY, -- Tăng độ dài mã để linh hoạt hơn
+    HO_TEN_KH NVARCHAR(40) NOT NULL,
+    SDT_KH NVARCHAR(15),
+    DIA_CHI NVARCHAR(120),
+    EMAIL NVARCHAR(100),
+    ANH_DAI_DIEN NVARCHAR(255) -- Lưu đường dẫn ảnh thay vì kiểu IMAGE
+);
+-- Bảng USERS
+CREATE TABLE USERS (
+    USERNAME NVARCHAR(255) PRIMARY KEY,
+    PASSWORD NVARCHAR(255) NOT NULL, -- Lưu ý: Mật khẩu nên được băm (hashed) trước khi lưu
+    ID_ROLE INT,
+    MA_KH NVARCHAR(20),
+    CONSTRAINT fk_users_khach_hang FOREIGN KEY (MA_KH) REFERENCES Khach_Hang(MA_KH),
+    CONSTRAINT fk_users_roles FOREIGN KEY (ID_ROLE) REFERENCES Roles(ID_ROLE)
+);
+
+-- Bảng Danh_Muc
+CREATE TABLE Danh_Muc (
+    ID_DANH_MUC INT IDENTITY(1,1) PRIMARY KEY,
+    THE_LOAI_SP NVARCHAR(50) NOT NULL -- Ví dụ: Văn học, Khoa học, Truyện tranh
+);
+-- Bảng Khuyen_Mai
+CREATE TABLE Khuyen_Mai (
+    MA_KHUYEN_MAI NVARCHAR(20) PRIMARY KEY, -- Tăng độ dài mã
+    TEN_KHUYEN_MAI NVARCHAR(100) NOT NULL,
+    PHAN_TRAM_GIAM INT CHECK (PHAN_TRAM_GIAM BETWEEN 0 AND 100),
+    NGAY_BAT_DAU DATE,
+    NGAY_KET_THUC DATE,
+    CONSTRAINT chk_date_khuyen_mai CHECK (NGAY_KET_THUC >= NGAY_BAT_DAU) -- Ràng buộc thời gian
+);
+CREATE TABLE San_Pham (
+    MA_SP NVARCHAR(20) PRIMARY KEY, -- Tăng độ dài mã, có thể dùng ISBN
+    TEN_SP NVARCHAR(100) NOT NULL,
+    MO_TA NVARCHAR(500),
+    GIA_GOC DECIMAL(10,2) NOT NULL,
+    DISCOUNT INT CHECK (DISCOUNT BETWEEN 0 AND 100) DEFAULT 0,
+    GIA_BAN AS (GIA_GOC * (1 - DISCOUNT / 100.0)) PERSISTED,
+    HINH_ANH NVARCHAR(255) NOT NULL, 
+    TON_KHO INT NOT NULL DEFAULT 0,
+    ID_DANH_MUC INT,
+    MA_KHUYEN_MAI NVARCHAR(20),
+    ID_TAC_GIA INT,
+	ID_NXB INT, 
+    NAM_XUAT_BAN INT,
+
+
+    CONSTRAINT fk_sanpham_danhmuc FOREIGN KEY (ID_DANH_MUC) REFERENCES Danh_Muc(ID_DANH_MUC),
+    CONSTRAINT fk_sanpham_khuyenmai FOREIGN KEY (MA_KHUYEN_MAI) REFERENCES Khuyen_Mai(MA_KHUYEN_MAI),
+    CONSTRAINT fk_sanpham_tacgia FOREIGN KEY (ID_TAC_GIA) REFERENCES Tac_Gia(ID_TAC_GIA),
+    CONSTRAINT fk_sanpham_nxb FOREIGN KEY (ID_NXB) REFERENCES Nha_Xuat_Ban(ID_NXB)
+);
+-- Bảng Trang_Thai
+CREATE TABLE Trang_Thai (
+    ID_TRANG_THAI INT IDENTITY(1,1) PRIMARY KEY,
+    TEN_TRANG_THAI NVARCHAR(50) NOT NULL -- Ví dụ: Chờ xác nhận, Đang giao, Hoàn thành
+);
+
+-- Bảng Don_Hang
+CREATE TABLE Don_Hang (
+    ID_DON_HANG INT IDENTITY(1,1) PRIMARY KEY,
+    MA_KH NVARCHAR(20),
+    TG_DAT_HANG DATETIME2 DEFAULT GETDATE(),
+    ID_TRANG_THAI INT,
+    TONG_TIEN DECIMAL(10,2),
+    CONSTRAINT fk_donhang_khachhang FOREIGN KEY (MA_KH) REFERENCES Khach_Hang(MA_KH),
+    CONSTRAINT fk_donhang_trangthai FOREIGN KEY (ID_TRANG_THAI) REFERENCES Trang_Thai(ID_TRANG_THAI)
+);
+
+-- Bảng Chi_Tiet_Don_Hang
+CREATE TABLE Chi_Tiet_Don_Hang (
+    ID_DON_HANG INT,
+    MA_SP NVARCHAR(20),
+    SO_LUONG INT CHECK (SO_LUONG > 0) DEFAULT 1,
+    GIA_BAN DECIMAL(10,2) NOT NULL,
+    CONSTRAINT pk_chitiet_donhang PRIMARY KEY (ID_DON_HANG, MA_SP),
+    CONSTRAINT fk_chitiet_donhang_donhang FOREIGN KEY (ID_DON_HANG) REFERENCES Don_Hang(ID_DON_HANG),
+    CONSTRAINT fk_chitiet_donhang_sanpham FOREIGN KEY (MA_SP) REFERENCES San_Pham(MA_SP)
+);
+-- Bảng Gio_Hang
+CREATE TABLE Gio_Hang (
+    MA_KH NVARCHAR(20),
+    MA_SP NVARCHAR(20),
+    SO_LUONG INT CHECK (SO_LUONG > 0) DEFAULT 1,
+    NGAY_TAO DATETIME2 DEFAULT GETDATE(),
+    CONSTRAINT pk_giohang PRIMARY KEY (MA_KH, MA_SP),
+    CONSTRAINT fk_giohang_khachhang FOREIGN KEY (MA_KH) REFERENCES Khach_Hang(MA_KH),
+    CONSTRAINT fk_giohang_sanpham FOREIGN KEY (MA_SP) REFERENCES San_Pham(MA_SP)
+);
+
+-- Bảng Danh_Gia (Lưu đánh giá và nhận xét về sách)
+CREATE TABLE Danh_Gia (
+    ID_DANH_GIA INT IDENTITY(1,1) PRIMARY KEY,
+    MA_KH NVARCHAR(20),
+    MA_SP NVARCHAR(20),
+    DIEM_DANH_GIA INT CHECK (DIEM_DANH_GIA BETWEEN 1 AND 5), -- Điểm từ 1 đến 5
+    NHAN_XET NVARCHAR(500),
+    NGAY_DANH_GIA DATETIME2 DEFAULT GETDATE(),
+    CONSTRAINT fk_danhgia_khachhang FOREIGN KEY (MA_KH) REFERENCES Khach_Hang(MA_KH),
+    CONSTRAINT fk_danhgia_sanpham FOREIGN KEY (MA_SP) REFERENCES San_Pham(MA_SP)
+);
+-- Bảng Lich_Su_Don_Hang
+CREATE TABLE Lich_Su_Don_Hang (
+    ID INT IDENTITY PRIMARY KEY,
+    ID_DON_HANG INT,
+    ID_TRANG_THAI INT,
+    NGAY_CAP_NHAT DATETIME2 DEFAULT GETDATE(),
+    GHI_CHU NVARCHAR(255),
+    FOREIGN KEY (ID_DON_HANG) REFERENCES Don_Hang(ID_DON_HANG),
+    FOREIGN KEY (ID_TRANG_THAI) REFERENCES Trang_Thai(ID_TRANG_THAI)
+);
+
+-- Tạo chỉ mục (INDEX) để tối ưu hóa truy vấn
+CREATE INDEX idx_donhang_makh ON Don_Hang(MA_KH);
+CREATE INDEX idx_sanpham_danhmuc ON San_Pham(ID_DANH_MUC);
+CREATE INDEX idx_giohang_makh ON Gio_Hang(MA_KH);
+CREATE INDEX idx_danhgia_masp ON Danh_Gia(MA_SP);

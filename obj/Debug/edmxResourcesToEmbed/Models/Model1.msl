@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DEMO_CNPM_WEB_BAN_HANGModelStoreContainer" CdmEntityContainer="DEMO_CNPM_WEB_BAN_HANGEntities">
+    <EntitySetMapping Name="Chi_Tiet_Don_Hang">
+      <EntityTypeMapping TypeName="DEMO_CNPM_WEB_BAN_HANGModel.Chi_Tiet_Don_Hang">
+        <MappingFragment StoreEntitySet="Chi_Tiet_Don_Hang">
+          <ScalarProperty Name="ID_DON_HANG" ColumnName="ID_DON_HANG" />
+          <ScalarProperty Name="MA_SP" ColumnName="MA_SP" />
+          <ScalarProperty Name="SO_LUONG" ColumnName="SO_LUONG" />
+          <ScalarProperty Name="GIA_BAN" ColumnName="GIA_BAN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Danh_Gia">
+      <EntityTypeMapping TypeName="DEMO_CNPM_WEB_BAN_HANGModel.Danh_Gia">
+        <MappingFragment StoreEntitySet="Danh_Gia">
+          <ScalarProperty Name="ID_DANH_GIA" ColumnName="ID_DANH_GIA" />
+          <ScalarProperty Name="MA_KH" ColumnName="MA_KH" />
+          <ScalarProperty Name="MA_SP" ColumnName="MA_SP" />
+          <ScalarProperty Name="DIEM_DANH_GIA" ColumnName="DIEM_DANH_GIA" />
+          <ScalarProperty Name="NHAN_XET" ColumnName="NHAN_XET" />
+          <ScalarProperty Name="NGAY_DANH_GIA" ColumnName="NGAY_DANH_GIA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Danh_Muc">
+      <EntityTypeMapping TypeName="DEMO_CNPM_WEB_BAN_HANGModel.Danh_Muc">
+        <MappingFragment StoreEntitySet="Danh_Muc">
+          <ScalarProperty Name="ID_DANH_MUC" ColumnName="ID_DANH_MUC" />
+          <ScalarProperty Name="THE_LOAI_SP" ColumnName="THE_LOAI_SP" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Don_Hang">
+      <EntityTypeMapping TypeName="DEMO_CNPM_WEB_BAN_HANGModel.Don_Hang">
+        <MappingFragment StoreEntitySet="Don_Hang">
+          <ScalarProperty Name="ID_DON_HANG" ColumnName="ID_DON_HANG" />
+          <ScalarProperty Name="MA_KH" ColumnName="MA_KH" />
+          <ScalarProperty Name="TG_DAT_HANG" ColumnName="TG_DAT_HANG" />
+          <ScalarProperty Name="ID_TRANG_THAI" ColumnName="ID_TRANG_THAI" />
+          <ScalarProperty Name="TONG_TIEN" ColumnName="TONG_TIEN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Gio_Hang">
+      <EntityTypeMapping TypeName="DEMO_CNPM_WEB_BAN_HANGModel.Gio_Hang">
+        <MappingFragment StoreEntitySet="Gio_Hang">
+          <ScalarProperty Name="MA_KH" ColumnName="MA_KH" />
+          <ScalarProperty Name="MA_SP" ColumnName="MA_SP" />
+          <ScalarProperty Name="SO_LUONG" ColumnName="SO_LUONG" />
+          <ScalarProperty Name="NGAY_TAO" ColumnName="NGAY_TAO" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Khach_Hang">
+      <EntityTypeMapping TypeName="DEMO_CNPM_WEB_BAN_HANGModel.Khach_Hang">
+        <MappingFragment StoreEntitySet="Khach_Hang">
+          <ScalarProperty Name="MA_KH" ColumnName="MA_KH" />
+          <ScalarProperty Name="HO_TEN_KH" ColumnName="HO_TEN_KH" />
+          <ScalarProperty Name="SDT_KH" ColumnName="SDT_KH" />
+          <ScalarProperty Name="DIA_CHI" ColumnName="DIA_CHI" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+          <ScalarProperty Name="ANH_DAI_DIEN" ColumnName="ANH_DAI_DIEN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Khuyen_Mai">
+      <EntityTypeMapping TypeName="DEMO_CNPM_WEB_BAN_HANGModel.Khuyen_Mai">
+        <MappingFragment StoreEntitySet="Khuyen_Mai">
+          <ScalarProperty Name="MA_KHUYEN_MAI" ColumnName="MA_KHUYEN_MAI" />
+          <ScalarProperty Name="TEN_KHUYEN_MAI" ColumnName="TEN_KHUYEN_MAI" />
+          <ScalarProperty Name="PHAN_TRAM_GIAM" ColumnName="PHAN_TRAM_GIAM" />
+          <ScalarProperty Name="NGAY_BAT_DAU" ColumnName="NGAY_BAT_DAU" />
+          <ScalarProperty Name="NGAY_KET_THUC" ColumnName="NGAY_KET_THUC" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Lich_Su_Don_Hang">
+      <EntityTypeMapping TypeName="DEMO_CNPM_WEB_BAN_HANGModel.Lich_Su_Don_Hang">
+        <MappingFragment StoreEntitySet="Lich_Su_Don_Hang">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="ID_DON_HANG" ColumnName="ID_DON_HANG" />
+          <ScalarProperty Name="ID_TRANG_THAI" ColumnName="ID_TRANG_THAI" />
+          <ScalarProperty Name="NGAY_CAP_NHAT" ColumnName="NGAY_CAP_NHAT" />
+          <ScalarProperty Name="GHI_CHU" ColumnName="GHI_CHU" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Nha_Xuat_Ban">
+      <EntityTypeMapping TypeName="DEMO_CNPM_WEB_BAN_HANGModel.Nha_Xuat_Ban">
+        <MappingFragment StoreEntitySet="Nha_Xuat_Ban">
+          <ScalarProperty Name="ID_NXB" ColumnName="ID_NXB" />
+          <ScalarProperty Name="TEN_NXB" ColumnName="TEN_NXB" />
+          <ScalarProperty Name="DIA_CHI" ColumnName="DIA_CHI" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="DEMO_CNPM_WEB_BAN_HANGModel.Role">
+        <MappingFragment StoreEntitySet="Roles">
+          <ScalarProperty Name="ID_ROLE" ColumnName="ID_ROLE" />
+          <ScalarProperty Name="TEN_ROLE" ColumnName="TEN_ROLE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="San_Pham">
+      <EntityTypeMapping TypeName="DEMO_CNPM_WEB_BAN_HANGModel.San_Pham">
+        <MappingFragment StoreEntitySet="San_Pham">
+          <ScalarProperty Name="MA_SP" ColumnName="MA_SP" />
+          <ScalarProperty Name="TEN_SP" ColumnName="TEN_SP" />
+          <ScalarProperty Name="MO_TA" ColumnName="MO_TA" />
+          <ScalarProperty Name="GIA_GOC" ColumnName="GIA_GOC" />
+          <ScalarProperty Name="DISCOUNT" ColumnName="DISCOUNT" />
+          <ScalarProperty Name="GIA_BAN" ColumnName="GIA_BAN" />
+          <ScalarProperty Name="HINH_ANH" ColumnName="HINH_ANH" />
+          <ScalarProperty Name="TON_KHO" ColumnName="TON_KHO" />
+          <ScalarProperty Name="ID_DANH_MUC" ColumnName="ID_DANH_MUC" />
+          <ScalarProperty Name="MA_KHUYEN_MAI" ColumnName="MA_KHUYEN_MAI" />
+          <ScalarProperty Name="ID_TAC_GIA" ColumnName="ID_TAC_GIA" />
+          <ScalarProperty Name="ID_NXB" ColumnName="ID_NXB" />
+          <ScalarProperty Name="NAM_XUAT_BAN" ColumnName="NAM_XUAT_BAN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tac_Gia">
+      <EntityTypeMapping TypeName="DEMO_CNPM_WEB_BAN_HANGModel.Tac_Gia">
+        <MappingFragment StoreEntitySet="Tac_Gia">
+          <ScalarProperty Name="ID_TAC_GIA" ColumnName="ID_TAC_GIA" />
+          <ScalarProperty Name="TEN_TAC_GIA" ColumnName="TEN_TAC_GIA" />
+          <ScalarProperty Name="MO_TA" ColumnName="MO_TA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Trang_Thai">
+      <EntityTypeMapping TypeName="DEMO_CNPM_WEB_BAN_HANGModel.Trang_Thai">
+        <MappingFragment StoreEntitySet="Trang_Thai">
+          <ScalarProperty Name="ID_TRANG_THAI" ColumnName="ID_TRANG_THAI" />
+          <ScalarProperty Name="TEN_TRANG_THAI" ColumnName="TEN_TRANG_THAI" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="USERS">
+      <EntityTypeMapping TypeName="DEMO_CNPM_WEB_BAN_HANGModel.USER">
+        <MappingFragment StoreEntitySet="USERS">
+          <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+          <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+          <ScalarProperty Name="ID_ROLE" ColumnName="ID_ROLE" />
+          <ScalarProperty Name="MA_KH" ColumnName="MA_KH" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

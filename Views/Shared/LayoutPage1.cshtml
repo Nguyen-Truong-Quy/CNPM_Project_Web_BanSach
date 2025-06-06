@@ -1,0 +1,236 @@
+﻿<!DOCTYPE html>
+
+<style>
+    /*Phần header*/
+    head {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 120px;
+        background-color: white;
+        border-bottom: 1px solid #e5e5e5;
+    }
+
+    .header-left {
+        display: flex;
+        align-items: center;
+    }
+
+        .header-left img {
+            height: 80px;
+            margin-right: 20px;
+        }
+
+    .search-bar {
+        display: flex;
+        align-items: center;
+    }
+
+        .search-bar input {
+            padding: 10px;
+            font-size: 14px;
+            width: 400px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .search-bar button {
+            padding: 10px;
+            margin-left: 5px;
+            background-color: #2874f0;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+    .header-links {
+        display: flex;
+        align-items: center;
+    }
+
+        .header-links a {
+            margin: 0 10px;
+            color: black;
+            text-decoration: none;
+        }
+
+    .diachi {
+        color: gray;
+        font-size: 14px;
+    }
+
+
+    /*Phần bottom*/
+    bottom {
+        font-family: Arial, sans-serif;
+        background-color: rgba(0, 0, 0, 0.1);
+    }
+
+    .footer {
+        display: flex;
+        justify-content: space-between;
+        background-color: #201e1e;
+        padding: 20px 250px;
+    }
+
+    .footer-section {
+        width: 20%;
+    }
+
+        .footer-section h3 {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .footer-section ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+            .footer-section ul li {
+                margin-bottom: 8px;
+                color: gray;
+            }
+
+                .footer-section ul li a {
+                    text-decoration: none;
+                    color: gray;
+                }
+
+        .footer-section .payment-icons {
+            display: flex;
+            padding-right: 10px;
+        }
+
+            .footer-section .payment-icons img {
+                width: 40px;
+                padding: 10px 10px;
+            }
+
+        .footer-section .social-icons img {
+            margin-right: 10px;
+            width: 40px
+        }
+
+    .qr-code {
+        display: flex;
+    }
+
+        .qr-code img {
+            width: 100px;
+        }
+
+    .giaohang {
+        width: 100px;
+    }
+</style>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrangChu</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+
+    <div class="header">
+        <div class="header-left">
+            <img src="~/Hinh/thiet-ke-logo-quan-an-1.jpg" alt="Logo">
+            <div class="search-bar">
+                <input type="text" placeholder="Hãy tìm món ăn ở đây">
+                <button>Tìm kiếm</button>
+            </div>
+        </div>
+        <div class="header-links">
+            <i class="fas fa-home"></i>
+            <a href="@Url.Action("Home","TrangChu")">Trang chủ</a>
+            <i class="far fa-laugh-wink"></i>
+            <a href="@Url.Action("_LayoutDangnhap","DangNhap")">Tài khoản</a>
+            <a href="@Url.Action("_LayoutGiohang","GioHang")">
+                <i class="fas fa-shopping-cart"></i>
+            </a>
+
+        </div>
+        <div class="diachi">
+            Giao đến: <a href="#">Q. 1, P. Bến Nghé, Hồ Chí Minh</a>
+        </div>
+    </div>
+
+</head>
+<body>
+    <div>
+        @RenderBody()
+    </div>
+</body>
+<bottom>
+    <div class="footer">
+        <div class="footer-section">
+            <h3>Hỗ trợ khách hàng</h3>
+            <ul>
+                <li>Hotline: 1900-6035</li>
+                <li>(1000 đ/phút, 8-21h kể cả T7, CN)</li>
+                <li><a href="#">Các câu hỏi thường gặp</a></li>
+                <li><a href="#">Gửi yêu cầu hỗ trợ</a></li>
+                <li><a href="#">Hướng dẫn đặt hàng</a></li>
+                <li><a href="mailto:hotro@tiki.vn">Hỗ trợ khách hàng: hotro@fastfood.vn</a></li>
+                <li><a href="mailto:security@tiki.vn">Báo lỗi bảo mật: security@fastfood.vn</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h3>Về FastFood</h3>
+            <ul>
+                <li><a href="#">Giới thiệu FastFood</a></li>
+                <li><a href="#">FastFood Blog</a></li>
+                <li><a href="#">Tuyển dụng</a></li>
+                <li><a href="#">Chính sách bảo mật thanh toán</a></li>
+                <li><a href="#">Chính sách bảo mật thông tin cá nhân</a></li>
+                <li><a href="#">Chính sách giải quyết khiếu nại</a></li>
+                <li><a href="#">Điều khoản sử dụng</a></li>
+                <li><a href="#">Giới thiệu FastFood</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h3>Hợp tác và liên kết</h3>
+            <ul>
+                <li><a href="#">Quy chế hoạt động</a></li>
+            </ul>
+
+        </div>
+
+        <div class="footer-section">
+            <h3>Phương thức thanh toán</h3>
+            <div class="payment-icons">
+                <img src="~/Hinh/logo-vietcombank.png" alt="Vietcombank">
+                <img src="~/Hinh/logo-momo.png" alt="MoMo">
+                <img src="~/Hinh/logo-zalo-vector-31.jpg" alt="ZaloPay">
+            </div>
+            <h3>Dịch vụ giao hàng</h3>
+            <img src="~/Hinh/giaohang.png" alt="TikiNow" class="giaohang">
+        </div>
+
+        <div class="footer-section">
+            <h3>Kết nối với chúng tôi</h3>
+            <div class="social-icons">
+                <img src="~/Hinh/facebook.png" alt="Facebook">
+                <img src="~/Hinh//logo-zalo-vector-31.jpg" alt="Zalo">
+            </div>
+            <h3>Tải ứng dụng trên điện thoại</h3>
+            <div class="qr-code">
+                <img src="~/Hinh/CHplay.png" alt="QR Code">
+                <img src="~/Hinh/apple-app-store-qr-code-sticker-ubf4f-x450.png" alt="QR Code">
+            </div>
+        </div>
+    </div>
+</bottom>
+</html>
