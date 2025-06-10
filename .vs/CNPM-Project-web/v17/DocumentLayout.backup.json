@@ -7,15 +7,15 @@
       "RelativeMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|solutionrelative:controllers\\chitietsanphamcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|d:\\wed b\u00E1n s\u00E1ch cnpm\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|D:\\wed b\u00E1n s\u00E1ch CNPM\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|solutionrelative:controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|d:\\wed b\u00E1n s\u00E1ch cnpm\\controllers\\giohangcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|D:\\wed b\u00E1n s\u00E1ch CNPM\\controllers\\giohangcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|solutionrelative:controllers\\giohangcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|d:\\wed b\u00E1n s\u00E1ch cnpm\\views\\trangchu\\home2.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|D:\\wed b\u00E1n s\u00E1ch CNPM\\views\\trangchu\\home2.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|solutionrelative:views\\trangchu\\home2.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
@@ -83,8 +83,7 @@
               "RelativeToolTip": "Controllers\\HomeController.cs",
               "ViewState": "AgIAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-06T03:22:31.252Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-06T03:22:31.252Z"
             },
             {
               "$type": "Document",
@@ -96,8 +95,7 @@
               "RelativeToolTip": "Controllers\\GiohangController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-06T03:21:49.321Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-06T03:21:49.321Z"
             },
             {
               "$type": "Document",
@@ -121,8 +119,7 @@
               "RelativeToolTip": "Views\\TrangChu\\Home2.cshtml",
               "ViewState": "AgIAABwBAAAAAAAAAAAAwD4BAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-04T15:53:12.101Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-04T15:53:12.101Z"
             },
             {
               "$type": "Document",
