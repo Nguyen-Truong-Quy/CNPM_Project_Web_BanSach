@@ -81,3 +81,13 @@ E:\CNPM_Project_Web_BanSach\obj\Debug\CNPM-Project-web.csproj.CoreCompileInputs.
 E:\CNPM_Project_Web_BanSach\obj\Debug\CNPM-Pro.C728C472.Up2Date
 E:\CNPM_Project_Web_BanSach\obj\Debug\CNPM-Project-web.dll
 E:\CNPM_Project_Web_BanSach\obj\Debug\CNPM-Project-web.pdb
+E:\CNPM_Project_Web_BanSach\bin\BCrypt.Net-Next.dll
+E:\CNPM_Project_Web_BanSach\bin\System.Buffers.dll
+E:\CNPM_Project_Web_BanSach\bin\System.Memory.dll
+E:\CNPM_Project_Web_BanSach\bin\System.Numerics.Vectors.dll
+E:\CNPM_Project_Web_BanSach\bin\System.Runtime.CompilerServices.Unsafe.dll
+E:\CNPM_Project_Web_BanSach\bin\BCrypt.Net-Next.xml
+E:\CNPM_Project_Web_BanSach\bin\System.Buffers.xml
+E:\CNPM_Project_Web_BanSach\bin\System.Memory.xml
+E:\CNPM_Project_Web_BanSach\bin\System.Numerics.Vectors.xml
+E:\CNPM_Project_Web_BanSach\bin\System.Runtime.CompilerServices.Unsafe.xml

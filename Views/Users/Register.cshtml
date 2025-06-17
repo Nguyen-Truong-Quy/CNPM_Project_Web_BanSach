@@ -15,13 +15,18 @@
             <div class="title-login">Register</div>
             @if (ViewBag.SuccessMessage != null)
             {
-                <div class="alert alert-success" style="margin-bottom: 15px; padding: 10px; background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; border-radius: 5px;">
+                <div class="alert alert-success">
                     @ViewBag.SuccessMessage
+                </div>
+            }
+            @if (ViewBag.ErrorMessage != null)
+            {
+                <div class="alert alert-danger">
+                    @ViewBag.ErrorMessage
                 </div>
             }
         </div>
 
-        <!-- REGISTER FORM -->
         @using (Html.BeginForm("Register", "Users", FormMethod.Post, new { @class = "register-form", autocomplete = "off" }))
         {
             @Html.AntiForgeryToken()
@@ -31,11 +36,13 @@
                 @Html.LabelFor(m => m.Username, new { @class = "label" })
                 <i class='bx bx-user icon'></i>
             </div>
+
             <div class="input-box">
                 @Html.TextBoxFor(m => m.Email, new { @class = "input-field", required = "required", type = "email" })
                 @Html.LabelFor(m => m.Email, new { @class = "label" })
                 <i class='bx bx-envelope icon'></i>
             </div>
+
             <div class="input-box">
                 @Html.PasswordFor(m => m.Password, new { @class = "input-field", required = "required" })
                 @Html.LabelFor(m => m.Password, new { @class = "label" })
@@ -44,20 +51,40 @@
 
             <div class="form-cols">
                 <div class="col-1">
-                    <input type="checkbox" id="agree">
+                    <input type="checkbox" id="agree" name="agree" required />
                     <label for="agree"> I agree to terms & conditions</label>
                 </div>
-                <div class="col-2"></div>
             </div>
+
+            if (ViewBag.ShowOtpBox == true)
+            {
+                <div class="input-box" id="otpBox">
+                    <input type="text" name="Otp" class="input-field" placeholder="Nhập mã OTP" required />
+                    <label class="label">Mã OTP</label>
+                    <i class='bx bx-key icon'></i>
+                </div>
+            }
+
             <div class="input-box">
                 <button type="submit" class="btn-submit">Sign Up <i class='bx bx-user-plus'></i></button>
             </div>
+
             <div class="switch-form">
                 <span>Already have an account? <a href="@Url.Action("Login", "Account")">Login</a></span>
             </div>
         }
-
-
     </div>
 </body>
 </html>
+<script>
+    // Nếu có thông báo thành công từ ViewBag, reload sau 2 giây
+    @if (ViewBag.SuccessMessage != null)
+    {
+        <text>
+            setTimeout(function () {
+                window.location.href = '@Url.Action("Register", "Users")';
+            }, 2000);
+        </text>
+    }
+</script>
+
