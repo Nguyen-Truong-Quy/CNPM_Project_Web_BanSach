@@ -3,15 +3,43 @@
   "WorkspaceRootPath": "E:\\CNPM_Project_Web_BanSach\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|e:\\cnpm_project_web_bansach\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|solutionrelative:views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|E:\\CNPM_Project_Web_BanSach\\css\\login.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|solutionrelative:css\\login.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|E:\\CNPM_Project_Web_BanSach\\css\\register.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|solutionrelative:css\\register.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|E:\\CNPM_Project_Web_BanSach\\controllers\\tac_giacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|solutionrelative:controllers\\tac_giacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|E:\\CNPM_Project_Web_BanSach\\areas\\admin\\controllers\\users_admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|solutionrelative:areas\\admin\\controllers\\users_admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|e:\\cnpm_project_web_bansach\\content\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|solutionrelative:content\\site.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|E:\\CNPM_Project_Web_BanSach\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|solutionrelative:web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|E:\\CNPM_Project_Web_BanSach\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|solutionrelative:controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|e:\\cnpm_project_web_bansach\\model\\khach_hang.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|E:\\CNPM_Project_Web_BanSach\\model\\khach_hang.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|solutionrelative:model\\khach_hang.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|e:\\cnpm_project_web_bansach\\views\\users\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|E:\\CNPM_Project_Web_BanSach\\views\\users\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|solutionrelative:views\\users\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
@@ -27,24 +55,8 @@
       "RelativeMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|E:\\CNPM_Project_Web_BanSach\\css\\login.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|solutionrelative:css\\login.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|E:\\CNPM_Project_Web_BanSach\\css\\register.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|solutionrelative:css\\register.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|E:\\CNPM_Project_Web_BanSach\\model\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|solutionrelative:model\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|E:\\CNPM_Project_Web_BanSach\\areas\\admin\\controllers\\users_admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|solutionrelative:areas\\admin\\controllers\\users_admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|E:\\CNPM_Project_Web_BanSach\\controllers\\tac_giacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|solutionrelative:controllers\\tac_giacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -54,61 +66,37 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Khach_Hang.cs",
-              "DocumentMoniker": "E:\\CNPM_Project_Web_BanSach\\Model\\Khach_Hang.cs",
-              "RelativeDocumentMoniker": "Model\\Khach_Hang.cs",
-              "ToolTip": "E:\\CNPM_Project_Web_BanSach\\Model\\Khach_Hang.cs",
-              "RelativeToolTip": "Model\\Khach_Hang.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAtAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-04T12:36:37.526Z",
+              "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "E:\\CNPM_Project_Web_BanSach\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Home\\Index.cshtml",
+              "ToolTip": "E:\\CNPM_Project_Web_BanSach\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-17T05:18:16.284Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Login.cshtml",
-              "DocumentMoniker": "E:\\CNPM_Project_Web_BanSach\\Views\\Users\\Login.cshtml",
-              "RelativeDocumentMoniker": "Views\\Users\\Login.cshtml",
-              "ToolTip": "E:\\CNPM_Project_Web_BanSach\\Views\\Users\\Login.cshtml",
-              "RelativeToolTip": "Views\\Users\\Login.cshtml",
-              "ViewState": "AgIAAAEAAAAAAAAAAAAkwDMAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-04T06:37:45.432Z",
+              "DocumentIndex": 5,
+              "Title": "Site.css",
+              "DocumentMoniker": "E:\\CNPM_Project_Web_BanSach\\Content\\Site.css",
+              "RelativeDocumentMoniker": "Content\\Site.css",
+              "ToolTip": "E:\\CNPM_Project_Web_BanSach\\Content\\Site.css",
+              "RelativeToolTip": "Content\\Site.css",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-06-17T05:14:33.79Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Register.cshtml",
-              "DocumentMoniker": "E:\\CNPM_Project_Web_BanSach\\Views\\Users\\Register.cshtml",
-              "RelativeDocumentMoniker": "Views\\Users\\Register.cshtml",
-              "ToolTip": "E:\\CNPM_Project_Web_BanSach\\Views\\Users\\Register.cshtml",
-              "RelativeToolTip": "Views\\Users\\Register.cshtml",
-              "ViewState": "AgIAAEQAAAAAAAAAAAAQwEsAAAAKAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-06-03T16:15:42.443Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "RegisterViewModel.cs",
-              "DocumentMoniker": "E:\\CNPM_Project_Web_BanSach\\Model\\RegisterViewModel.cs",
-              "RelativeDocumentMoniker": "Model\\RegisterViewModel.cs",
-              "ToolTip": "E:\\CNPM_Project_Web_BanSach\\Model\\RegisterViewModel.cs",
-              "RelativeToolTip": "Model\\RegisterViewModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-03T16:05:05.381Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 13,
               "Title": "USER.cs",
               "DocumentMoniker": "E:\\CNPM_Project_Web_BanSach\\Model\\USER.cs",
               "RelativeDocumentMoniker": "Model\\USER.cs",
@@ -120,20 +108,19 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 7,
               "Title": "UsersController.cs",
               "DocumentMoniker": "E:\\CNPM_Project_Web_BanSach\\Controllers\\UsersController.cs",
               "RelativeDocumentMoniker": "Controllers\\UsersController.cs",
               "ToolTip": "E:\\CNPM_Project_Web_BanSach\\Controllers\\UsersController.cs",
               "RelativeToolTip": "Controllers\\UsersController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAIUAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAAwIUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-03T15:27:27.894Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-06-03T15:27:27.894Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 12,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "E:\\CNPM_Project_Web_BanSach\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
@@ -145,7 +132,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 4,
+              "Title": "USERs_AdminController.cs",
+              "DocumentMoniker": "E:\\CNPM_Project_Web_BanSach\\Areas\\Admin\\Controllers\\USERs_AdminController.cs",
+              "RelativeDocumentMoniker": "Areas\\Admin\\Controllers\\USERs_AdminController.cs",
+              "ToolTip": "E:\\CNPM_Project_Web_BanSach\\Areas\\Admin\\Controllers\\USERs_AdminController.cs",
+              "RelativeToolTip": "Areas\\Admin\\Controllers\\USERs_AdminController.cs",
+              "ViewState": "AgIAAE8AAAAAAAAAAAAAAEgAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-03T15:25:22.541Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Tac_GiaController.cs",
+              "DocumentMoniker": "E:\\CNPM_Project_Web_BanSach\\Controllers\\Tac_GiaController.cs",
+              "RelativeDocumentMoniker": "Controllers\\Tac_GiaController.cs",
+              "ToolTip": "E:\\CNPM_Project_Web_BanSach\\Controllers\\Tac_GiaController.cs",
+              "RelativeToolTip": "Controllers\\Tac_GiaController.cs",
+              "ViewState": "AgIAAEkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-03T14:50:23.592Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "Register.css",
               "DocumentMoniker": "E:\\CNPM_Project_Web_BanSach\\CSS\\Register.css",
               "RelativeDocumentMoniker": "CSS\\Register.css",
@@ -153,11 +166,12 @@
               "RelativeToolTip": "CSS\\Register.css",
               "ViewState": "AgIAAJ4AAAAAAAAAAAAQwJ4AAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-06-03T16:35:51.751Z"
+              "WhenOpened": "2025-06-03T16:35:51.751Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 1,
               "Title": "Login.css",
               "DocumentMoniker": "E:\\CNPM_Project_Web_BanSach\\CSS\\Login.css",
               "RelativeDocumentMoniker": "CSS\\Login.css",
@@ -165,31 +179,69 @@
               "RelativeToolTip": "CSS\\Login.css",
               "ViewState": "AgIAACoAAAAAAAAAAAAowDsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-06-04T06:38:17.483Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "USERs_AdminController.cs",
-              "DocumentMoniker": "E:\\CNPM_Project_Web_BanSach\\Areas\\Admin\\Controllers\\USERs_AdminController.cs",
-              "RelativeDocumentMoniker": "Areas\\Admin\\Controllers\\USERs_AdminController.cs",
-              "ToolTip": "E:\\CNPM_Project_Web_BanSach\\Areas\\Admin\\Controllers\\USERs_AdminController.cs",
-              "RelativeToolTip": "Areas\\Admin\\Controllers\\USERs_AdminController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-03T15:25:22.541Z"
+              "WhenOpened": "2025-06-04T06:38:17.483Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 10,
-              "Title": "Tac_GiaController.cs",
-              "DocumentMoniker": "E:\\CNPM_Project_Web_BanSach\\Controllers\\Tac_GiaController.cs",
-              "RelativeDocumentMoniker": "Controllers\\Tac_GiaController.cs",
-              "ToolTip": "E:\\CNPM_Project_Web_BanSach\\Controllers\\Tac_GiaController.cs",
-              "RelativeToolTip": "Controllers\\Tac_GiaController.cs",
-              "ViewState": "AgIAACwAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
+              "Title": "RegisterViewModel.cs",
+              "DocumentMoniker": "E:\\CNPM_Project_Web_BanSach\\Model\\RegisterViewModel.cs",
+              "RelativeDocumentMoniker": "Model\\RegisterViewModel.cs",
+              "ToolTip": "E:\\CNPM_Project_Web_BanSach\\Model\\RegisterViewModel.cs",
+              "RelativeToolTip": "Model\\RegisterViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-03T14:50:23.592Z"
+              "WhenOpened": "2025-06-03T16:05:05.381Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Register.cshtml",
+              "DocumentMoniker": "E:\\CNPM_Project_Web_BanSach\\Views\\Users\\Register.cshtml",
+              "RelativeDocumentMoniker": "Views\\Users\\Register.cshtml",
+              "ToolTip": "E:\\CNPM_Project_Web_BanSach\\Views\\Users\\Register.cshtml",
+              "RelativeToolTip": "Views\\Users\\Register.cshtml",
+              "ViewState": "AgIAAEQAAAAAAAAAAAAQwEsAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-03T16:15:42.443Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "E:\\CNPM_Project_Web_BanSach\\Views\\Users\\Login.cshtml",
+              "RelativeDocumentMoniker": "Views\\Users\\Login.cshtml",
+              "ToolTip": "E:\\CNPM_Project_Web_BanSach\\Views\\Users\\Login.cshtml",
+              "RelativeToolTip": "Views\\Users\\Login.cshtml",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAkwDMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-04T06:37:45.432Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Khach_Hang.cs",
+              "DocumentMoniker": "E:\\CNPM_Project_Web_BanSach\\Model\\Khach_Hang.cs",
+              "RelativeDocumentMoniker": "Model\\Khach_Hang.cs",
+              "ToolTip": "E:\\CNPM_Project_Web_BanSach\\Model\\Khach_Hang.cs",
+              "RelativeToolTip": "Model\\Khach_Hang.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-04T12:36:37.526Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Web.config",
+              "DocumentMoniker": "E:\\CNPM_Project_Web_BanSach\\Web.config",
+              "RelativeDocumentMoniker": "Web.config",
+              "ToolTip": "E:\\CNPM_Project_Web_BanSach\\Web.config",
+              "RelativeToolTip": "Web.config",
+              "ViewState": "AgIAACoAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2025-06-05T16:38:46.802Z",
+              "EditorCaption": ""
             }
           ]
         }
