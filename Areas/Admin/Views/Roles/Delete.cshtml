@@ -1,0 +1,46 @@
+﻿@model CNPM_Project_web.Model.Role
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml"; // Nếu có layout
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Xóa vai trò</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <h3 class="text-danger">Bạn có chắc chắn muốn xóa vai trò này không?</h3>
+        <h4>Thông tin vai trò</h4>
+        <hr />
+
+        <dl class="dl-horizontal">
+            <dt>Mã vai trò</dt>
+            <dd>@Model.ID_ROLE</dd>
+
+            <dt>Tên vai trò</dt>
+            <dd>@Model.TEN_ROLE</dd>
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-group">
+                <input type="submit" value="Xác nhận xóa" class="btn btn-danger" />
+                @Html.ActionLink("Hủy bỏ", "Index", null, new { @class = "btn btn-default" })
+            </div>
+        }
+
+        @if (ViewBag.ErrorMessage != null)
+        {
+            <div class="alert alert-danger" style="margin-top:15px;">
+                <strong>Lỗi:</strong> @ViewBag.ErrorMessage
+            </div>
+        }
+    </div>
+</body>
+</html>

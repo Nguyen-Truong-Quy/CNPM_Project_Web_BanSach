@@ -26,7 +26,7 @@
       <PropertyRef Name="ID_DANH_MUC" />
     </Key>
     <Property Name="ID_DANH_MUC" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="THE_LOAI_SP" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="TEN_DANH_MUC" Type="nvarchar" MaxLength="100" Nullable="false" />
   </EntityType>
   <EntityType Name="Don_Hang">
     <Key>
@@ -100,7 +100,7 @@
     <Key>
       <PropertyRef Name="ID_ROLE" />
     </Key>
-    <Property Name="ID_ROLE" Type="int" Nullable="false" />
+    <Property Name="ID_ROLE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="TEN_ROLE" Type="nvarchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="San_Pham">
@@ -110,16 +110,17 @@
     <Property Name="MA_SP" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="TEN_SP" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="MO_TA" Type="nvarchar" MaxLength="500" />
+    <Property Name="HINH_ANH" Type="nvarchar" MaxLength="255" Nullable="false" />
     <Property Name="GIA_GOC" Type="decimal" Precision="10" Scale="2" Nullable="false" />
     <Property Name="DISCOUNT" Type="int" />
     <Property Name="GIA_BAN" Type="numeric" Precision="29" Scale="8" StoreGeneratedPattern="Computed" />
-    <Property Name="HINH_ANH" Type="nvarchar" MaxLength="255" Nullable="false" />
     <Property Name="TON_KHO" Type="int" Nullable="false" />
+    <Property Name="ID_TRANG_THAI" Type="int" Nullable="false" />
     <Property Name="ID_DANH_MUC" Type="int" Nullable="false" />
     <Property Name="MA_KHUYEN_MAI" Type="nvarchar" MaxLength="20" />
     <Property Name="ID_TAC_GIA" Type="int" Nullable="false" />
     <Property Name="ID_NXB" Type="int" Nullable="false" />
-    <Property Name="NAM_XUAT_BAN" Type="int" Nullable="false" />
+    <Property Name="ID_The_Loai" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Tac_Gia">
     <Key>
@@ -128,6 +129,13 @@
     <Property Name="ID_TAC_GIA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="TEN_TAC_GIA" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="MO_TA" Type="nvarchar" MaxLength="500" Nullable="false" />
+  </EntityType>
+  <EntityType Name="The_Loai">
+    <Key>
+      <PropertyRef Name="ID_The_Loai" />
+    </Key>
+    <Property Name="ID_The_Loai" Type="int" Nullable="false" />
+    <Property Name="Ten_The_Loai" Type="nvarchar" MaxLength="100" Nullable="false" />
   </EntityType>
   <EntityType Name="Trang_Thai">
     <Key>
@@ -146,7 +154,7 @@
     <Property Name="MA_KH" Type="nvarchar" MaxLength="20" />
     <Property Name="EMAIL" Type="nvarchar" MaxLength="100" />
   </EntityType>
-  <Association Name="FK__Lich_Su_D__ID_DO__6E01572D">
+  <Association Name="FK__Lich_Su_D__ID_DO__74AE54BC">
     <End Role="Don_Hang" Type="Self.Don_Hang" Multiplicity="1" />
     <End Role="Lich_Su_Don_Hang" Type="Self.Lich_Su_Don_Hang" Multiplicity="*" />
     <ReferentialConstraint>
@@ -158,7 +166,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Lich_Su_D__ID_TR__6EF57B66">
+  <Association Name="FK__Lich_Su_D__ID_TR__75A278F5">
     <End Role="Trang_Thai" Type="Self.Trang_Thai" Multiplicity="1" />
     <End Role="Lich_Su_Don_Hang" Type="Self.Lich_Su_Don_Hang" Multiplicity="*" />
     <ReferentialConstraint>
@@ -326,6 +334,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="fk_sanpham_theloai">
+    <End Role="The_Loai" Type="Self.The_Loai" Multiplicity="1" />
+    <End Role="San_Pham" Type="Self.San_Pham" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="The_Loai">
+        <PropertyRef Name="ID_The_Loai" />
+      </Principal>
+      <Dependent Role="San_Pham">
+        <PropertyRef Name="ID_The_Loai" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_sanpham_trangthai">
+    <End Role="Trang_Thai" Type="Self.Trang_Thai" Multiplicity="1" />
+    <End Role="San_Pham" Type="Self.San_Pham" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Trang_Thai">
+        <PropertyRef Name="ID_TRANG_THAI" />
+      </Principal>
+      <Dependent Role="San_Pham">
+        <PropertyRef Name="ID_TRANG_THAI" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="fk_users_khach_hang">
     <End Role="Khach_Hang" Type="Self.Khach_Hang" Multiplicity="0..1" />
     <End Role="USERS" Type="Self.USERS" Multiplicity="*" />
@@ -364,13 +396,14 @@
     <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="San_Pham" EntityType="Self.San_Pham" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Tac_Gia" EntityType="Self.Tac_Gia" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="The_Loai" EntityType="Self.The_Loai" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Trang_Thai" EntityType="Self.Trang_Thai" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__Lich_Su_D__ID_DO__6E01572D" Association="Self.FK__Lich_Su_D__ID_DO__6E01572D">
+    <AssociationSet Name="FK__Lich_Su_D__ID_DO__74AE54BC" Association="Self.FK__Lich_Su_D__ID_DO__74AE54BC">
       <End Role="Don_Hang" EntitySet="Don_Hang" />
       <End Role="Lich_Su_Don_Hang" EntitySet="Lich_Su_Don_Hang" />
     </AssociationSet>
-    <AssociationSet Name="FK__Lich_Su_D__ID_TR__6EF57B66" Association="Self.FK__Lich_Su_D__ID_TR__6EF57B66">
+    <AssociationSet Name="FK__Lich_Su_D__ID_TR__75A278F5" Association="Self.FK__Lich_Su_D__ID_TR__75A278F5">
       <End Role="Trang_Thai" EntitySet="Trang_Thai" />
       <End Role="Lich_Su_Don_Hang" EntitySet="Lich_Su_Don_Hang" />
     </AssociationSet>
@@ -424,6 +457,14 @@
     </AssociationSet>
     <AssociationSet Name="fk_sanpham_tacgia" Association="Self.fk_sanpham_tacgia">
       <End Role="Tac_Gia" EntitySet="Tac_Gia" />
+      <End Role="San_Pham" EntitySet="San_Pham" />
+    </AssociationSet>
+    <AssociationSet Name="fk_sanpham_theloai" Association="Self.fk_sanpham_theloai">
+      <End Role="The_Loai" EntitySet="The_Loai" />
+      <End Role="San_Pham" EntitySet="San_Pham" />
+    </AssociationSet>
+    <AssociationSet Name="fk_sanpham_trangthai" Association="Self.fk_sanpham_trangthai">
+      <End Role="Trang_Thai" EntitySet="Trang_Thai" />
       <End Role="San_Pham" EntitySet="San_Pham" />
     </AssociationSet>
     <AssociationSet Name="fk_users_khach_hang" Association="Self.fk_users_khach_hang">

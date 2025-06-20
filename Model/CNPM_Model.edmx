@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CNPM_Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CNPM_Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Chi_Tiet_Don_Hang">
           <Key>
             <PropertyRef Name="ID_DON_HANG" />
@@ -31,7 +31,7 @@
             <PropertyRef Name="ID_DANH_MUC" />
           </Key>
           <Property Name="ID_DANH_MUC" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="THE_LOAI_SP" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TEN_DANH_MUC" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="Don_Hang">
           <Key>
@@ -105,7 +105,7 @@
           <Key>
             <PropertyRef Name="ID_ROLE" />
           </Key>
-          <Property Name="ID_ROLE" Type="int" Nullable="false" />
+          <Property Name="ID_ROLE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TEN_ROLE" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="San_Pham">
@@ -115,16 +115,17 @@
           <Property Name="MA_SP" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="TEN_SP" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="MO_TA" Type="nvarchar" MaxLength="500" />
+          <Property Name="HINH_ANH" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="GIA_GOC" Type="decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="DISCOUNT" Type="int" />
           <Property Name="GIA_BAN" Type="numeric" Precision="29" Scale="8" StoreGeneratedPattern="Computed" />
-          <Property Name="HINH_ANH" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="TON_KHO" Type="int" Nullable="false" />
+          <Property Name="ID_TRANG_THAI" Type="int" Nullable="false" />
           <Property Name="ID_DANH_MUC" Type="int" Nullable="false" />
           <Property Name="MA_KHUYEN_MAI" Type="nvarchar" MaxLength="20" />
           <Property Name="ID_TAC_GIA" Type="int" Nullable="false" />
           <Property Name="ID_NXB" Type="int" Nullable="false" />
-          <Property Name="NAM_XUAT_BAN" Type="int" Nullable="false" />
+          <Property Name="ID_The_Loai" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Tac_Gia">
           <Key>
@@ -133,6 +134,13 @@
           <Property Name="ID_TAC_GIA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="TEN_TAC_GIA" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="MO_TA" Type="nvarchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="The_Loai">
+          <Key>
+            <PropertyRef Name="ID_The_Loai" />
+          </Key>
+          <Property Name="ID_The_Loai" Type="int" Nullable="false" />
+          <Property Name="Ten_The_Loai" Type="nvarchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="Trang_Thai">
           <Key>
@@ -151,7 +159,7 @@
           <Property Name="MA_KH" Type="nvarchar" MaxLength="20" />
           <Property Name="EMAIL" Type="nvarchar" MaxLength="100" />
         </EntityType>
-        <Association Name="FK__Lich_Su_D__ID_DO__6E01572D">
+        <Association Name="FK__Lich_Su_D__ID_DO__74AE54BC">
           <End Role="Don_Hang" Type="Self.Don_Hang" Multiplicity="1" />
           <End Role="Lich_Su_Don_Hang" Type="Self.Lich_Su_Don_Hang" Multiplicity="*" />
           <ReferentialConstraint>
@@ -163,7 +171,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Lich_Su_D__ID_TR__6EF57B66">
+        <Association Name="FK__Lich_Su_D__ID_TR__75A278F5">
           <End Role="Trang_Thai" Type="Self.Trang_Thai" Multiplicity="1" />
           <End Role="Lich_Su_Don_Hang" Type="Self.Lich_Su_Don_Hang" Multiplicity="*" />
           <ReferentialConstraint>
@@ -331,6 +339,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_sanpham_theloai">
+          <End Role="The_Loai" Type="Self.The_Loai" Multiplicity="1" />
+          <End Role="San_Pham" Type="Self.San_Pham" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="The_Loai">
+              <PropertyRef Name="ID_The_Loai" />
+            </Principal>
+            <Dependent Role="San_Pham">
+              <PropertyRef Name="ID_The_Loai" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_sanpham_trangthai">
+          <End Role="Trang_Thai" Type="Self.Trang_Thai" Multiplicity="1" />
+          <End Role="San_Pham" Type="Self.San_Pham" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trang_Thai">
+              <PropertyRef Name="ID_TRANG_THAI" />
+            </Principal>
+            <Dependent Role="San_Pham">
+              <PropertyRef Name="ID_TRANG_THAI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_users_khach_hang">
           <End Role="Khach_Hang" Type="Self.Khach_Hang" Multiplicity="0..1" />
           <End Role="USERS" Type="Self.USERS" Multiplicity="*" />
@@ -369,13 +401,14 @@
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="San_Pham" EntityType="Self.San_Pham" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tac_Gia" EntityType="Self.Tac_Gia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="The_Loai" EntityType="Self.The_Loai" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Trang_Thai" EntityType="Self.Trang_Thai" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__Lich_Su_D__ID_DO__6E01572D" Association="Self.FK__Lich_Su_D__ID_DO__6E01572D">
+          <AssociationSet Name="FK__Lich_Su_D__ID_DO__74AE54BC" Association="Self.FK__Lich_Su_D__ID_DO__74AE54BC">
             <End Role="Don_Hang" EntitySet="Don_Hang" />
             <End Role="Lich_Su_Don_Hang" EntitySet="Lich_Su_Don_Hang" />
           </AssociationSet>
-          <AssociationSet Name="FK__Lich_Su_D__ID_TR__6EF57B66" Association="Self.FK__Lich_Su_D__ID_TR__6EF57B66">
+          <AssociationSet Name="FK__Lich_Su_D__ID_TR__75A278F5" Association="Self.FK__Lich_Su_D__ID_TR__75A278F5">
             <End Role="Trang_Thai" EntitySet="Trang_Thai" />
             <End Role="Lich_Su_Don_Hang" EntitySet="Lich_Su_Don_Hang" />
           </AssociationSet>
@@ -431,6 +464,14 @@
             <End Role="Tac_Gia" EntitySet="Tac_Gia" />
             <End Role="San_Pham" EntitySet="San_Pham" />
           </AssociationSet>
+          <AssociationSet Name="fk_sanpham_theloai" Association="Self.fk_sanpham_theloai">
+            <End Role="The_Loai" EntitySet="The_Loai" />
+            <End Role="San_Pham" EntitySet="San_Pham" />
+          </AssociationSet>
+          <AssociationSet Name="fk_sanpham_trangthai" Association="Self.fk_sanpham_trangthai">
+            <End Role="Trang_Thai" EntitySet="Trang_Thai" />
+            <End Role="San_Pham" EntitySet="San_Pham" />
+          </AssociationSet>
           <AssociationSet Name="fk_users_khach_hang" Association="Self.fk_users_khach_hang">
             <End Role="Khach_Hang" EntitySet="Khach_Hang" />
             <End Role="USERS" EntitySet="USERS" />
@@ -440,8 +481,7 @@
             <End Role="USERS" EntitySet="USERS" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CNPM_Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -475,7 +515,7 @@
             <PropertyRef Name="ID_DANH_MUC" />
           </Key>
           <Property Name="ID_DANH_MUC" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="THE_LOAI_SP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TEN_DANH_MUC" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="San_Pham" Relationship="Self.fk_sanpham_danhmuc" FromRole="Danh_Muc" ToRole="San_Pham" />
         </EntityType>
         <EntityType Name="Don_Hang">
@@ -489,7 +529,7 @@
           <Property Name="TONG_TIEN" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="ID_THANH_TOAN" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Chi_Tiet_Don_Hang" Relationship="Self.fk_chitiet_donhang_donhang" FromRole="Don_Hang" ToRole="Chi_Tiet_Don_Hang" />
-          <NavigationProperty Name="Lich_Su_Don_Hang" Relationship="Self.FK__Lich_Su_D__ID_DO__6E01572D" FromRole="Don_Hang" ToRole="Lich_Su_Don_Hang" />
+          <NavigationProperty Name="Lich_Su_Don_Hang" Relationship="Self.FK__Lich_Su_D__ID_DO__74AE54BC" FromRole="Don_Hang" ToRole="Lich_Su_Don_Hang" />
           <NavigationProperty Name="Khach_Hang" Relationship="Self.fk_donhang_khachhang" FromRole="Don_Hang" ToRole="Khach_Hang" />
           <NavigationProperty Name="Phuong_Thuc_Thanh_Toan" Relationship="Self.fk_donhang_thanhtoan" FromRole="Don_Hang" ToRole="Phuong_Thuc_Thanh_Toan" />
           <NavigationProperty Name="Trang_Thai" Relationship="Self.fk_donhang_trangthai" FromRole="Don_Hang" ToRole="Trang_Thai" />
@@ -541,8 +581,8 @@
           <Property Name="ID_TRANG_THAI" Type="Int32" Nullable="false" />
           <Property Name="NGAY_CAP_NHAT" Type="DateTime" Precision="7" />
           <Property Name="GHI_CHU" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Don_Hang" Relationship="Self.FK__Lich_Su_D__ID_DO__6E01572D" FromRole="Lich_Su_Don_Hang" ToRole="Don_Hang" />
-          <NavigationProperty Name="Trang_Thai" Relationship="Self.FK__Lich_Su_D__ID_TR__6EF57B66" FromRole="Lich_Su_Don_Hang" ToRole="Trang_Thai" />
+          <NavigationProperty Name="Don_Hang" Relationship="Self.FK__Lich_Su_D__ID_DO__74AE54BC" FromRole="Lich_Su_Don_Hang" ToRole="Don_Hang" />
+          <NavigationProperty Name="Trang_Thai" Relationship="Self.FK__Lich_Su_D__ID_TR__75A278F5" FromRole="Lich_Su_Don_Hang" ToRole="Trang_Thai" />
         </EntityType>
         <EntityType Name="Nha_Xuat_Ban">
           <Key>
@@ -577,16 +617,17 @@
           <Property Name="MA_SP" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="TEN_SP" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="MO_TA" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="HINH_ANH" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="GIA_GOC" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
           <Property Name="DISCOUNT" Type="Int32" />
           <Property Name="GIA_BAN" Type="Decimal" Precision="29" Scale="8" annotation:StoreGeneratedPattern="Computed" />
-          <Property Name="HINH_ANH" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="TON_KHO" Type="Int32" Nullable="false" />
+          <Property Name="ID_TRANG_THAI" Type="Int32" Nullable="false" />
           <Property Name="ID_DANH_MUC" Type="Int32" Nullable="false" />
           <Property Name="MA_KHUYEN_MAI" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="ID_TAC_GIA" Type="Int32" Nullable="false" />
           <Property Name="ID_NXB" Type="Int32" Nullable="false" />
-          <Property Name="NAM_XUAT_BAN" Type="Int32" Nullable="false" />
+          <Property Name="ID_The_Loai" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Chi_Tiet_Don_Hang" Relationship="Self.fk_chitiet_donhang_sanpham" FromRole="San_Pham" ToRole="Chi_Tiet_Don_Hang" />
           <NavigationProperty Name="Danh_Gia" Relationship="Self.fk_danhgia_sanpham" FromRole="San_Pham" ToRole="Danh_Gia" />
           <NavigationProperty Name="Danh_Muc" Relationship="Self.fk_sanpham_danhmuc" FromRole="San_Pham" ToRole="Danh_Muc" />
@@ -594,6 +635,8 @@
           <NavigationProperty Name="Khuyen_Mai" Relationship="Self.fk_sanpham_khuyenmai" FromRole="San_Pham" ToRole="Khuyen_Mai" />
           <NavigationProperty Name="Nha_Xuat_Ban" Relationship="Self.fk_sanpham_nxb" FromRole="San_Pham" ToRole="Nha_Xuat_Ban" />
           <NavigationProperty Name="Tac_Gia" Relationship="Self.fk_sanpham_tacgia" FromRole="San_Pham" ToRole="Tac_Gia" />
+          <NavigationProperty Name="The_Loai" Relationship="Self.fk_sanpham_theloai" FromRole="San_Pham" ToRole="The_Loai" />
+          <NavigationProperty Name="Trang_Thai" Relationship="Self.fk_sanpham_trangthai" FromRole="San_Pham" ToRole="Trang_Thai" />
         </EntityType>
         <EntityType Name="Tac_Gia">
           <Key>
@@ -604,6 +647,14 @@
           <Property Name="MO_TA" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="San_Pham" Relationship="Self.fk_sanpham_tacgia" FromRole="Tac_Gia" ToRole="San_Pham" />
         </EntityType>
+        <EntityType Name="The_Loai">
+          <Key>
+            <PropertyRef Name="ID_The_Loai" />
+          </Key>
+          <Property Name="ID_The_Loai" Type="Int32" Nullable="false" />
+          <Property Name="Ten_The_Loai" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="San_Pham" Relationship="Self.fk_sanpham_theloai" FromRole="The_Loai" ToRole="San_Pham" />
+        </EntityType>
         <EntityType Name="Trang_Thai">
           <Key>
             <PropertyRef Name="ID_TRANG_THAI" />
@@ -611,7 +662,8 @@
           <Property Name="ID_TRANG_THAI" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TEN_TRANG_THAI" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="Don_Hang" Relationship="Self.fk_donhang_trangthai" FromRole="Trang_Thai" ToRole="Don_Hang" />
-          <NavigationProperty Name="Lich_Su_Don_Hang" Relationship="Self.FK__Lich_Su_D__ID_TR__6EF57B66" FromRole="Trang_Thai" ToRole="Lich_Su_Don_Hang" />
+          <NavigationProperty Name="Lich_Su_Don_Hang" Relationship="Self.FK__Lich_Su_D__ID_TR__75A278F5" FromRole="Trang_Thai" ToRole="Lich_Su_Don_Hang" />
+          <NavigationProperty Name="San_Pham" Relationship="Self.fk_sanpham_trangthai" FromRole="Trang_Thai" ToRole="San_Pham" />
         </EntityType>
         <EntityType Name="USER">
           <Key>
@@ -685,7 +737,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Lich_Su_D__ID_DO__6E01572D">
+        <Association Name="FK__Lich_Su_D__ID_DO__74AE54BC">
           <End Role="Don_Hang" Type="Self.Don_Hang" Multiplicity="1" />
           <End Role="Lich_Su_Don_Hang" Type="Self.Lich_Su_Don_Hang" Multiplicity="*" />
           <ReferentialConstraint>
@@ -781,7 +833,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Lich_Su_D__ID_TR__6EF57B66">
+        <Association Name="FK__Lich_Su_D__ID_TR__75A278F5">
           <End Role="Trang_Thai" Type="Self.Trang_Thai" Multiplicity="1" />
           <End Role="Lich_Su_Don_Hang" Type="Self.Lich_Su_Don_Hang" Multiplicity="*" />
           <ReferentialConstraint>
@@ -829,6 +881,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_sanpham_theloai">
+          <End Role="The_Loai" Type="Self.The_Loai" Multiplicity="1" />
+          <End Role="San_Pham" Type="Self.San_Pham" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="The_Loai">
+              <PropertyRef Name="ID_The_Loai" />
+            </Principal>
+            <Dependent Role="San_Pham">
+              <PropertyRef Name="ID_The_Loai" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_sanpham_trangthai">
+          <End Role="Trang_Thai" Type="Self.Trang_Thai" Multiplicity="1" />
+          <End Role="San_Pham" Type="Self.San_Pham" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trang_Thai">
+              <PropertyRef Name="ID_TRANG_THAI" />
+            </Principal>
+            <Dependent Role="San_Pham">
+              <PropertyRef Name="ID_TRANG_THAI" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="Web_Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Chi_Tiet_Don_Hang" EntityType="Self.Chi_Tiet_Don_Hang" />
           <EntitySet Name="Danh_Gia" EntityType="Self.Danh_Gia" />
@@ -843,6 +919,7 @@
           <EntitySet Name="Roles" EntityType="Self.Role" />
           <EntitySet Name="San_Pham" EntityType="Self.San_Pham" />
           <EntitySet Name="Tac_Gia" EntityType="Self.Tac_Gia" />
+          <EntitySet Name="The_Loai" EntityType="Self.The_Loai" />
           <EntitySet Name="Trang_Thai" EntityType="Self.Trang_Thai" />
           <EntitySet Name="USERS" EntityType="Self.USER" />
           <AssociationSet Name="fk_chitiet_donhang_donhang" Association="Self.fk_chitiet_donhang_donhang">
@@ -865,7 +942,7 @@
             <End Role="Danh_Muc" EntitySet="Danh_Muc" />
             <End Role="San_Pham" EntitySet="San_Pham" />
           </AssociationSet>
-          <AssociationSet Name="FK__Lich_Su_D__ID_DO__6E01572D" Association="Self.FK__Lich_Su_D__ID_DO__6E01572D">
+          <AssociationSet Name="FK__Lich_Su_D__ID_DO__74AE54BC" Association="Self.FK__Lich_Su_D__ID_DO__74AE54BC">
             <End Role="Don_Hang" EntitySet="Don_Hang" />
             <End Role="Lich_Su_Don_Hang" EntitySet="Lich_Su_Don_Hang" />
           </AssociationSet>
@@ -897,7 +974,7 @@
             <End Role="Khuyen_Mai" EntitySet="Khuyen_Mai" />
             <End Role="San_Pham" EntitySet="San_Pham" />
           </AssociationSet>
-          <AssociationSet Name="FK__Lich_Su_D__ID_TR__6EF57B66" Association="Self.FK__Lich_Su_D__ID_TR__6EF57B66">
+          <AssociationSet Name="FK__Lich_Su_D__ID_TR__75A278F5" Association="Self.FK__Lich_Su_D__ID_TR__75A278F5">
             <End Role="Trang_Thai" EntitySet="Trang_Thai" />
             <End Role="Lich_Su_Don_Hang" EntitySet="Lich_Su_Don_Hang" />
           </AssociationSet>
@@ -911,6 +988,14 @@
           </AssociationSet>
           <AssociationSet Name="fk_sanpham_tacgia" Association="Self.fk_sanpham_tacgia">
             <End Role="Tac_Gia" EntitySet="Tac_Gia" />
+            <End Role="San_Pham" EntitySet="San_Pham" />
+          </AssociationSet>
+          <AssociationSet Name="fk_sanpham_theloai" Association="Self.fk_sanpham_theloai">
+            <End Role="The_Loai" EntitySet="The_Loai" />
+            <End Role="San_Pham" EntitySet="San_Pham" />
+          </AssociationSet>
+          <AssociationSet Name="fk_sanpham_trangthai" Association="Self.fk_sanpham_trangthai">
+            <End Role="Trang_Thai" EntitySet="Trang_Thai" />
             <End Role="San_Pham" EntitySet="San_Pham" />
           </AssociationSet>
         </EntityContainer>
@@ -946,7 +1031,7 @@
             <EntityTypeMapping TypeName="CNPM_Model.Danh_Muc">
               <MappingFragment StoreEntitySet="Danh_Muc">
                 <ScalarProperty Name="ID_DANH_MUC" ColumnName="ID_DANH_MUC" />
-                <ScalarProperty Name="THE_LOAI_SP" ColumnName="THE_LOAI_SP" />
+                <ScalarProperty Name="TEN_DANH_MUC" ColumnName="TEN_DANH_MUC" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1038,16 +1123,17 @@
                 <ScalarProperty Name="MA_SP" ColumnName="MA_SP" />
                 <ScalarProperty Name="TEN_SP" ColumnName="TEN_SP" />
                 <ScalarProperty Name="MO_TA" ColumnName="MO_TA" />
+                <ScalarProperty Name="HINH_ANH" ColumnName="HINH_ANH" />
                 <ScalarProperty Name="GIA_GOC" ColumnName="GIA_GOC" />
                 <ScalarProperty Name="DISCOUNT" ColumnName="DISCOUNT" />
                 <ScalarProperty Name="GIA_BAN" ColumnName="GIA_BAN" />
-                <ScalarProperty Name="HINH_ANH" ColumnName="HINH_ANH" />
                 <ScalarProperty Name="TON_KHO" ColumnName="TON_KHO" />
+                <ScalarProperty Name="ID_TRANG_THAI" ColumnName="ID_TRANG_THAI" />
                 <ScalarProperty Name="ID_DANH_MUC" ColumnName="ID_DANH_MUC" />
                 <ScalarProperty Name="MA_KHUYEN_MAI" ColumnName="MA_KHUYEN_MAI" />
                 <ScalarProperty Name="ID_TAC_GIA" ColumnName="ID_TAC_GIA" />
                 <ScalarProperty Name="ID_NXB" ColumnName="ID_NXB" />
-                <ScalarProperty Name="NAM_XUAT_BAN" ColumnName="NAM_XUAT_BAN" />
+                <ScalarProperty Name="ID_The_Loai" ColumnName="ID_The_Loai" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1057,6 +1143,14 @@
                 <ScalarProperty Name="ID_TAC_GIA" ColumnName="ID_TAC_GIA" />
                 <ScalarProperty Name="TEN_TAC_GIA" ColumnName="TEN_TAC_GIA" />
                 <ScalarProperty Name="MO_TA" ColumnName="MO_TA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="The_Loai">
+            <EntityTypeMapping TypeName="CNPM_Model.The_Loai">
+              <MappingFragment StoreEntitySet="The_Loai">
+                <ScalarProperty Name="ID_The_Loai" ColumnName="ID_The_Loai" />
+                <ScalarProperty Name="Ten_The_Loai" ColumnName="Ten_The_Loai" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

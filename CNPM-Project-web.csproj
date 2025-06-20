@@ -145,6 +145,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\Khuyen_Mai_AdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\RolesController.cs" />
     <Compile Include="Areas\Admin\Controllers\USERs_AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Tac_GiaController.cs" />
@@ -209,6 +212,9 @@
     <Compile Include="Model\Tac_Gia.cs">
       <DependentUpon>CNPM_Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\The_Loai.cs">
+      <DependentUpon>CNPM_Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\Trang_Thai.cs">
       <DependentUpon>CNPM_Model.tt</DependentUpon>
     </Compile>
@@ -262,11 +268,25 @@
     <Content Include="Model\CNPM_Model.edmx.diagram">
       <DependentUpon>CNPM_Model.edmx</DependentUpon>
     </Content>
+    <Content Include="Areas\Admin\Views\Roles\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Roles\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Roles\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Roles\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Roles\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Web.config" />
     <Content Include="Areas\Admin\Views\USERs_Admin\Create.cshtml" />
     <Content Include="Areas\Admin\Views\USERs_Admin\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\USERs_Admin\Details.cshtml" />
     <Content Include="Areas\Admin\Views\USERs_Admin\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\USERs_Admin\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\USERs_Admin\_UserInfo.cshtml" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Admin\Views\Khuyen_Mai_Admin\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Khuyen_Mai_Admin\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Khuyen_Mai_Admin\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Khuyen_Mai_Admin\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Khuyen_Mai_Admin\Index.cshtml" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />

@@ -19,6 +19,7 @@ namespace CNPM_Project_web.Model
         {
             this.Don_Hang = new HashSet<Don_Hang>();
             this.Lich_Su_Don_Hang = new HashSet<Lich_Su_Don_Hang>();
+            this.San_Pham = new HashSet<San_Pham>();
         }
     
         public int ID_TRANG_THAI { get; set; }
@@ -28,5 +29,7 @@ namespace CNPM_Project_web.Model
         public virtual ICollection<Don_Hang> Don_Hang { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Lich_Su_Don_Hang> Lich_Su_Don_Hang { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<San_Pham> San_Pham { get; set; }
     }
 }

@@ -1,59 +1,59 @@
 ﻿@model IEnumerable<CNPM_Project_web.Model.USER>
 
 @{
-    Layout = null;
+    ViewBag.Title = "Danh sách người dùng";
+    Layout = "~/Views/Shared/_Layout.cshtml"; // Thay đổi nếu dùng layout khác
+    var stt = 1; // Biến đếm số thứ tự
 }
-
-<!DOCTYPE html>
-
-<html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-<body>
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.PASSWORD)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EMAIL)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Khach_Hang.HO_TEN_KH)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Role.TEN_ROLE)
-            </th>
-            <th></th>
-        </tr>
-    
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.PASSWORD)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EMAIL)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Khach_Hang.HO_TEN_KH)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Role.TEN_ROLE)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.USERNAME }) |
-                @Html.ActionLink("Details", "Details", new { id=item.USERNAME }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.USERNAME })
-            </td>
-        </tr>
-    }
-    
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Danh sách người dùng</h2>
+        @Html.ActionLink("Tạo người dùng mới", "Create", null, new { @class = "btn btn-success" })
+    </div>
+
+    <table class="table table-bordered table-hover table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>STT</th>
+                <th>Mã KH</th>
+                <th>ID Role</th>
+                <th>Vai trò</th>
+                <th>Tên đăng nhập</th>
+                <th>Mật khẩu</th>
+                <th>Email</th>
+                <th>Họ tên KH</th>
+
+
+
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@stt</td>
+                    <td>@Html.DisplayFor(modelItem => item.MA_KH)</td>
+                    <td>@Html.DisplayFor(modelItem => item.ID_ROLE)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Role.TEN_ROLE)</td>
+                    <td>@Html.DisplayFor(modelItem => item.USERNAME)</td>
+                    <td>@Html.DisplayFor(modelItem => item.PASSWORD)</td>
+                    <td>@Html.DisplayFor(modelItem => item.EMAIL)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Khach_Hang.HO_TEN_KH)</td>
+
+                    <td>
+                        @Html.ActionLink("Sửa", "Edit", new { id = item.USERNAME }, new { @class = "btn btn-sm btn-warning mr-1" })
+                        @Html.ActionLink("Chi tiết", "Details", new { id = item.USERNAME }, new { @class = "btn btn-sm btn-info mr-1" })
+                        @Html.ActionLink("Xóa", "Delete", new { id = item.USERNAME }, new { @class = "btn btn-sm btn-danger" })
+                    </td>
+                </tr>
+                stt++;
+            }
+        </tbody>
     </table>
-</body>
-</html>
+</div>

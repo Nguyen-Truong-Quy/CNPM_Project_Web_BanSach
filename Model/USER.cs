@@ -15,7 +15,7 @@ namespace CNPM_Project_web.Model
     public partial class USER
     {
         public string USERNAME { get; set; }
-        public string PASSWORD { get; set; }  
+        public string PASSWORD { get; set; }
         public int ID_ROLE { get; set; }
         public string MA_KH { get; set; }
         public string EMAIL { get; set; }

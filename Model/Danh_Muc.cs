@@ -21,7 +21,7 @@ namespace CNPM_Project_web.Model
         }
     
         public int ID_DANH_MUC { get; set; }
-        public string THE_LOAI_SP { get; set; }
+        public string TEN_DANH_MUC { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<San_Pham> San_Pham { get; set; }

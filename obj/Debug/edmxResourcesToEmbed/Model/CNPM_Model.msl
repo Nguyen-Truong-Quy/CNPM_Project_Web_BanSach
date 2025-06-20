@@ -27,7 +27,7 @@
       <EntityTypeMapping TypeName="CNPM_Model.Danh_Muc">
         <MappingFragment StoreEntitySet="Danh_Muc">
           <ScalarProperty Name="ID_DANH_MUC" ColumnName="ID_DANH_MUC" />
-          <ScalarProperty Name="THE_LOAI_SP" ColumnName="THE_LOAI_SP" />
+          <ScalarProperty Name="TEN_DANH_MUC" ColumnName="TEN_DANH_MUC" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -119,16 +119,17 @@
           <ScalarProperty Name="MA_SP" ColumnName="MA_SP" />
           <ScalarProperty Name="TEN_SP" ColumnName="TEN_SP" />
           <ScalarProperty Name="MO_TA" ColumnName="MO_TA" />
+          <ScalarProperty Name="HINH_ANH" ColumnName="HINH_ANH" />
           <ScalarProperty Name="GIA_GOC" ColumnName="GIA_GOC" />
           <ScalarProperty Name="DISCOUNT" ColumnName="DISCOUNT" />
           <ScalarProperty Name="GIA_BAN" ColumnName="GIA_BAN" />
-          <ScalarProperty Name="HINH_ANH" ColumnName="HINH_ANH" />
           <ScalarProperty Name="TON_KHO" ColumnName="TON_KHO" />
+          <ScalarProperty Name="ID_TRANG_THAI" ColumnName="ID_TRANG_THAI" />
           <ScalarProperty Name="ID_DANH_MUC" ColumnName="ID_DANH_MUC" />
           <ScalarProperty Name="MA_KHUYEN_MAI" ColumnName="MA_KHUYEN_MAI" />
           <ScalarProperty Name="ID_TAC_GIA" ColumnName="ID_TAC_GIA" />
           <ScalarProperty Name="ID_NXB" ColumnName="ID_NXB" />
-          <ScalarProperty Name="NAM_XUAT_BAN" ColumnName="NAM_XUAT_BAN" />
+          <ScalarProperty Name="ID_The_Loai" ColumnName="ID_The_Loai" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -138,6 +139,14 @@
           <ScalarProperty Name="ID_TAC_GIA" ColumnName="ID_TAC_GIA" />
           <ScalarProperty Name="TEN_TAC_GIA" ColumnName="TEN_TAC_GIA" />
           <ScalarProperty Name="MO_TA" ColumnName="MO_TA" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="The_Loai">
+      <EntityTypeMapping TypeName="CNPM_Model.The_Loai">
+        <MappingFragment StoreEntitySet="The_Loai">
+          <ScalarProperty Name="ID_The_Loai" ColumnName="ID_The_Loai" />
+          <ScalarProperty Name="Ten_The_Loai" ColumnName="Ten_The_Loai" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

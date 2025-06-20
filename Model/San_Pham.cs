@@ -25,16 +25,17 @@ namespace CNPM_Project_web.Model
         public string MA_SP { get; set; }
         public string TEN_SP { get; set; }
         public string MO_TA { get; set; }
+        public string HINH_ANH { get; set; }
         public decimal GIA_GOC { get; set; }
         public Nullable<int> DISCOUNT { get; set; }
         public Nullable<decimal> GIA_BAN { get; set; }
-        public string HINH_ANH { get; set; }
         public int TON_KHO { get; set; }
+        public int ID_TRANG_THAI { get; set; }
         public int ID_DANH_MUC { get; set; }
         public string MA_KHUYEN_MAI { get; set; }
         public int ID_TAC_GIA { get; set; }
         public int ID_NXB { get; set; }
-        public int NAM_XUAT_BAN { get; set; }
+        public int ID_The_Loai { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Chi_Tiet_Don_Hang> Chi_Tiet_Don_Hang { get; set; }
@@ -46,5 +47,7 @@ namespace CNPM_Project_web.Model
         public virtual Khuyen_Mai Khuyen_Mai { get; set; }
         public virtual Nha_Xuat_Ban Nha_Xuat_Ban { get; set; }
         public virtual Tac_Gia Tac_Gia { get; set; }
+        public virtual The_Loai The_Loai { get; set; }
+        public virtual Trang_Thai Trang_Thai { get; set; }
     }
 }

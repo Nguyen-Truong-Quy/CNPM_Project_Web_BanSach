@@ -20,7 +20,6 @@ namespace CNPM_Project_web.Areas.Admin.Controllers
             var uSERS = db.USERS.Include(u => u.Khach_Hang).Include(u => u.Role);
             return View(uSERS.ToList());
         }
-
         // GET: Admin/USERs_Admin/Details/5
         public ActionResult Details(string id)
         {
@@ -28,13 +27,21 @@ namespace CNPM_Project_web.Areas.Admin.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            USER uSER = db.USERS.Find(id);
+
+            // Sử dụng Include để load navigation property đầy đủ
+            USER uSER = db.USERS
+                .Include(u => u.Khach_Hang)
+                .Include(u => u.Role)
+                .FirstOrDefault(u => u.USERNAME == id);
+
             if (uSER == null)
             {
                 return HttpNotFound();
             }
+
             return View(uSER);
         }
+
 
         // GET: Admin/USERs_Admin/Create
         public ActionResult Create()
@@ -49,19 +56,39 @@ namespace CNPM_Project_web.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "USERNAME,PASSWORD,ID_ROLE,MA_KH,EMAIL")] USER uSER)
+        public ActionResult Create([Bind(Include = "USERNAME,PASSWORD,ID_ROLE,EMAIL")] USER user)
         {
             if (ModelState.IsValid)
             {
-                db.USERS.Add(uSER);
+                string maKH = GenerateCustomerCode();
+
+                // Tạo Khách hàng trước
+                var khachHang = new Khach_Hang
+                {
+                    MA_KH = maKH,
+                    HO_TEN_KH = user.USERNAME,
+                    EMAIL = user.EMAIL
+                };
+                db.Khach_Hang.Add(khachHang);
+
+                // Gắn vào USER
+                user.MA_KH = maKH;
+                db.USERS.Add(user);
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
 
-            ViewBag.MA_KH = new SelectList(db.Khach_Hang, "MA_KH", "HO_TEN_KH", uSER.MA_KH);
-            ViewBag.ID_ROLE = new SelectList(db.Roles, "ID_ROLE", "TEN_ROLE", uSER.ID_ROLE);
-            return View(uSER);
+            ViewBag.ID_ROLE = new SelectList(db.Roles, "ID_ROLE", "TEN_ROLE", user.ID_ROLE);
+            return View(user);
         }
+        private string GenerateCustomerCode()
+        {
+            int count = db.Khach_Hang.Count() + 1;
+            return "KH" + count.ToString("D4");
+        }
+
+
 
         // GET: Admin/USERs_Admin/Edit/5
         public ActionResult Edit(string id)
