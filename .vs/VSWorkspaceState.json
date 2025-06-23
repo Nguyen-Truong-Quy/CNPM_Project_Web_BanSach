@@ -1,7 +1,11 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Areas",
+    "\\Areas\\Admin",
+    "\\Areas\\Admin\\Views",
+    "\\Areas\\Admin\\Views\\Shared"
   ],
-  "SelectedNode": "\\CNPM-Project-web.sln",
+  "SelectedNode": "\\Areas\\Admin\\Views\\Shared\\_Layout.cshtml",
   "PreviewInSolutionExplorer": false
 }

@@ -24,7 +24,10 @@ namespace CNPM_Project_web
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                          //"~/CSS/Login.css",
+                          //"~/CSS/Register.css",
                       "~/Content/site.css"));
+
         }
     }
 }

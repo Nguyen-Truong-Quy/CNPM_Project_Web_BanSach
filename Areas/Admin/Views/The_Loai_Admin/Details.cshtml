@@ -1,0 +1,26 @@
+﻿@model CNPM_Project_web.Model.The_Loai
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>The_Loai</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Ten_The_Loai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ten_The_Loai)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_The_Loai }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,51 +1,48 @@
-﻿@model CNPM_Project_web.Model.LoginViewModel
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login form</title>
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link href="~/CSS/Login.css" rel="stylesheet" />
-</head>
-<body>
-    <div class="wrapper">
-        <div class="form-header">
-            <div class="title-login">Đăng nhập</div>
+@model CNPM_Project_web.Model.LoginViewModel
+
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+<link href="~/CSS/Login.css" rel="stylesheet" />
+
+<div class="wrapper">
+    <div class="form-header">
+        <div class="title-login">Đăng nhập</div>
+    </div>
+
+    @using (Html.BeginForm("Login", "Users", FormMethod.Post, new { @class = "login-form", autocomplete = "off" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="input-box">
+            @Html.TextBoxFor(m => m.Username, new { @class = "input-field", required = "required", placeholder = "" })
+            @Html.LabelFor(m => m.Username, new { @class = "label" })
+            <i class='bx bx-user icon'></i>
         </div>
 
-        @using (Html.BeginForm("Login", "Users", FormMethod.Post, new { @class = "login-form", autocomplete = "off" }))
-        {
-            @Html.AntiForgeryToken()
+        <div class="input-box">
+            @Html.PasswordFor(m => m.Password, new { @class = "input-field", required = "required", placeholder = "" })
+            @Html.LabelFor(m => m.Password, new { @class = "label" })
+            <i class='bx bx-lock-alt icon'></i>
+        </div>
 
-            <div class="input-box">
-                @Html.TextBoxFor(m => m.Username, new { @class = "input-field", required = "required", placeholder = "" })
-                @Html.LabelFor(m => m.Username, new { @class = "label" })
-                <i class='bx bx-user icon'></i>
+        <div class="form-cols">
+            <div class="col-1"></div>
+            <div class="col-2">
+                <a href="#">Quên mật khẩu?</a>
             </div>
+        </div>
 
-            <div class="input-box">
-                @Html.PasswordFor(m => m.Password, new { @class = "input-field", required = "required", placeholder = "" })
-                @Html.LabelFor(m => m.Password, new { @class = "label" })
-                <i class='bx bx-lock-alt icon'></i>
-            </div>
+        <div class="input-box">
+            <button type="submit" class="btn-submit">Đăng nhập <i class='bx bx-log-in'></i></button>
+        </div>
 
-            <div class="form-cols">
-                <div class="col-1"></div>
-                <div class="col-2">
-                    <a href="#">Quên mật khẩu?</a>
-                </div>
-            </div>
+        <div class="switch-form">
+            <span>Chưa có tài khoản? <a href="@Url.Action("Register", "Users")">Đăng ký</a></span>
+        </div>
+    }
+</div>
 
-            <div class="input-box">
-                <button type="submit" class="btn-submit">Đăng nhập <i class='bx bx-log-in'></i></button>
-            </div>
 
-            <div class="switch-form">
-                <span>Chưa có tài khoản? <a href="@Url.Action("Register", "Users")">Đăng ký</a></span>
-            </div>
-        }
-    </div>
-</body>
-</html>

@@ -146,11 +146,15 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\Danh_Muc_AdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\Khuyen_Mai_AdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Nha_Xuat_Ban_AdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\RolesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\The_Loai_AdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Trang_Thai_AdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\USERs_AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\Tac_GiaController.cs" />
+    <Compile Include="Areas\Admin\Controllers\Tac_GiaController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -287,6 +291,26 @@
     <Content Include="Areas\Admin\Views\Khuyen_Mai_Admin\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Khuyen_Mai_Admin\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Khuyen_Mai_Admin\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Danh_Muc_Admin\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Danh_Muc_Admin\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Danh_Muc_Admin\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Danh_Muc_Admin\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Danh_Muc_Admin\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\The_Loai_Admin\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\The_Loai_Admin\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\The_Loai_Admin\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\The_Loai_Admin\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\The_Loai_Admin\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Nha_Xuat_Ban_Admin\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Nha_Xuat_Ban_Admin\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Nha_Xuat_Ban_Admin\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Nha_Xuat_Ban_Admin\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Nha_Xuat_Ban_Admin\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Trang_Thai_Admin\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Trang_Thai_Admin\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Trang_Thai_Admin\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Trang_Thai_Admin\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Trang_Thai_Admin\Index.cshtml" />
     <None Include="Scripts\jquery-3.7.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.0.js" />
     <Content Include="Scripts\jquery-3.7.0.min.js" />
@@ -306,7 +330,6 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />

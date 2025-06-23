@@ -1,0 +1,33 @@
+﻿@model IEnumerable<CNPM_Project_web.Model.Trang_Thai>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TEN_TRANG_THAI)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TEN_TRANG_THAI)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID_TRANG_THAI }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID_TRANG_THAI }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID_TRANG_THAI })
+        </td>
+    </tr>
+}
+
+</table>
