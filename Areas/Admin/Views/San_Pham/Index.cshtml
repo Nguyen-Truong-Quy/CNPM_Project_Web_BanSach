@@ -1,0 +1,56 @@
+﻿@model IEnumerable<CNPM_Project_web.Model.San_Pham>
+@{
+    ViewBag.Title = "Danh sách sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+
+}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<h2 class="text-center">Danh sách sản phẩm</h2>
+<div class="d-flex justify-content-end mb-3">
+    @Html.ActionLink("➕ Tạo sản phẩm mới", "Create", null, new { @class = "btn btn-success" })
+</div>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-3 col-sm-6 mb-4" style="border-radius:10px">
+            <div class="card shadow-sm" style="height: 100%;">
+                <img src="@item.HINH_ANH" class="card-img-top" alt="@item.TEN_SP" style="height: 250px; object-fit: cover;" />
+                <div class="card-body d-flex flex-column justify-content-between">
+                    <h5 class="card-title text-truncate" title="@item.TEN_SP">@item.TEN_SP</h5>
+                    <p class="card-text text-danger font-weight-bold">
+                        @string.Format("{0:#,##0} ₫", item.GIA_BAN)
+                    </p>
+                    <div class="btn-group mt-auto">
+                        @Html.ActionLink("Xem", "Details", new { id = item.MA_SP }, new { @class = "btn btn-sm btn-outline-primary" })
+                        @Html.ActionLink("Sửa", "Edit", new { id = item.MA_SP }, new { @class = "btn btn-sm btn-outline-secondary" })
+                        <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal_@item.MA_SP">
+                            Xóa
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="confirmDeleteModal_@item.MA_SP" tabindex="-1" aria-labelledby="deleteModalLabel_@item.MA_SP" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="deleteModalLabel_@item.MA_SP">Xác nhận xóa</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+                        </div>
+                        <div class="modal-body">
+                            Bạn có muốn xóa sản phẩm <strong>@item.TEN_SP</strong>?
+                        </div>
+                        <div class="modal-footer">
+                            @using (Html.BeginForm("Delete", "San_Pham", new { id = item.MA_SP }, FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                                <button type="submit" class="btn btn-danger">Xác nhận</button>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

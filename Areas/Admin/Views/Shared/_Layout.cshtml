@@ -7,28 +7,78 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
+<style>
+    .navbar-nav .nav-link.active {
+        background-color: #0d6efd !important;
+        color: white !important;
+        border-radius: 5px;
+    }
+</style>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            @Html.ActionLink("📚 Quản lý Sách", "Index", "Home", null, new { @class = "navbar-brand" })
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="mainNavbar">
+                <!-- Bên trái: menu các chức năng -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "Danh_Muc_Admin" ? "active text-white bg-primary" : "")"
+                           href="@Url.Action("Index", "Danh_Muc_Admin")">
+                            Sản Phẩm
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "Tac_Gia" ? "active text-white bg-primary" : "")"
+                           href="@Url.Action("Index", "Tac_Gia")">
+                            Tác giả
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "San_Pham" ? "active text-white bg-primary" : "")"
+                           href="@Url.Action("Index", "San_Pham")">
+                            Sản Phẩm
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "Nha_Xuat_Ban_Admin" ? "active text-white bg-primary" : "")"
+                           href="@Url.Action("Index", "Nha_Xuat_Ban_Admin")">
+                            Nhà xuất bản
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "The_Loai_Admin" ? "active text-white bg-primary" : "")"
+                           href="@Url.Action("Index", "The_Loai_Admin")">
+                            Thể loại
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "Trang_Thai_Admin" ? "active text-white bg-primary" : "")"
+                           href="@Url.Action("Index", "Trang_Thai_Admin")">
+                            Trạng Thái
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Bên phải: đăng nhập / đăng xuất -->
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        @* TODO: thay bằng kiểm tra trạng thái đăng nhập *@
+                        <a class="nav-link" href="#">Đăng nhập</a>
+                    </li>
                 </ul>
             </div>
         </div>
-    </div>
+    </nav>
 
-    <div class="container body-content">
+    <div class="container mt-4 body-content">
         @RenderBody()
         <hr />
-        <footer>
+        <footer class="text-center text-muted">
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
     </div>

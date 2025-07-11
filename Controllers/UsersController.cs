@@ -60,11 +60,7 @@ namespace CNPM_Project_web.Controllers
 
                 var newUser = new USER
                 {
-                    USERNAME = model.Username,
-                    PASSWORD = model.Password, // Không mã hóa
-                    EMAIL = model.Email,
-                    ID_ROLE = 2,
-                    MA_KH = maKH
+                    
                 };
                 db.USERS.Add(newUser);
                 db.SaveChanges();
@@ -90,36 +86,36 @@ namespace CNPM_Project_web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(LoginViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
+        //public ActionResult Login(LoginViewModel model)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return View(model);
+        //    }
 
-            try
-            {
-                var user = db.USERS.FirstOrDefault(u => u.USERNAME == model.Username);
+        //    try
+        //    {
+        //        var user = db.USERS.FirstOrDefault(u => u.USERNAME == model.Username);
 
-                if (user == null || user.PASSWORD != model.Password)
-                {
-                    ModelState.AddModelError("", "Tên đăng nhập hoặc mật khẩu không đúng.");
-                    return View(model);
-                }
+        //        if (user == null || user.PASSWORD != model.Password)
+        //        {
+        //            ModelState.AddModelError("", "Tên đăng nhập hoặc mật khẩu không đúng.");
+        //            return View(model);
+        //        }
 
-                // Đăng nhập thành công: lưu thông tin vào Session
-                Session["Username"] = user.USERNAME;
-                Session["Role"] = user.ID_ROLE;
-                Session["CustomerId"] = user.MA_KH;
+        //        // Đăng nhập thành công: lưu thông tin vào Session
+        //        Session["Username"] = user.USERNAME;
+        //        Session["Role"] = user.ID_ROLE;
+        //        Session["CustomerId"] = user.MA_KH;
 
-                return RedirectToAction("Contact", "Home");
-            }
-            catch (Exception)
-            {
-                ModelState.AddModelError("", "Đã xảy ra lỗi. Vui lòng thử lại sau.");
-                return View(model);
-            }
-        }
+        //        return RedirectToAction("Contact", "Home");
+        //    }
+        //    catch (Exception)
+        //    {
+        //        ModelState.AddModelError("", "Đã xảy ra lỗi. Vui lòng thử lại sau.");
+        //        return View(model);
+        //    }
+        //}
 
         protected override void Dispose(bool disposing)
         {

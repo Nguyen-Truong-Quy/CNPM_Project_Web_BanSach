@@ -15,6 +15,7 @@
       <EntityTypeMapping TypeName="CNPM_Model.Danh_Gia">
         <MappingFragment StoreEntitySet="Danh_Gia">
           <ScalarProperty Name="ID_DANH_GIA" ColumnName="ID_DANH_GIA" />
+          <ScalarProperty Name="ID_DON_HANG" ColumnName="ID_DON_HANG" />
           <ScalarProperty Name="MA_KH" ColumnName="MA_KH" />
           <ScalarProperty Name="MA_SP" ColumnName="MA_SP" />
           <ScalarProperty Name="DIEM_DANH_GIA" ColumnName="DIEM_DANH_GIA" />
@@ -36,6 +37,7 @@
         <MappingFragment StoreEntitySet="Don_Hang">
           <ScalarProperty Name="ID_DON_HANG" ColumnName="ID_DON_HANG" />
           <ScalarProperty Name="MA_KH" ColumnName="MA_KH" />
+          <ScalarProperty Name="ID_GIO_HANG" ColumnName="ID_GIO_HANG" />
           <ScalarProperty Name="TG_DAT_HANG" ColumnName="TG_DAT_HANG" />
           <ScalarProperty Name="ID_TRANG_THAI" ColumnName="ID_TRANG_THAI" />
           <ScalarProperty Name="TONG_TIEN" ColumnName="TONG_TIEN" />
@@ -46,6 +48,7 @@
     <EntitySetMapping Name="Gio_Hang">
       <EntityTypeMapping TypeName="CNPM_Model.Gio_Hang">
         <MappingFragment StoreEntitySet="Gio_Hang">
+          <ScalarProperty Name="ID_GIO_HANG" ColumnName="ID_GIO_HANG" />
           <ScalarProperty Name="MA_KH" ColumnName="MA_KH" />
           <ScalarProperty Name="MA_SP" ColumnName="MA_SP" />
           <ScalarProperty Name="SO_LUONG" ColumnName="SO_LUONG" />
@@ -62,17 +65,7 @@
           <ScalarProperty Name="DIA_CHI" ColumnName="DIA_CHI" />
           <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
           <ScalarProperty Name="ANH_DAI_DIEN" ColumnName="ANH_DAI_DIEN" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Khuyen_Mai">
-      <EntityTypeMapping TypeName="CNPM_Model.Khuyen_Mai">
-        <MappingFragment StoreEntitySet="Khuyen_Mai">
-          <ScalarProperty Name="MA_KHUYEN_MAI" ColumnName="MA_KHUYEN_MAI" />
-          <ScalarProperty Name="TEN_KHUYEN_MAI" ColumnName="TEN_KHUYEN_MAI" />
-          <ScalarProperty Name="PHAN_TRAM_GIAM" ColumnName="PHAN_TRAM_GIAM" />
-          <ScalarProperty Name="NGAY_BAT_DAU" ColumnName="NGAY_BAT_DAU" />
-          <ScalarProperty Name="NGAY_KET_THUC" ColumnName="NGAY_KET_THUC" />
+          <ScalarProperty Name="ID_User" ColumnName="ID_User" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -126,7 +119,6 @@
           <ScalarProperty Name="TON_KHO" ColumnName="TON_KHO" />
           <ScalarProperty Name="ID_TRANG_THAI" ColumnName="ID_TRANG_THAI" />
           <ScalarProperty Name="ID_DANH_MUC" ColumnName="ID_DANH_MUC" />
-          <ScalarProperty Name="MA_KHUYEN_MAI" ColumnName="MA_KHUYEN_MAI" />
           <ScalarProperty Name="ID_TAC_GIA" ColumnName="ID_TAC_GIA" />
           <ScalarProperty Name="ID_NXB" ColumnName="ID_NXB" />
           <ScalarProperty Name="ID_The_Loai" ColumnName="ID_The_Loai" />
@@ -161,11 +153,10 @@
     <EntitySetMapping Name="USERS">
       <EntityTypeMapping TypeName="CNPM_Model.USER">
         <MappingFragment StoreEntitySet="USERS">
-          <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+          <ScalarProperty Name="ID_User" ColumnName="ID_User" />
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
           <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
           <ScalarProperty Name="ID_ROLE" ColumnName="ID_ROLE" />
-          <ScalarProperty Name="MA_KH" ColumnName="MA_KH" />
-          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

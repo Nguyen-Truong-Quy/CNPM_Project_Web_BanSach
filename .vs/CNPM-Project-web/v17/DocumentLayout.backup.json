@@ -1,7 +1,72 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\DoAnCNPM\\Project\\CNPM_Project_Web_BanSach\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|d:\\doancnpm\\project\\cnpm_project_web_bansach\\views\\products\\productlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|solutionrelative:views\\products\\productlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|d:\\doancnpm\\project\\cnpm_project_web_bansach\\views\\products\\productdetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|solutionrelative:views\\products\\productdetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|d:\\doancnpm\\project\\cnpm_project_web_bansach\\areas\\admin\\views\\san_pham\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|solutionrelative:areas\\admin\\views\\san_pham\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|d:\\doancnpm\\project\\cnpm_project_web_bansach\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|solutionrelative:controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|d:\\doancnpm\\project\\cnpm_project_web_bansach\\areas\\admin\\views\\san_pham\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|solutionrelative:areas\\admin\\views\\san_pham\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|d:\\doancnpm\\project\\cnpm_project_web_bansach\\areas\\admin\\views\\tac_gia\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|solutionrelative:areas\\admin\\views\\tac_gia\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|d:\\doancnpm\\project\\cnpm_project_web_bansach\\areas\\admin\\controllers\\nha_xuat_ban_admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|solutionrelative:areas\\admin\\controllers\\nha_xuat_ban_admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|d:\\doancnpm\\project\\cnpm_project_web_bansach\\areas\\admin\\views\\trang_thai_admin\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|solutionrelative:areas\\admin\\views\\trang_thai_admin\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|d:\\doancnpm\\project\\cnpm_project_web_bansach\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|solutionrelative:web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|d:\\doancnpm\\project\\cnpm_project_web_bansach\\areas\\admin\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|solutionrelative:areas\\admin\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|d:\\doancnpm\\project\\cnpm_project_web_bansach\\areas\\admin\\views\\san_pham\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|solutionrelative:areas\\admin\\views\\san_pham\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|d:\\doancnpm\\project\\cnpm_project_web_bansach\\areas\\admin\\views\\danh_muc_admin\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|solutionrelative:areas\\admin\\views\\danh_muc_admin\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|d:\\doancnpm\\project\\cnpm_project_web_bansach\\areas\\admin\\views\\the_loai_admin\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|solutionrelative:areas\\admin\\views\\the_loai_admin\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|d:\\doancnpm\\project\\cnpm_project_web_bansach\\areas\\admin\\views\\san_pham\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|solutionrelative:areas\\admin\\views\\san_pham\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|d:\\doancnpm\\project\\cnpm_project_web_bansach\\areas\\admin\\controllers\\san_phamcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|solutionrelative:areas\\admin\\controllers\\san_phamcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|d:\\doancnpm\\project\\cnpm_project_web_bansach\\areas\\admin\\controllers\\tac_giacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|solutionrelative:areas\\admin\\controllers\\tac_giacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,7 +74,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -18,6 +83,214 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ProductDetails.cshtml",
+              "DocumentMoniker": "D:\\DoAnCNPM\\Project\\CNPM_Project_Web_BanSach\\Views\\Products\\ProductDetails.cshtml",
+              "RelativeDocumentMoniker": "Views\\Products\\ProductDetails.cshtml",
+              "ToolTip": "D:\\DoAnCNPM\\Project\\CNPM_Project_Web_BanSach\\Views\\Products\\ProductDetails.cshtml*",
+              "RelativeToolTip": "Views\\Products\\ProductDetails.cshtml*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-11T16:26:51.983Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ProductList.cshtml",
+              "DocumentMoniker": "D:\\DoAnCNPM\\Project\\CNPM_Project_Web_BanSach\\Views\\Products\\ProductList.cshtml",
+              "RelativeDocumentMoniker": "Views\\Products\\ProductList.cshtml",
+              "ToolTip": "D:\\DoAnCNPM\\Project\\CNPM_Project_Web_BanSach\\Views\\Products\\ProductList.cshtml",
+              "RelativeToolTip": "Views\\Products\\ProductList.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-11T16:19:17.905Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ProductsController.cs",
+              "DocumentMoniker": "D:\\DoAnCNPM\\Project\\CNPM_Project_Web_BanSach\\Controllers\\ProductsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\ProductsController.cs",
+              "ToolTip": "D:\\DoAnCNPM\\Project\\CNPM_Project_Web_BanSach\\Controllers\\ProductsController.cs",
+              "RelativeToolTip": "Controllers\\ProductsController.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAWwBoAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-11T16:18:13.221Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\DoAnCNPM\\Project\\CNPM_Project_Web_BanSach\\Areas\\Admin\\Views\\The_Loai_Admin\\Index.cshtml",
+              "RelativeDocumentMoniker": "Areas\\Admin\\Views\\The_Loai_Admin\\Index.cshtml",
+              "ToolTip": "D:\\DoAnCNPM\\Project\\CNPM_Project_Web_BanSach\\Areas\\Admin\\Views\\The_Loai_Admin\\Index.cshtml",
+              "RelativeToolTip": "Areas\\Admin\\Views\\The_Loai_Admin\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-11T16:02:52.544Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\DoAnCNPM\\Project\\CNPM_Project_Web_BanSach\\Areas\\Admin\\Views\\Tac_Gia\\Index.cshtml",
+              "RelativeDocumentMoniker": "Areas\\Admin\\Views\\Tac_Gia\\Index.cshtml",
+              "ToolTip": "D:\\DoAnCNPM\\Project\\CNPM_Project_Web_BanSach\\Areas\\Admin\\Views\\Tac_Gia\\Index.cshtml",
+              "RelativeToolTip": "Areas\\Admin\\Views\\Tac_Gia\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-11T15:54:25.251Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "D:\\DoAnCNPM\\Project\\CNPM_Project_Web_BanSach\\Areas\\Admin\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "Areas\\Admin\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "D:\\DoAnCNPM\\Project\\CNPM_Project_Web_BanSach\\Areas\\Admin\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "Areas\\Admin\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAADAAAAAAAAAAAAAAAD8AAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-11T15:56:21.976Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "D:\\DoAnCNPM\\Project\\CNPM_Project_Web_BanSach\\Areas\\Admin\\Views\\San_Pham\\Details.cshtml",
+              "RelativeDocumentMoniker": "Areas\\Admin\\Views\\San_Pham\\Details.cshtml",
+              "ToolTip": "D:\\DoAnCNPM\\Project\\CNPM_Project_Web_BanSach\\Areas\\Admin\\Views\\San_Pham\\Details.cshtml",
+              "RelativeToolTip": "Areas\\Admin\\Views\\San_Pham\\Details.cshtml",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAAAsAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-11T15:28:02.399Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\DoAnCNPM\\Project\\CNPM_Project_Web_BanSach\\Areas\\Admin\\Views\\Trang_Thai_Admin\\Index.cshtml",
+              "RelativeDocumentMoniker": "Areas\\Admin\\Views\\Trang_Thai_Admin\\Index.cshtml",
+              "ToolTip": "D:\\DoAnCNPM\\Project\\CNPM_Project_Web_BanSach\\Areas\\Admin\\Views\\Trang_Thai_Admin\\Index.cshtml",
+              "RelativeToolTip": "Areas\\Admin\\Views\\Trang_Thai_Admin\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-11T16:02:57.944Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\DoAnCNPM\\Project\\CNPM_Project_Web_BanSach\\Areas\\Admin\\Views\\San_Pham\\Index.cshtml",
+              "RelativeDocumentMoniker": "Areas\\Admin\\Views\\San_Pham\\Index.cshtml",
+              "ToolTip": "D:\\DoAnCNPM\\Project\\CNPM_Project_Web_BanSach\\Areas\\Admin\\Views\\San_Pham\\Index.cshtml",
+              "RelativeToolTip": "Areas\\Admin\\Views\\San_Pham\\Index.cshtml",
+              "ViewState": "AgIAABwAAAAAAAAAAAAkwDgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-11T13:32:14.611Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Nha_Xuat_Ban_AdminController.cs",
+              "DocumentMoniker": "D:\\DoAnCNPM\\Project\\CNPM_Project_Web_BanSach\\Areas\\Admin\\Controllers\\Nha_Xuat_Ban_AdminController.cs",
+              "RelativeDocumentMoniker": "Areas\\Admin\\Controllers\\Nha_Xuat_Ban_AdminController.cs",
+              "ToolTip": "D:\\DoAnCNPM\\Project\\CNPM_Project_Web_BanSach\\Areas\\Admin\\Controllers\\Nha_Xuat_Ban_AdminController.cs",
+              "RelativeToolTip": "Areas\\Admin\\Controllers\\Nha_Xuat_Ban_AdminController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-11T16:20:01.375Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Web.config",
+              "DocumentMoniker": "D:\\DoAnCNPM\\Project\\CNPM_Project_Web_BanSach\\Web.config",
+              "RelativeDocumentMoniker": "Web.config",
+              "ToolTip": "D:\\DoAnCNPM\\Project\\CNPM_Project_Web_BanSach\\Web.config",
+              "RelativeToolTip": "Web.config",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2025-07-11T14:32:13.903Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "D:\\DoAnCNPM\\Project\\CNPM_Project_Web_BanSach\\Areas\\Admin\\Views\\San_Pham\\Create.cshtml",
+              "RelativeDocumentMoniker": "Areas\\Admin\\Views\\San_Pham\\Create.cshtml",
+              "ToolTip": "D:\\DoAnCNPM\\Project\\CNPM_Project_Web_BanSach\\Areas\\Admin\\Views\\San_Pham\\Create.cshtml",
+              "RelativeToolTip": "Areas\\Admin\\Views\\San_Pham\\Create.cshtml",
+              "ViewState": "AgIAAEkAAAAAAAAAAAAmwJEAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-11T13:49:42.271Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "D:\\DoAnCNPM\\Project\\CNPM_Project_Web_BanSach\\Areas\\Admin\\Views\\San_Pham\\Edit.cshtml",
+              "RelativeDocumentMoniker": "Areas\\Admin\\Views\\San_Pham\\Edit.cshtml",
+              "ToolTip": "D:\\DoAnCNPM\\Project\\CNPM_Project_Web_BanSach\\Areas\\Admin\\Views\\San_Pham\\Edit.cshtml",
+              "RelativeToolTip": "Areas\\Admin\\Views\\San_Pham\\Edit.cshtml",
+              "ViewState": "AgIAAIQAAAAAAAAAAAAqwJgAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-11T13:32:16.062Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "D:\\DoAnCNPM\\Project\\CNPM_Project_Web_BanSach\\Areas\\Admin\\Views\\Danh_Muc_Admin\\Index.cshtml",
+              "RelativeDocumentMoniker": "Areas\\Admin\\Views\\Danh_Muc_Admin\\Index.cshtml",
+              "ToolTip": "D:\\DoAnCNPM\\Project\\CNPM_Project_Web_BanSach\\Areas\\Admin\\Views\\Danh_Muc_Admin\\Index.cshtml",
+              "RelativeToolTip": "Areas\\Admin\\Views\\Danh_Muc_Admin\\Index.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAA5AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-07-11T16:03:17.256Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "San_PhamController.cs",
+              "DocumentMoniker": "D:\\DoAnCNPM\\Project\\CNPM_Project_Web_BanSach\\Areas\\Admin\\Controllers\\San_PhamController.cs",
+              "RelativeDocumentMoniker": "Areas\\Admin\\Controllers\\San_PhamController.cs",
+              "ToolTip": "D:\\DoAnCNPM\\Project\\CNPM_Project_Web_BanSach\\Areas\\Admin\\Controllers\\San_PhamController.cs",
+              "RelativeToolTip": "Areas\\Admin\\Controllers\\San_PhamController.cs",
+              "ViewState": "AgIAAP0AAAAAAAAAAAAwwBMBAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-11T13:30:36.944Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Tac_GiaController.cs",
+              "DocumentMoniker": "D:\\DoAnCNPM\\Project\\CNPM_Project_Web_BanSach\\Areas\\Admin\\Controllers\\Tac_GiaController.cs",
+              "RelativeDocumentMoniker": "Areas\\Admin\\Controllers\\Tac_GiaController.cs",
+              "ToolTip": "D:\\DoAnCNPM\\Project\\CNPM_Project_Web_BanSach\\Areas\\Admin\\Controllers\\Tac_GiaController.cs",
+              "RelativeToolTip": "Areas\\Admin\\Controllers\\Tac_GiaController.cs",
+              "ViewState": "AgIAAFQAAAAAAAAAAAAowAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-11T13:30:25.168Z",
+              "EditorCaption": ""
             }
           ]
         }
