@@ -7,63 +7,63 @@
       "RelativeMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|solutionrelative:views\\products\\productlist.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|d:\\doancnpm\\project\\cnpm_project_web_bansach\\views\\products\\productdetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|D:\\DoAnCNPM\\Project\\CNPM_Project_Web_BanSach\\views\\products\\productdetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|solutionrelative:views\\products\\productdetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|d:\\doancnpm\\project\\cnpm_project_web_bansach\\areas\\admin\\views\\san_pham\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|D:\\DoAnCNPM\\Project\\CNPM_Project_Web_BanSach\\areas\\admin\\views\\san_pham\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|solutionrelative:areas\\admin\\views\\san_pham\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|d:\\doancnpm\\project\\cnpm_project_web_bansach\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|D:\\DoAnCNPM\\Project\\CNPM_Project_Web_BanSach\\controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|solutionrelative:controllers\\productscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|d:\\doancnpm\\project\\cnpm_project_web_bansach\\areas\\admin\\views\\san_pham\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|D:\\DoAnCNPM\\Project\\CNPM_Project_Web_BanSach\\areas\\admin\\views\\san_pham\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|solutionrelative:areas\\admin\\views\\san_pham\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|d:\\doancnpm\\project\\cnpm_project_web_bansach\\areas\\admin\\views\\tac_gia\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|D:\\DoAnCNPM\\Project\\CNPM_Project_Web_BanSach\\areas\\admin\\views\\tac_gia\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|solutionrelative:areas\\admin\\views\\tac_gia\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|d:\\doancnpm\\project\\cnpm_project_web_bansach\\areas\\admin\\controllers\\nha_xuat_ban_admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|D:\\DoAnCNPM\\Project\\CNPM_Project_Web_BanSach\\areas\\admin\\controllers\\nha_xuat_ban_admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|solutionrelative:areas\\admin\\controllers\\nha_xuat_ban_admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|d:\\doancnpm\\project\\cnpm_project_web_bansach\\areas\\admin\\views\\trang_thai_admin\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|D:\\DoAnCNPM\\Project\\CNPM_Project_Web_BanSach\\areas\\admin\\views\\trang_thai_admin\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|solutionrelative:areas\\admin\\views\\trang_thai_admin\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|d:\\doancnpm\\project\\cnpm_project_web_bansach\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|D:\\DoAnCNPM\\Project\\CNPM_Project_Web_BanSach\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
       "RelativeMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|solutionrelative:web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|d:\\doancnpm\\project\\cnpm_project_web_bansach\\areas\\admin\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|D:\\DoAnCNPM\\Project\\CNPM_Project_Web_BanSach\\areas\\admin\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|solutionrelative:areas\\admin\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|d:\\doancnpm\\project\\cnpm_project_web_bansach\\areas\\admin\\views\\san_pham\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|D:\\DoAnCNPM\\Project\\CNPM_Project_Web_BanSach\\areas\\admin\\views\\san_pham\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|solutionrelative:areas\\admin\\views\\san_pham\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|d:\\doancnpm\\project\\cnpm_project_web_bansach\\areas\\admin\\views\\danh_muc_admin\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|D:\\DoAnCNPM\\Project\\CNPM_Project_Web_BanSach\\areas\\admin\\views\\danh_muc_admin\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|solutionrelative:areas\\admin\\views\\danh_muc_admin\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|d:\\doancnpm\\project\\cnpm_project_web_bansach\\areas\\admin\\views\\the_loai_admin\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|D:\\DoAnCNPM\\Project\\CNPM_Project_Web_BanSach\\areas\\admin\\views\\the_loai_admin\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|solutionrelative:areas\\admin\\views\\the_loai_admin\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|d:\\doancnpm\\project\\cnpm_project_web_bansach\\areas\\admin\\views\\san_pham\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|D:\\DoAnCNPM\\Project\\CNPM_Project_Web_BanSach\\areas\\admin\\views\\san_pham\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|solutionrelative:areas\\admin\\views\\san_pham\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|d:\\doancnpm\\project\\cnpm_project_web_bansach\\areas\\admin\\controllers\\san_phamcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|D:\\DoAnCNPM\\Project\\CNPM_Project_Web_BanSach\\areas\\admin\\controllers\\san_phamcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|solutionrelative:areas\\admin\\controllers\\san_phamcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|d:\\doancnpm\\project\\cnpm_project_web_bansach\\areas\\admin\\controllers\\tac_giacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|D:\\DoAnCNPM\\Project\\CNPM_Project_Web_BanSach\\areas\\admin\\controllers\\tac_giacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1BB07E48-8FA8-4598-968A-52E1D57C41ED}|CNPM-Project-web.csproj|solutionrelative:areas\\admin\\controllers\\tac_giacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -94,8 +94,7 @@
               "RelativeToolTip": "Views\\Products\\ProductDetails.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-11T16:26:51.983Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-11T16:26:51.983Z"
             },
             {
               "$type": "Document",
@@ -120,8 +119,7 @@
               "RelativeToolTip": "Controllers\\ProductsController.cs",
               "ViewState": "AgIAAA4AAAAAAAAAAAAWwBoAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-11T16:18:13.221Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-11T16:18:13.221Z"
             },
             {
               "$type": "Document",
@@ -133,8 +131,7 @@
               "RelativeToolTip": "Areas\\Admin\\Views\\The_Loai_Admin\\Index.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-11T16:02:52.544Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-11T16:02:52.544Z"
             },
             {
               "$type": "Document",
@@ -146,8 +143,7 @@
               "RelativeToolTip": "Areas\\Admin\\Views\\Tac_Gia\\Index.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-11T15:54:25.251Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-11T15:54:25.251Z"
             },
             {
               "$type": "Document",
@@ -159,8 +155,7 @@
               "RelativeToolTip": "Areas\\Admin\\Views\\Shared\\_Layout.cshtml",
               "ViewState": "AgIAADAAAAAAAAAAAAAAAD8AAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-11T15:56:21.976Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-11T15:56:21.976Z"
             },
             {
               "$type": "Document",
@@ -172,8 +167,7 @@
               "RelativeToolTip": "Areas\\Admin\\Views\\San_Pham\\Details.cshtml",
               "ViewState": "AgIAAAwAAAAAAAAAAAAAAAsAAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-11T15:28:02.399Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-11T15:28:02.399Z"
             },
             {
               "$type": "Document",
@@ -185,8 +179,7 @@
               "RelativeToolTip": "Areas\\Admin\\Views\\Trang_Thai_Admin\\Index.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-11T16:02:57.944Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-11T16:02:57.944Z"
             },
             {
               "$type": "Document",
@@ -198,8 +191,7 @@
               "RelativeToolTip": "Areas\\Admin\\Views\\San_Pham\\Index.cshtml",
               "ViewState": "AgIAABwAAAAAAAAAAAAkwDgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-11T13:32:14.611Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-11T13:32:14.611Z"
             },
             {
               "$type": "Document",
@@ -211,8 +203,7 @@
               "RelativeToolTip": "Areas\\Admin\\Controllers\\Nha_Xuat_Ban_AdminController.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-11T16:20:01.375Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-11T16:20:01.375Z"
             },
             {
               "$type": "Document",
@@ -237,8 +228,7 @@
               "RelativeToolTip": "Areas\\Admin\\Views\\San_Pham\\Create.cshtml",
               "ViewState": "AgIAAEkAAAAAAAAAAAAmwJEAAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-11T13:49:42.271Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-11T13:49:42.271Z"
             },
             {
               "$type": "Document",
@@ -250,8 +240,7 @@
               "RelativeToolTip": "Areas\\Admin\\Views\\San_Pham\\Edit.cshtml",
               "ViewState": "AgIAAIQAAAAAAAAAAAAqwJgAAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-11T13:32:16.062Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-11T13:32:16.062Z"
             },
             {
               "$type": "Document",
@@ -263,8 +252,7 @@
               "RelativeToolTip": "Areas\\Admin\\Views\\Danh_Muc_Admin\\Index.cshtml",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-07-11T16:03:17.256Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-11T16:03:17.256Z"
             },
             {
               "$type": "Document",
@@ -276,8 +264,7 @@
               "RelativeToolTip": "Areas\\Admin\\Controllers\\San_PhamController.cs",
               "ViewState": "AgIAAP0AAAAAAAAAAAAwwBMBAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-11T13:30:36.944Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-11T13:30:36.944Z"
             },
             {
               "$type": "Document",
@@ -289,8 +276,7 @@
               "RelativeToolTip": "Areas\\Admin\\Controllers\\Tac_GiaController.cs",
               "ViewState": "AgIAAFQAAAAAAAAAAAAowAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-11T13:30:25.168Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-11T13:30:25.168Z"
             }
           ]
         }
