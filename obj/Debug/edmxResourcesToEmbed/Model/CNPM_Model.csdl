@@ -46,8 +46,8 @@
     <Property Name="TONG_TIEN" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
     <Property Name="ID_THANH_TOAN" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Chi_Tiet_Don_Hang" Relationship="Self.fk_chitiet_donhang_donhang" FromRole="Don_Hang" ToRole="Chi_Tiet_Don_Hang" />
-    <NavigationProperty Name="Gio_Hang" Relationship="Self.FK__Don_Hang__ID_GIO__03F0984C" FromRole="Don_Hang" ToRole="Gio_Hang" />
-    <NavigationProperty Name="Lich_Su_Don_Hang" Relationship="Self.FK__Lich_Su_D__ID_DO__14270015" FromRole="Don_Hang" ToRole="Lich_Su_Don_Hang" />
+    <NavigationProperty Name="Gio_Hang" Relationship="Self.FK__Don_Hang__ID_GIO__6754599E" FromRole="Don_Hang" ToRole="Gio_Hang" />
+    <NavigationProperty Name="Lich_Su_Don_Hang" Relationship="Self.FK__Lich_Su_D__ID_DO__778AC167" FromRole="Don_Hang" ToRole="Lich_Su_Don_Hang" />
     <NavigationProperty Name="Phuong_Thuc_Thanh_Toan" Relationship="Self.fk_donhang_thanhtoan" FromRole="Don_Hang" ToRole="Phuong_Thuc_Thanh_Toan" />
     <NavigationProperty Name="Trang_Thai" Relationship="Self.fk_donhang_trangthai" FromRole="Don_Hang" ToRole="Trang_Thai" />
   </EntityType>
@@ -60,7 +60,7 @@
     <Property Name="MA_SP" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="SO_LUONG" Type="Int32" Nullable="false" />
     <Property Name="NGAY_TAO" Type="DateTime" Precision="7" />
-    <NavigationProperty Name="Don_Hang" Relationship="Self.FK__Don_Hang__ID_GIO__03F0984C" FromRole="Gio_Hang" ToRole="Don_Hang" />
+    <NavigationProperty Name="Don_Hang" Relationship="Self.FK__Don_Hang__ID_GIO__6754599E" FromRole="Gio_Hang" ToRole="Don_Hang" />
     <NavigationProperty Name="Khach_Hang" Relationship="Self.fk_giohang_khachhang" FromRole="Gio_Hang" ToRole="Khach_Hang" />
     <NavigationProperty Name="San_Pham" Relationship="Self.fk_giohang_sanpham" FromRole="Gio_Hang" ToRole="San_Pham" />
   </EntityType>
@@ -87,7 +87,7 @@
     <Property Name="ID_TRANG_THAI" Type="Int32" Nullable="false" />
     <Property Name="NGAY_CAP_NHAT" Type="DateTime" Precision="7" />
     <Property Name="GHI_CHU" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Don_Hang" Relationship="Self.FK__Lich_Su_D__ID_DO__14270015" FromRole="Lich_Su_Don_Hang" ToRole="Don_Hang" />
+    <NavigationProperty Name="Don_Hang" Relationship="Self.FK__Lich_Su_D__ID_DO__778AC167" FromRole="Lich_Su_Don_Hang" ToRole="Don_Hang" />
   </EntityType>
   <EntityType Name="Nha_Xuat_Ban">
     <Key>
@@ -227,7 +227,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Don_Hang__ID_GIO__03F0984C">
+  <Association Name="FK__Don_Hang__ID_GIO__6754599E">
     <End Role="Gio_Hang" Type="Self.Gio_Hang" Multiplicity="0..1" />
     <End Role="Don_Hang" Type="Self.Don_Hang" Multiplicity="*" />
     <ReferentialConstraint>
@@ -239,7 +239,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Lich_Su_D__ID_DO__14270015">
+  <Association Name="FK__Lich_Su_D__ID_DO__778AC167">
     <End Role="Don_Hang" Type="Self.Don_Hang" Multiplicity="1" />
     <End Role="Lich_Su_Don_Hang" Type="Self.Lich_Su_Don_Hang" Multiplicity="*" />
     <ReferentialConstraint>
@@ -403,11 +403,11 @@
       <End Role="Danh_Muc" EntitySet="Danh_Muc" />
       <End Role="San_Pham" EntitySet="San_Pham" />
     </AssociationSet>
-    <AssociationSet Name="FK__Don_Hang__ID_GIO__03F0984C" Association="Self.FK__Don_Hang__ID_GIO__03F0984C">
+    <AssociationSet Name="FK__Don_Hang__ID_GIO__6754599E" Association="Self.FK__Don_Hang__ID_GIO__6754599E">
       <End Role="Gio_Hang" EntitySet="Gio_Hang" />
       <End Role="Don_Hang" EntitySet="Don_Hang" />
     </AssociationSet>
-    <AssociationSet Name="FK__Lich_Su_D__ID_DO__14270015" Association="Self.FK__Lich_Su_D__ID_DO__14270015">
+    <AssociationSet Name="FK__Lich_Su_D__ID_DO__778AC167" Association="Self.FK__Lich_Su_D__ID_DO__778AC167">
       <End Role="Don_Hang" EntitySet="Don_Hang" />
       <End Role="Lich_Su_Don_Hang" EntitySet="Lich_Su_Don_Hang" />
     </AssociationSet>
