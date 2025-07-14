@@ -1,0 +1,51 @@
+﻿@{
+    ViewBag.Title = "Nhập thông tin đặt hàng";
+    var gioHang = ViewBag.GioHang as List<CNPM_Project_web.Model.Gio_Hang>;
+    var thanhToan = ViewBag.PhuongThuc as SelectList;
+    string maKH = ViewBag.MaKH as string;
+    decimal tongTien = 0;
+}
+
+<h2>Thông tin đặt hàng</h2>
+
+@using (Html.BeginForm("XacNhanDatHang", "Order", FormMethod.Post))
+{
+    @Html.Hidden("maKH", maKH)
+
+    foreach (var item in gioHang)
+    {
+        @Html.Hidden("chonSP", item.MA_SP)
+    }
+
+    <div class="mb-3">
+        <label><strong>Địa chỉ giao hàng:</strong></label>
+        <input type="text" name="diaChi" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+        <label><strong>Phương thức thanh toán:</strong></label>
+        @Html.DropDownList("idThanhToan", thanhToan, "-- Chọn phương thức --", new { @class = "form-control" })
+    </div>
+
+    <table class="table table-bordered mt-3">
+        <tr><th>Sản phẩm</th><th>Số lượng</th><th>Đơn giá</th><th>Thành tiền</th></tr>
+        @foreach (var item in gioHang)
+        {
+            var sp = item.San_Pham;
+            var tien = (sp.GIA_BAN ?? 0) * item.SO_LUONG;
+            tongTien += tien;
+            <tr>
+                <td>@sp.TEN_SP</td>
+                <td>@item.SO_LUONG</td>
+                <td>@sp.GIA_BAN?.ToString("N0") ₫</td>
+                <td>@tien.ToString("N0") ₫</td>
+            </tr>
+        }
+    </table>
+
+    <p class="text-end fw-bold">Tổng tiền: <span class="text-danger fs-5">@tongTien.ToString("N0") ₫</span></p>
+
+    <button type="submit" class="btn btn-success">Xác nhận đặt hàng</button>
+    <a href="@Url.Action("XemGioHang", "Cart")" class="btn btn-secondary">Quay lại</a>
+}
+

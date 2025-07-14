@@ -23,7 +23,27 @@
             <h4 class="text-danger">Giá bán: @string.Format("{0:#,##0} ₫", Model.GIA_BAN)</h4>
             <p><strong>Số lượng còn lại:</strong> @Model.TON_KHO</p>
             <hr />
-            @Html.ActionLink("Thêm Vào giỏ hàng", "Edit", new { id = Model.MA_SP }, new { @class = "btn btn-primary" })
+            @using (Html.BeginForm("ThemGioHang", "Cart", FormMethod.Post))
+            {
+                @Html.Hidden("maSP", Model.MA_SP)
+
+                <div class="mb-3">
+                    <label><strong>Số lượng:</strong></label>
+                    <div class="input-group" style="width: 150px;">
+                        <button type="button" id="btnGiam" class="btn btn-outline-secondary">−</button>
+                        <input type="number" name="soLuong" id="soLuong" class="form-control text-center" value="1" min="1" />
+                        <button type="button" id="btnTang" class="btn btn-outline-secondary">+</button>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <strong>Thành tiền: </strong>
+                    <span id="thanhTien" class="text-danger fw-bold fs-5">@Model.GIA_BAN.Value.ToString("N0") ₫</span>
+                </div>
+
+                <button type="submit" class="btn btn-primary">🛒 Thêm vào giỏ hàng</button>
+            }
+
             <a href="@Url.Action("ProductList", "Products")" class="btn btn-secondary">Quay lại</a>
         </div>
     </div>
@@ -38,4 +58,44 @@
         </div>
     </div>
 </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const giaBan = parseFloat("@Model.GIA_BAN.Value");
+        const tonKho = parseInt("@Model.TON_KHO");
+        const qtyInput = document.getElementById("soLuong");
+        const thanhTienEl = document.getElementById("thanhTien");
+        const btnGiam = document.getElementById("btnGiam");
+        const btnTang = document.getElementById("btnTang");
+
+        function updateThanhTien() {
+            let qty = parseInt(qtyInput.value) || 1;
+            if (qty < 1) qty = 1;
+            if (qty > tonKho) qty = tonKho;
+            qtyInput.value = qty;
+            let total = giaBan * qty;
+            thanhTienEl.innerText = total.toLocaleString('vi-VN') + " ₫";
+        }
+
+        btnGiam.addEventListener("click", function () {
+            let current = parseInt(qtyInput.value);
+            if (current > 1) {
+                qtyInput.value = current - 1;
+                updateThanhTien();
+            }
+        });
+
+        btnTang.addEventListener("click", function () {
+            let current = parseInt(qtyInput.value);
+            if (current < tonKho) {
+                qtyInput.value = current + 1;
+                updateThanhTien();
+            }
+        });
+
+        qtyInput.addEventListener("input", updateThanhTien);
+
+        updateThanhTien(); // khởi tạo ban đầu
+    });
+</script>
+
 

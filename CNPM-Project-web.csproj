@@ -141,13 +141,17 @@
     <Compile Include="Areas\Admin\Controllers\Tac_GiaController.cs" />
     <Compile Include="Areas\Admin\Controllers\The_Loai_AdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\Trang_Thai_AdminController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\EmailService.cs" />
+    <Compile Include="Lib\VNPayConfig.cs" />
+    <Compile Include="Lib\VnPayLibrary.cs" />
     <Compile Include="Model\Chi_Tiet_Don_Hang.cs">
       <DependentUpon>CNPM_Model.tt</DependentUpon>
     </Compile>
@@ -329,6 +333,10 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Products\ProductList.cshtml" />
     <Content Include="Views\Products\ProductDetails.cshtml" />
+    <Content Include="Views\Cart\GoiYSanPham.cshtml" />
+    <Content Include="Views\Cart\XemGioHang.cshtml" />
+    <Content Include="Views\Order\NhapThongTinDatHang.cshtml" />
+    <Content Include="Views\Order\XacNhanThanhToan.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -140,8 +140,14 @@ namespace CNPM_Project_web.Areas.Admin.Controllers
                             ModelState.AddModelError(ve.PropertyName, ve.ErrorMessage);
                         }
                     }
+                    TempData["ErrorMessage"] = "Lỗi khi lưu dữ liệu. Vui lòng kiểm tra lại.";
                 }
 
+            }
+            else
+            {
+                 TempData["ErrorMessage"] = "Dữ liệu nhập không hợp lệ. Vui lòng kiểm tra các trường bắt buộc.";
+    
             }
 
             // Reload lại dropdown nếu model có lỗi
