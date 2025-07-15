@@ -27,7 +27,7 @@ namespace CNPM_Project_web.Model
         public string HINH_ANH { get; set; }
         public decimal GIA_GOC { get; set; }
         public Nullable<int> DISCOUNT { get; set; }
-        public Nullable<decimal> GIA_BAN { get; set; }
+        public decimal GIA_BAN { get; set; }
         public int TON_KHO { get; set; }
         public int ID_TRANG_THAI { get; set; }
         public int ID_DANH_MUC { get; set; }

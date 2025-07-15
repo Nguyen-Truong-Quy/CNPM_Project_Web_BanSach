@@ -8,8 +8,6 @@ namespace CNPM_Project_web.Model
     public class RegisterViewModel
 
     {
-
-        public string Username { get; set; }
         public string Password { get; set; }
 
         public string Email { get; set; }

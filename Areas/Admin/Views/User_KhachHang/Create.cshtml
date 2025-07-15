@@ -1,0 +1,86 @@
+﻿@model CNPM_Project_web.ViewModel.UserKhachHangViewModel
+
+@{
+    ViewBag.Title = "Tạo tài khoản người dùng + khách hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+<div class="container mt-5">
+    <div class="card shadow-lg">
+        <div class="card-header bg-success text-white">
+            <h4 class="mb-0">Tạo người dùng + khách hàng</h4>
+        </div>
+        <div class="card-body">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <!-- Hiển thị lỗi tổng hợp -->
+                @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+
+                <div class="row">
+                    <!-- Thông tin tài khoản -->
+                    <div class="col-md-6">
+                        <h5 class="text-primary font-weight-bold mb-3">Tài khoản người dùng</h5>
+
+                        <div class="form-group">
+                            <label>Email</label>
+                            @Html.TextBoxFor(m => m.EMAIL, new { @class = "form-control", placeholder = "Nhập email đăng nhập" })
+                            @Html.ValidationMessageFor(m => m.EMAIL, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            <label>Mật khẩu</label>
+                            @Html.PasswordFor(m => m.PASSWORD, new { @class = "form-control", placeholder = "Nhập mật khẩu" })
+                            @Html.ValidationMessageFor(m => m.PASSWORD, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            <label>Vai trò</label>
+                            @Html.DropDownListFor(m => m.ID_ROLE, (SelectList)ViewBag.RoleList, "Chọn vai trò", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.ID_ROLE, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <!-- Thông tin khách hàng -->
+                    <div class="col-md-6">
+                        <h5 class="text-primary font-weight-bold mb-3">Thông tin khách hàng</h5>
+
+                        <div class="form-group">
+                            <label>Họ tên</label>
+                            @Html.TextBoxFor(m => m.HO_TEN_KH, new { @class = "form-control", placeholder = "Nhập họ tên" })
+                            @Html.ValidationMessageFor(m => m.HO_TEN_KH, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            <label>Số điện thoại</label>
+                            @Html.TextBoxFor(m => m.SDT_KH, new { @class = "form-control", placeholder = "Nhập số điện thoại" })
+                            @Html.ValidationMessageFor(m => m.SDT_KH, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            <label>Địa chỉ</label>
+                            @Html.TextBoxFor(m => m.DIA_CHI, new { @class = "form-control", placeholder = "Nhập địa chỉ" })
+                            @Html.ValidationMessageFor(m => m.DIA_CHI, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            <label>Ảnh đại diện (chọn từ máy):</label>
+                            <input type="file" name="AnhUpload" class="form-control" accept="image/*" />
+                        </div>
+                     
+                    </div>
+                </div>
+
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-success px-4">
+                        <i class="fa fa-plus-circle mr-2"></i> Tạo mới
+                    </button>
+                    @Html.ActionLink("Quay lại", "Index", null, new { @class = "btn btn-secondary ml-2" })
+                </div>
+            }
+        </div>
+    </div>
+</div>

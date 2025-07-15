@@ -1,0 +1,63 @@
+﻿@model CNPM_Project_web.ViewModel.UserKhachHangViewModel
+
+@{
+    ViewBag.Title = "Chi tiết người dùng + khách hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+    <div class="card shadow-lg">
+        <div class="card-header bg-info text-white">
+            <h4 class="mb-0">Chi tiết người dùng + khách hàng</h4>
+        </div>
+        <div class="card-body">
+            <!-- Thông tin người dùng -->
+            <h5 class="text-primary font-weight-bold mb-3">Thông tin người dùng</h5>
+            <dl class="row">
+                <dt class="col-sm-3">ID người dùng:</dt>
+                <dd class="col-sm-9">@Model.ID_User</dd>
+
+                <dt class="col-sm-3">Email đăng nhập:</dt>
+                <dd class="col-sm-9">@Model.EMAIL</dd>
+
+                <dt class="col-sm-3">Mật khẩu:</dt>
+                <dd class="col-sm-9">@Model.PASSWORD</dd>
+
+                <dt class="col-sm-3">Vai trò:</dt>
+                <dd class="col-sm-9">@Model.TEN_ROLE</dd>
+            </dl>
+
+            <!-- Thông tin khách hàng -->
+            <h5 class="text-success font-weight-bold mt-4 mb-3">Thông tin khách hàng</h5>
+            <dl class="row">
+                <dt class="col-sm-3">Mã khách hàng:</dt>
+                <dd class="col-sm-9">@Model.MA_KH</dd>
+
+                <dt class="col-sm-3">Họ tên:</dt>
+                <dd class="col-sm-9 text-lowercase">@Model.HO_TEN_KH</dd>
+
+                <dt class="col-sm-3">Số điện thoại:</dt>
+                <dd class="col-sm-9">@Model.SDT_KH</dd>
+
+                <dt class="col-sm-3">Địa chỉ:</dt>
+                <dd class="col-sm-9">@Model.DIA_CHI</dd>
+
+                <dt class="col-sm-3">Ảnh đại diện:</dt>
+                <dd class="col-sm-9">
+                    @if (!string.IsNullOrEmpty(Model.ANH_DAI_DIEN))
+                    {
+                        <img src="@Model.ANH_DAI_DIEN" alt="Ảnh đại diện" class="img-thumbnail" style="max-width: 150px;" />
+                    }
+                    else
+                    {
+                        <span>Chưa có ảnh</span>
+                    }
+                </dd>
+            </dl>
+
+            <div class="text-right">
+                @Html.ActionLink("Quay lại danh sách", "Index", null, new { @class = "btn btn-secondary" })
+            </div>
+        </div>
+    </div>
+</div>
