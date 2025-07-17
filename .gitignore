@@ -2,21 +2,26 @@
 .vs/
 *.suo
 *.user
-*.csproj.user
+*.csproj
 
 # Build
 bin/
 obj/
+packages/
 *.cache
 *.pdb
 *.dll
-
+Areas/Admin/Views/Web.config
+CNPM-Project-web.csproj.user
+Global.asax
 # Workspace Layout
 DocumentLayout*.json
+packages.config
 *.dtbcache.json
 *.sqlite
 *.wsuo
-Web.Local.config
+Web.config
+CNPM-Project-web.csproj
 # Database auto-generated files
 *.edmx.diagram
 *.edmx.sql
