@@ -1067,6 +1067,40 @@
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
-    <Diagrams></Diagrams>
+    <Diagrams>
+      <Diagram DiagramId="dea37c1f74e947b8a494cf1312e8cec9" Name="Diagram1">
+        <EntityTypeShape EntityType="CNPM_Model.Chi_Tiet_Don_Hang" Width="1.5" PointX="8.25" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNPM_Model.Danh_Gia" Width="1.5" PointX="10.5" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNPM_Model.Danh_Muc" Width="1.5" PointX="3.75" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNPM_Model.Don_Hang" Width="1.5" PointX="3" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNPM_Model.Gio_Hang" Width="1.5" PointX="11.25" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNPM_Model.Khach_Hang" Width="1.5" PointX="9" PointY="20.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNPM_Model.Lich_Su_Don_Hang" Width="1.5" PointX="5.25" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNPM_Model.Nha_Xuat_Ban" Width="1.5" PointX="3.75" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNPM_Model.Phuong_Thuc_Thanh_Toan" Width="1.5" PointX="0.75" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNPM_Model.Role" Width="1.5" PointX="4.5" PointY="21.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNPM_Model.San_Pham" Width="1.5" PointX="6" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNPM_Model.Tac_Gia" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNPM_Model.The_Loai" Width="1.5" PointX="3.75" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNPM_Model.Trang_Thai" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNPM_Model.USER" Width="1.5" PointX="6.75" PointY="21.125" IsExpanded="true" />
+        <AssociationConnector Association="CNPM_Model.fk_chitiet_donhang_donhang" ManuallyRouted="false" />
+        <AssociationConnector Association="CNPM_Model.fk_chitiet_donhang_sanpham" ManuallyRouted="false" />
+        <AssociationConnector Association="CNPM_Model.fk_danhgia_chitietdonhang" ManuallyRouted="false" />
+        <AssociationConnector Association="CNPM_Model.fk_sanpham_danhmuc" ManuallyRouted="false" />
+        <AssociationConnector Association="CNPM_Model.FK__Don_Hang__ID_GIO__03F0984C" ManuallyRouted="false" />
+        <AssociationConnector Association="CNPM_Model.FK__Lich_Su_D__ID_DO__14270015" ManuallyRouted="false" />
+        <AssociationConnector Association="CNPM_Model.fk_donhang_thanhtoan" ManuallyRouted="false" />
+        <AssociationConnector Association="CNPM_Model.fk_donhang_trangthai" ManuallyRouted="false" />
+        <AssociationConnector Association="CNPM_Model.fk_giohang_khachhang" ManuallyRouted="false" />
+        <AssociationConnector Association="CNPM_Model.fk_giohang_sanpham" ManuallyRouted="false" />
+        <AssociationConnector Association="CNPM_Model.fk_users_khach_hang" ManuallyRouted="false" />
+        <AssociationConnector Association="CNPM_Model.fk_sanpham_nxb" ManuallyRouted="false" />
+        <AssociationConnector Association="CNPM_Model.fk_users_roles" ManuallyRouted="false" />
+        <AssociationConnector Association="CNPM_Model.fk_sanpham_tacgia" ManuallyRouted="false" />
+        <AssociationConnector Association="CNPM_Model.fk_sanpham_theloai" ManuallyRouted="false" />
+        <AssociationConnector Association="CNPM_Model.fk_sanpham_trangthai" ManuallyRouted="false" />
+      </Diagram>
+    </Diagrams>
   </Designer>
 </edmx:Edmx>

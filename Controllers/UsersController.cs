@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web.Mvc;
 using CNPM_Project_web.Model;
 using CNPM_Project_web.Helpers;
+using System.Xml;
 
 namespace CNPM_Project_web.Controllers
 {
@@ -20,12 +21,24 @@ namespace CNPM_Project_web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Register(RegisterViewModel model, string Otp)
         {
+            if (TempData["RegisterModel"] != null)
+            {
+                model = TempData["RegisterModel"] as RegisterViewModel;
+            }
+
             if (ModelState.IsValid)
             {
-                var existingUser = db.USERS.Find(model.Username);
-                if (existingUser != null)
+                //var existingUser = db.USERS.FirstOrDefault(u => u.EMAIL == model.Email);
+                //if (existingUser != null)
+                //{
+                //    ModelState.AddModelError("", "Email đã tồn tại.");
+                //    return View(model);
+                //}
+
+                // Gửi OTP nếu chưa có
+                ValidationHelper.CheckEmailAndPassword(model.Email, model.Password, ModelState);
+                if (!ModelState.IsValid)
                 {
-                    ModelState.AddModelError("", "Tên đăng nhập đã tồn tại.");
                     return View(model);
                 }
 
@@ -34,12 +47,25 @@ namespace CNPM_Project_web.Controllers
                     string generatedOtp = new Random().Next(100000, 999999).ToString();
                     TempData["OTP"] = generatedOtp;
                     TempData["RegisterModel"] = model;
-                    EmailService.SendOtp(model.Email, generatedOtp);
-                    ViewBag.SuccessMessage = "Mã OTP đã được gửi đến email của bạn.";
-                    ViewBag.ShowOtpBox = true;
+
+                    try
+                    {
+                        EmailService.SendOtp(model.Email, generatedOtp);
+                        ViewBag.SuccessMessage = "Mã OTP đã được gửi đến email của bạn.";
+                        ViewBag.ShowOtpBox = true;
+                    }
+                    catch (Exception ex)
+                    {
+                        ModelState.AddModelError("", "Không thể gửi email OTP. Vui lòng kiểm tra kết nối hoặc cấu hình email.");
+                        return View(model);
+                    }
+
                     return View(model);
                 }
 
+
+
+                // Kiểm tra OTP
                 string sentOtp = TempData["OTP"] as string;
                 if (Otp != sentOtp)
                 {
@@ -48,29 +74,58 @@ namespace CNPM_Project_web.Controllers
                     return View(model);
                 }
 
-                string maKH = GenerateCustomerCode();
+                // === TẠO MÃ USER ===
+                string lastUserId = db.USERS.OrderByDescending(u => u.ID_User).Select(u => u.ID_User).FirstOrDefault();
+                int nextUserNumber = 1;
+                if (!string.IsNullOrEmpty(lastUserId) && lastUserId.StartsWith("USER_"))
+                {
+                    int.TryParse(lastUserId.Substring(5), out nextUserNumber);
+                    nextUserNumber++;
+                }
+                string newIdUser = $"USER_{nextUserNumber:D3}";
 
+                // === TẠO MÃ KHÁCH HÀNG ===
+                string lastMaKH = db.Khach_Hang.OrderByDescending(k => k.MA_KH).Select(k => k.MA_KH).FirstOrDefault();
+                int nextMaKHNumber = 1;
+                if (!string.IsNullOrEmpty(lastMaKH) && lastMaKH.StartsWith("KH"))
+                {
+                    int.TryParse(lastMaKH.Substring(2), out nextMaKHNumber);
+                    nextMaKHNumber++;
+                }
+                string newMaKH = $"KH{nextMaKHNumber:D3}";
+
+                // === TẠO USER ===
+                var newUser = new USER
+                {
+                    ID_User = newIdUser,
+                    EMAIL = model.Email,
+                    PASSWORD = model.Password,
+                    ID_ROLE = 2 // Giả sử 2 là ROLE Khách hàng
+                };
+                db.USERS.Add(newUser);
+
+                // === TẠO KHÁCH HÀNG (có thể để trống thông tin) ===
                 var khachHang = new Khach_Hang
                 {
-                    MA_KH = maKH,
-                    HO_TEN_KH = model.Username,
-                    EMAIL = model.Email
+                    MA_KH = newMaKH,
+                    ID_User = newIdUser,
+                    HO_TEN_KH = "",
+                    EMAIL = model.Email,
+                    SDT_KH = "",       // Có thể để trống
+                    DIA_CHI = "",      // Có thể để trống
+                    ANH_DAI_DIEN = null
                 };
                 db.Khach_Hang.Add(khachHang);
 
-                var newUser = new USER
-                {
-                    
-                };
-                db.USERS.Add(newUser);
                 db.SaveChanges();
 
-                ViewBag.SuccessMessage = "Đăng ký thành công!";
-                return View();
+                ViewBag.SuccessMessage = "Đăng ký thành công. Bạn có thể đăng nhập ngay!";
+                return RedirectToAction("Login", "Users");
             }
 
             return View(model);
         }
+
 
         private string GenerateCustomerCode()
         {
@@ -84,38 +139,52 @@ namespace CNPM_Project_web.Controllers
             return View();
         }
 
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //public ActionResult Login(LoginViewModel model)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return View(model);
-        //    }
+        public ActionResult Login(LoginViewModel model, string returnUrl)
+        {
+            if (!ModelState.IsValid) return View(model);
 
-        //    try
-        //    {
-        //        var user = db.USERS.FirstOrDefault(u => u.USERNAME == model.Username);
+            try
+            {
+                var user = db.USERS.FirstOrDefault(u => u.EMAIL == model.Email);
+                if (user == null || user.PASSWORD != model.Password)
+                {
+                    ModelState.AddModelError("", "Email hoặc mật khẩu không đúng.");
+                    return View(model);
+                }
 
-        //        if (user == null || user.PASSWORD != model.Password)
-        //        {
-        //            ModelState.AddModelError("", "Tên đăng nhập hoặc mật khẩu không đúng.");
-        //            return View(model);
-        //        }
+                var khachHang = db.Khach_Hang.FirstOrDefault(k => k.ID_User == user.ID_User);
 
-        //        // Đăng nhập thành công: lưu thông tin vào Session
-        //        Session["Username"] = user.USERNAME;
-        //        Session["Role"] = user.ID_ROLE;
-        //        Session["CustomerId"] = user.MA_KH;
+                Session["Email"] = user.EMAIL;
+                Session["UserId"] = user.ID_User;
+                Session["Role"] = user.ID_ROLE;
+                Session["CustomerId"] = khachHang?.MA_KH;
 
-        //        return RedirectToAction("Contact", "Home");
-        //    }
-        //    catch (Exception)
-        //    {
-        //        ModelState.AddModelError("", "Đã xảy ra lỗi. Vui lòng thử lại sau.");
-        //        return View(model);
-        //    }
-        //}
+                if (user.ID_ROLE != 1 && !string.IsNullOrEmpty(returnUrl))
+                {
+                    // Redirect về trang trước khi login
+                    return Redirect(returnUrl);
+                }
+
+                if (user.ID_ROLE == 1)
+                {
+                    return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            catch
+            {
+                ModelState.AddModelError("", "Đã xảy ra lỗi. Vui lòng thử lại sau.");
+                return View(model);
+            }
+        }
+
+
 
         protected override void Dispose(bool disposing)
         {

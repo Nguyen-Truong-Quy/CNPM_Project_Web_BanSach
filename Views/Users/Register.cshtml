@@ -1,4 +1,4 @@
-﻿@model CNPM_Project_web.Model.RegisterViewModel
+﻿﻿@model CNPM_Project_web.Model.RegisterViewModel
 
 <!DOCTYPE html>
 <html lang="en">
@@ -31,23 +31,20 @@
         {
             @Html.AntiForgeryToken()
 
-            <div class="input-box">
-                @Html.TextBoxFor(m => m.Username, new { @class = "input-field", required = "required" })
-                @Html.LabelFor(m => m.Username, new { @class = "label" })
-                <i class='bx bx-user icon'></i>
-            </div>
+
 
             <div class="input-box">
-                @Html.TextBoxFor(m => m.Email, new { @class = "input-field", required = "required", type = "email" })
+                @Html.TextBoxFor(m => m.Email, new { @class = "input-field", type = "email" })
                 @Html.LabelFor(m => m.Email, new { @class = "label" })
                 <i class='bx bx-envelope icon'></i>
             </div>
 
             <div class="input-box">
-                @Html.PasswordFor(m => m.Password, new { @class = "input-field", required = "required" })
+                @Html.PasswordFor(m => m.Password, new { @class = "input-field" })
                 @Html.LabelFor(m => m.Password, new { @class = "label" })
                 <i class='bx bx-lock-alt icon'></i>
             </div>
+
 
             <div class="form-cols">
                 <div class="col-1">
@@ -64,6 +61,16 @@
                     <i class='bx bx-key icon'></i>
                 </div>
             }
+            if (!ViewData.ModelState.IsValid)
+            {
+                <div class="alert alert-danger">
+                    @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                    {
+                        <div>@error.ErrorMessage</div>
+                    }
+                </div>
+            }
+
 
             <div class="input-box">
                 <button type="submit" class="btn-submit">Sign Up <i class='bx bx-user-plus'></i></button>
@@ -76,15 +83,3 @@
     </div>
 </body>
 </html>
-<script>
-    // Nếu có thông báo thành công từ ViewBag, reload sau 2 giây
-    @if (ViewBag.SuccessMessage != null)
-    {
-        <text>
-            setTimeout(function () {
-                window.location.href = '@Url.Action("Register", "Users")';
-            }, 2000);
-        </text>
-    }
-</script>
-

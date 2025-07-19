@@ -1,4 +1,4 @@
-﻿@{
+﻿﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -15,10 +15,12 @@
     @using (Html.BeginForm("Login", "Users", FormMethod.Post, new { @class = "login-form", autocomplete = "off" }))
     {
         @Html.AntiForgeryToken()
+        @Html.Hidden("returnUrl", Request.QueryString["returnUrl"] ?? "")
+
 
         <div class="input-box">
-            @Html.TextBoxFor(m => m.Username, new { @class = "input-field", required = "required", placeholder = "" })
-            @Html.LabelFor(m => m.Username, new { @class = "label" })
+            @Html.TextBoxFor(m => m.Email, new { @class = "input-field", required = "required", placeholder = "" })
+            @Html.LabelFor(m => m.Email, new { @class = "label" })
             <i class='bx bx-user icon'></i>
         </div>
 
@@ -44,5 +46,3 @@
         </div>
     }
 </div>
-
-

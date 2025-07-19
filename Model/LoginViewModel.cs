@@ -9,7 +9,8 @@ namespace CNPM_Project_web.Model
     public class LoginViewModel
     {
         [Required(ErrorMessage = "Vui lòng nhập tên đăng nhập.")]
-        public string Username { get; set; }
+        [EmailAddress]
+        public string Email { get; set; }
 
         [Required(ErrorMessage = "Vui lòng nhập mật khẩu.")]
         [DataType(DataType.Password)]
