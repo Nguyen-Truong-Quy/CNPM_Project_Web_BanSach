@@ -11,18 +11,4 @@ obj/
 *.pdb
 *.dll
 
-# Workspace Layout
-DocumentLayout*.json
-*.dtbcache.json
-*.sqlite
-*.wsuo
-Web.Local.config
-# Database auto-generated files
-*.edmx.diagram
-*.edmx.sql
-*.edmx.*
-*.dbmdl
-*.mdf
-*.ldf
-*.suo
-*.user
+
