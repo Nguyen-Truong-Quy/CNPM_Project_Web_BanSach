@@ -1,40 +1,273 @@
-﻿@model IEnumerable<CNPM_Project_web.Model.Tac_Gia>
+﻿@model IPagedList<CNPM_Project_web.Model.Tac_Gia>
+@using PagedList
+@using PagedList.Mvc
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Quản lý Tác giả";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="h3 mb-0 text-gray-800">
+                <i class="fas fa-users me-2"></i>Quản lý Tác giả
+            </h1>
+            <p class="text-muted">Quản lý thông tin các tác giả trong hệ thống</p>
+        </div>
+        <div>
+            <a href="@Url.Action("Create")" class="btn btn-primary">
+                <i class="fas fa-plus me-2"></i>Thêm Tác giả
+            </a>
+        </div>
+    </div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.TEN_TAC_GIA)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MO_TA)
-        </th>
-        <th></th>
-    </tr>
+    <!-- Alert Messages -->
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fas fa-check-circle me-2"></i>@TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fas fa-exclamation-circle me-2"></i>@TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.TEN_TAC_GIA)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MO_TA)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID_TAC_GIA }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID_TAC_GIA }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID_TAC_GIA })
-        </td>
-    </tr>
+    <!-- Search and Filter Card -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <form method="get" class="row g-3">
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <i class="fas fa-search"></i>
+                        </span>
+                        <input type="text" class="form-control" name="searchString" 
+                               value="@ViewBag.CurrentFilter" placeholder="Tìm kiếm tên tác giả hoặc mô tả...">
+                        <button type="submit" class="btn btn-outline-secondary">
+                            <i class="fas fa-search me-1"></i>Tìm
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <select name="sortOrder" class="form-select" onchange="this.form.submit()">
+                        <option value="">Sắp xếp theo</option>
+                        <option value="name_desc" @(ViewBag.CurrentSort == "name_desc" ? "selected" : "")>Tên A-Z</option>
+                        <option value="" @(ViewBag.CurrentSort == "" ? "selected" : "")>Tên Z-A</option>
+                        <option value="Description" @(ViewBag.CurrentSort == "Description" ? "selected" : "")>Mô tả A-Z</option>
+                        <option value="description_desc" @(ViewBag.CurrentSort == "description_desc" ? "selected" : "")>Mô tả Z-A</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <a href="@Url.Action("Index")" class="btn btn-outline-secondary w-100">
+                        <i class="fas fa-refresh me-2"></i>Làm mới
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Results Card -->
+    <div class="card shadow-sm">
+        <div class="card-header bg-white">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">
+                    <i class="fas fa-list me-2"></i>Danh sách Tác giả
+                </h5>
+                <span class="badge bg-primary">@Model.TotalItemCount tác giả</span>
+            </div>
+        </div>
+        <div class="card-body p-0">
+            @if (Model.Any())
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th width="10%">#</th>
+                                <th width="60%">
+                                    <i class="fas fa-user me-1"></i>Tên Tác giả
+                                </th>
+                                <th width="30%" class="text-center">
+                                    <i class="fas fa-cogs me-1"></i>Thao tác
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="text-muted">@item.ID_TAC_GIA</td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="avatar-sm bg-primary rounded-circle d-flex align-items-center justify-content-center me-3">
+                                                <i class="fas fa-user text-white"></i>
+                                            </div>
+                                            <div>
+                                                <h6 class="mb-0 fw-bold">@item.TEN_TAC_GIA</h6>
+                                                <small class="text-muted">ID: @item.ID_TAC_GIA</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="btn-group" role="group">
+                                            <button type="button" class="btn btn-outline-info" 
+                                                    onclick="showAuthorDetails(@item.ID_TAC_GIA)" 
+                                                    title="Xem chi tiết">
+                                                <i class="fas fa-eye me-1"></i>Chi tiết
+                                            </button>
+                                            <a href="@Url.Action("Edit", new { id = item.ID_TAC_GIA })" 
+                                               class="btn btn-outline-warning" title="Chỉnh sửa">
+                                                <i class="fas fa-edit me-1"></i>Sửa
+                                            </a>
+                                            <button type="button" class="btn btn-outline-danger" 
+                                                    onclick="confirmDelete(@item.ID_TAC_GIA, '@item.TEN_TAC_GIA')" 
+                                                    title="Xóa">
+                                                <i class="fas fa-trash me-1"></i>Xóa
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <div class="text-center py-5">
+                    <i class="fas fa-users fa-3x text-muted mb-3"></i>
+                    <h5 class="text-muted">Không có tác giả nào</h5>
+                    <p class="text-muted">Bắt đầu bằng cách thêm tác giả đầu tiên</p>
+                    <a href="@Url.Action("Create")" class="btn btn-primary">
+                        <i class="fas fa-plus me-2"></i>Thêm Tác giả
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- Pagination -->
+    @if (Model.PageCount > 1)
+    {
+        <div class="d-flex justify-content-center mt-4">
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchString = ViewBag.CurrentFilter, sortOrder = ViewBag.CurrentSort }))
+        </div>
+    }
+</div>
+
+<!-- Author Details Modal -->
+<div class="modal fade" id="authorDetailsModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-user me-2"></i>Chi tiết Tác giả
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div id="authorDetailsContent">
+                    <div class="text-center">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-danger">
+                    <i class="fas fa-exclamation-triangle me-2"></i>Xác nhận xóa
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Bạn có chắc chắn muốn xóa tác giả <strong id="authorNameToDelete"></strong>?</p>
+                <p class="text-muted small">Hành động này không thể hoàn tác.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <form id="deleteForm" method="post" style="display: inline;">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash me-2"></i>Xóa
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Show author details
+        function showAuthorDetails(id) {
+            $.get('@Url.Action("GetAuthorInfo")', { id: id })
+                .done(function(data) {
+                    if (data) {
+                        var content = `
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div class="avatar-lg bg-primary rounded-circle d-flex align-items-center justify-content-center me-3">
+                                            <i class="fas fa-user fa-2x text-white"></i>
+                                        </div>
+                                        <div>
+                                            <h5 class="mb-1">${data.tenTacGia}</h5>
+                                            <span class="badge bg-secondary">ID: ${data.id}</span>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label fw-bold">Mô tả:</label>
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <p class="text-muted mb-0">${data.moTa || 'Chưa có mô tả'}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        $('#authorDetailsContent').html(content);
+                        $('#authorDetailsModal').modal('show');
+                    } else {
+                        alert('Không tìm thấy thông tin tác giả');
+                    }
+                })
+                .fail(function() {
+                    alert('Có lỗi xảy ra khi tải thông tin tác giả');
+                });
+        }
+
+        // Confirm delete
+        function confirmDelete(id, name) {
+            $('#authorNameToDelete').text(name);
+            $('#deleteForm').attr('action', '@Url.Action("Delete")/' + id);
+            $('#deleteModal').modal('show');
+        }
+
+        // Auto-hide alerts after 5 seconds
+        $(document).ready(function() {
+            setTimeout(function() {
+                $('.alert').fadeOut();
+            }, 5000);
+        });
+    </script>
 }
-
-</table>

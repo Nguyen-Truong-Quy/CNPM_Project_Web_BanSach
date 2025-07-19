@@ -1,56 +1,363 @@
-﻿@model IEnumerable<CNPM_Project_web.Model.San_Pham>
-@{
-    ViewBag.Title = "Danh sách sản phẩm";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+﻿@model IPagedList<CNPM_Project_web.Model.San_Pham>
+@using PagedList
+@using PagedList.Mvc
 
+@{
+    ViewBag.Title = "Quản lý Sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-<h2 class="text-center">Danh sách sản phẩm</h2>
-<div class="d-flex justify-content-end mb-3">
-    @Html.ActionLink("➕ Tạo sản phẩm mới", "Create", null, new { @class = "btn btn-success" })
-</div>
-<div class="row">
-    @foreach (var item in Model)
+
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="h3 mb-0 text-gray-800">
+                <i class="fas fa-box me-2"></i>Quản lý Sản phẩm
+            </h1>
+            <p class="text-muted">Quản lý thông tin các sản phẩm trong hệ thống</p>
+        </div>
+        <div>
+            <a href="@Url.Action("Create")" class="btn btn-primary">
+                <i class="fas fa-plus me-2"></i>Thêm Sản phẩm
+            </a>
+        </div>
+    </div>
+
+    <!-- Alert Messages -->
+    @if (TempData["SuccessMessage"] != null)
     {
-        <div class="col-md-3 col-sm-6 mb-4" style="border-radius:10px">
-            <div class="card shadow-sm" style="height: 100%;">
-                <img src="@item.HINH_ANH" class="card-img-top" alt="@item.TEN_SP" style="height: 250px; object-fit: cover;" />
-                <div class="card-body d-flex flex-column justify-content-between">
-                    <h5 class="card-title text-truncate" title="@item.TEN_SP">@item.TEN_SP</h5>
-                    <p class="card-text text-danger font-weight-bold">
-                        @string.Format("{0:#,##0} ₫", item.GIA_BAN)
-                    </p>
-                    <div class="btn-group mt-auto">
-                        @Html.ActionLink("Xem", "Details", new { id = item.MA_SP }, new { @class = "btn btn-sm btn-outline-primary" })
-                        @Html.ActionLink("Sửa", "Edit", new { id = item.MA_SP }, new { @class = "btn btn-sm btn-outline-secondary" })
-                        <button type="button" class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal_@item.MA_SP">
-                            Xóa
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fas fa-check-circle me-2"></i>@TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fas fa-exclamation-circle me-2"></i>@TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <!-- Search and Filter Card -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <form method="get" class="row g-3">
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <i class="fas fa-search"></i>
+                        </span>
+                        <input type="text" class="form-control" name="searchString" 
+                               value="@ViewBag.CurrentFilter" placeholder="Tìm kiếm tên sản phẩm, mã SP, danh mục...">
+                        <button type="submit" class="btn btn-outline-secondary">
+                            <i class="fas fa-search me-1"></i>Tìm
                         </button>
                     </div>
                 </div>
+                <div class="col-md-3">
+                    <select name="sortOrder" class="form-select" onchange="this.form.submit()">
+                        <option value="">Sắp xếp theo</option>
+                        <option value="name_desc" @(ViewBag.CurrentSort == "name_desc" ? "selected" : "")>Tên A-Z</option>
+                        <option value="" @(ViewBag.CurrentSort == "" ? "selected" : "")>Tên Z-A</option>
+                        <option value="Price" @(ViewBag.CurrentSort == "Price" ? "selected" : "")>Giá tăng dần</option>
+                        <option value="price_desc" @(ViewBag.CurrentSort == "price_desc" ? "selected" : "")>Giá giảm dần</option>
+                        <option value="Category" @(ViewBag.CurrentSort == "Category" ? "selected" : "")>Danh mục A-Z</option>
+                        <option value="category_desc" @(ViewBag.CurrentSort == "category_desc" ? "selected" : "")>Danh mục Z-A</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <a href="@Url.Action("Index")" class="btn btn-outline-secondary w-100">
+                        <i class="fas fa-refresh me-2"></i>Làm mới
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Results Card -->
+    <div class="card shadow-sm">
+        <div class="card-header bg-white">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">
+                    <i class="fas fa-list me-2"></i>Danh sách Sản phẩm
+                </h5>
+                <span class="badge bg-primary">@Model.TotalItemCount sản phẩm</span>
             </div>
-            <div class="modal fade" id="confirmDeleteModal_@item.MA_SP" tabindex="-1" aria-labelledby="deleteModalLabel_@item.MA_SP" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="deleteModalLabel_@item.MA_SP">Xác nhận xóa</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+        </div>
+        <div class="card-body">
+            @if (Model.Any())
+            {
+                <div class="row">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 mb-4">
+                            <div class="card h-100 product-card">
+                                <!-- Product Image -->
+                                <div class="product-image-container">
+                                    @if (!string.IsNullOrEmpty(item.HINH_ANH))
+                                    {
+                                        <img src="@item.HINH_ANH" class="card-img-top product-image" alt="@item.TEN_SP">
+                                    }
+                                    else
+                                    {
+                                        <div class="product-image-placeholder">
+                                            <i class="fas fa-image fa-3x text-muted"></i>
+                                        </div>
+                                    }
+                                    
+                                    <!-- Status Badge -->
+                                    <div class="product-status">
+                                        <span class="badge @(item.Trang_Thai?.ID_TRANG_THAI == 2 ? "bg-success" : "bg-warning")">
+                                            @(item.Trang_Thai?.TEN_TRANG_THAI ?? "N/A")
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="card-body d-flex flex-column">
+                                    <!-- Product Info -->
+                                    <div class="mb-3">
+                                        <h6 class="card-title text-truncate" title="@item.TEN_SP">
+                                            @item.TEN_SP
+                                        </h6>
+                                        <p class="card-text text-muted small mb-2">
+                                            <i class="fas fa-hashtag me-1"></i>@item.MA_SP
+                                        </p>
+                                        <p class="card-text text-muted small mb-2">
+                                            <i class="fas fa-user me-1"></i>@(item.Tac_Gia?.TEN_TAC_GIA ?? "N/A")
+                                        </p>
+                                        <div class="mb-2">
+                                            <span class="badge bg-info me-1">@(item.Danh_Muc?.TEN_DANH_MUC ?? "N/A")</span>
+                                            <span class="badge bg-secondary">@(item.The_Loai?.Ten_The_Loai ?? "N/A")</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Price Info -->
+                                    <div class="mb-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <span class="fw-bold text-primary fs-6">
+                                                    @(item.GIA_BAN.HasValue ? item.GIA_BAN.Value.ToString("N0") : "0") ₫
+                                                </span>
+                                                @if (item.DISCOUNT > 0 && item.GIA_GOC > 0)
+                                                {
+                                                    <br><small class="text-muted text-decoration-line-through">
+                                                        @item.GIA_GOC.ToString("N0") ₫
+                                                    </small>
+                                                }
+                                            </div>
+                                            <div class="text-end">
+                                                <small class="text-muted">Tồn kho</small>
+                                                <div class="fw-bold">@item.TON_KHO</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Action Buttons -->
+                                    <div class="mt-auto">
+                                        <div class="btn-group w-100" role="group">
+                                            <button type="button" class="btn btn-outline-info btn-sm" 
+                                                    onclick="showProductDetails('@item.MA_SP')" 
+                                                    title="Xem chi tiết">
+                                                <i class="fas fa-eye me-1"></i>Chi tiết
+                                            </button>
+                                            <a href="@Url.Action("Edit", new { id = item.MA_SP })" 
+                                               class="btn btn-outline-warning btn-sm" title="Chỉnh sửa">
+                                                <i class="fas fa-edit me-1"></i>Sửa
+                                            </a>
+                                            <button type="button" class="btn btn-outline-danger btn-sm" 
+                                                    onclick="confirmDelete('@item.MA_SP', '@item.TEN_SP')" 
+                                                    title="Xóa">
+                                                <i class="fas fa-trash me-1"></i>Xóa
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="modal-body">
-                            Bạn có muốn xóa sản phẩm <strong>@item.TEN_SP</strong>?
-                        </div>
-                        <div class="modal-footer">
-                            @using (Html.BeginForm("Delete", "San_Pham", new { id = item.MA_SP }, FormMethod.Post))
-                            {
-                                @Html.AntiForgeryToken()
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                                <button type="submit" class="btn btn-danger">Xác nhận</button>
-                            }
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="text-center py-5">
+                    <i class="fas fa-box fa-3x text-muted mb-3"></i>
+                    <h5 class="text-muted">Không có sản phẩm nào</h5>
+                    <p class="text-muted">Bắt đầu bằng cách thêm sản phẩm đầu tiên</p>
+                    <a href="@Url.Action("Create")" class="btn btn-primary">
+                        <i class="fas fa-plus me-2"></i>Thêm Sản phẩm
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- Pagination -->
+    @if (Model.PageCount > 1)
+    {
+        <div class="d-flex justify-content-center mt-4">
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchString = ViewBag.CurrentFilter, sortOrder = ViewBag.CurrentSort }))
+        </div>
+    }
+</div>
+
+<!-- Product Details Modal -->
+<div class="modal fade" id="productDetailsModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-box me-2"></i>Chi tiết Sản phẩm
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div id="productDetailsContent">
+                    <div class="text-center">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+            </div>
         </div>
-    }
+    </div>
 </div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-danger">
+                    <i class="fas fa-exclamation-triangle me-2"></i>Xác nhận xóa
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Bạn có chắc chắn muốn xóa sản phẩm <strong id="productNameToDelete"></strong>?</p>
+                <p class="text-muted small">Hành động này không thể hoàn tác.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <form id="deleteForm" method="post" style="display: inline;">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash me-2"></i>Xóa
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Show product details
+        function showProductDetails(id) {
+            $.get('@Url.Action("GetProductInfo")', { id: id })
+                .done(function(data) {
+                    if (data) {
+                        var imageHtml = data.hinhAnh ? 
+                            `<img src="${data.hinhAnh}" alt="${data.tenSP}" class="img-fluid rounded mb-3" style="max-height: 200px;">` :
+                            `<div class="bg-light rounded d-flex align-items-center justify-content-center mb-3" style="height: 200px;">
+                                <i class="fas fa-image fa-3x text-muted"></i>
+                            </div>`;
+
+                        var content = `
+                            <div class="row">
+                                <div class="col-md-4">
+                                    ${imageHtml}
+                                </div>
+                                <div class="col-md-8">
+                                    <h5 class="mb-3">${data.tenSP}</h5>
+                                    <div class="row mb-2">
+                                        <div class="col-6">
+                                            <small class="text-muted">Mã SP:</small>
+                                            <div class="fw-bold">${data.maSP}</div>
+                                        </div>
+                                        <div class="col-6">
+                                            <small class="text-muted">Trạng thái:</small>
+                                            <div class="fw-bold">${data.trangThai || 'N/A'}</div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-6">
+                                            <small class="text-muted">Tác giả:</small>
+                                            <div class="fw-bold">${data.tacGia || 'N/A'}</div>
+                                        </div>
+                                        <div class="col-6">
+                                            <small class="text-muted">Nhà xuất bản:</small>
+                                            <div class="fw-bold">${data.nhaXuatBan || 'N/A'}</div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-6">
+                                            <small class="text-muted">Danh mục:</small>
+                                            <div class="fw-bold">${data.danhMuc || 'N/A'}</div>
+                                        </div>
+                                        <div class="col-6">
+                                            <small class="text-muted">Thể loại:</small>
+                                            <div class="fw-bold">${data.theLoai || 'N/A'}</div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-4">
+                                            <small class="text-muted">Giá gốc:</small>
+                                            <div class="fw-bold text-decoration-line-through">${data.giaGoc ? data.giaGoc.toLocaleString() + ' ₫' : 'N/A'}</div>
+                                        </div>
+                                        <div class="col-4">
+                                            <small class="text-muted">Giảm giá:</small>
+                                            <div class="fw-bold text-success">${data.discount ? data.discount + '%' : '0%'}</div>
+                                        </div>
+                                        <div class="col-4">
+                                            <small class="text-muted">Giá bán:</small>
+                                            <div class="fw-bold text-primary">${data.giaBan ? data.giaBan.toLocaleString() + ' ₫' : 'N/A'}</div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-6">
+                                            <small class="text-muted">Tồn kho:</small>
+                                            <div class="fw-bold">${data.tonKho || 0}</div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <small class="text-muted">Mô tả:</small>
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <p class="text-muted mb-0">${data.moTa || 'Chưa có mô tả'}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        $('#productDetailsContent').html(content);
+                        $('#productDetailsModal').modal('show');
+                    } else {
+                        alert('Không tìm thấy thông tin sản phẩm');
+                    }
+                })
+                .fail(function() {
+                    alert('Có lỗi xảy ra khi tải thông tin sản phẩm');
+                });
+        }
+
+        // Confirm delete
+        function confirmDelete(id, name) {
+            $('#productNameToDelete').text(name);
+            $('#deleteForm').attr('action', '@Url.Action("Delete")/' + id);
+            $('#deleteModal').modal('show');
+        }
+
+        // Auto-hide alerts after 5 seconds
+        $(document).ready(function() {
+            setTimeout(function() {
+                $('.alert').fadeOut();
+            }, 5000);
+        });
+    </script>
+}

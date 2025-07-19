@@ -1,37 +1,193 @@
 ﻿@model CNPM_Project_web.Model.The_Loai
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Chỉnh sửa Thể loại";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit</h2>
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>The_Loai</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.ID_The_Loai)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Ten_The_Loai, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Ten_The_Loai, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Ten_The_Loai, "", new { @class = "text-danger" })
-            </div>
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="h3 mb-0 text-gray-800">
+                <i class="fas fa-tags me-2"></i>Chỉnh sửa Thể loại
+            </h1>
+            <p class="text-muted">Cập nhật thông tin thể loại: @Model.Ten_The_Loai</p>
         </div>
+        <div>
+            <a href="@Url.Action("Index")" class="btn btn-outline-secondary">
+                <i class="fas fa-arrow-left me-2"></i>Quay lại
+            </a>
+        </div>
+    </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+    <!-- Form Card -->
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-white">
+                    <h5 class="mb-0">
+                        <i class="fas fa-edit me-2"></i>Thông tin Thể loại
+                    </h5>
+                </div>
+                <div class="card-body">
+                    @using (Html.BeginForm("Edit", "The_Loai_Admin", FormMethod.Post, new { @class = "needs-validation", novalidate = "novalidate" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="ID_The_Loai" class="form-label">
+                                        <i class="fas fa-hashtag me-1"></i>ID Thể loại
+                                    </label>
+                                    @Html.TextBoxFor(model => model.ID_The_Loai, new { 
+                                        @class = "form-control", 
+                                        id = "ID_The_Loai",
+                                        @readonly = "readonly"
+                                    })
+                                    <div class="form-text">
+                                        <i class="fas fa-info-circle me-1"></i>ID không thể thay đổi
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="Ten_The_Loai" class="form-label">
+                                        <i class="fas fa-tag me-1"></i>Tên Thể loại <span class="text-danger">*</span>
+                                    </label>
+                                    @Html.TextBoxFor(model => model.Ten_The_Loai, new { 
+                                        @class = "form-control", 
+                                        id = "Ten_The_Loai",
+                                        placeholder = "Nhập tên thể loại sách...",
+                                        required = "required",
+                                        maxlength = "100"
+                                    })
+                                    <div class="invalid-feedback" id="Ten_The_Loai-error">
+                                        Vui lòng nhập tên thể loại
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.Ten_The_Loai, "", new { @class = "text-danger" })
+                                    <div class="form-text">
+                                        <i class="fas fa-info-circle me-1"></i>Tên thể loại không được trùng lặp
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label class="form-label">
+                                        <i class="fas fa-eye me-1"></i>Xem trước
+                                    </label>
+                                    <div class="card bg-light">
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <div class="avatar-sm bg-warning rounded-circle d-flex align-items-center justify-content-center me-3">
+                                                    <i class="fas fa-tag text-white"></i>
+                                                </div>
+                                                <div>
+                                                    <h6 class="mb-0 fw-bold" id="previewName">@Model.Ten_The_Loai</h6>
+                                                    <small class="text-muted">ID: @Model.ID_The_Loai</small>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <small class="text-muted">
+                                                        <i class="fas fa-info-circle me-1"></i>
+                                                        <span id="previewInfo">Thể loại sách trong hệ thống</span>
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <div class="d-flex justify-content-between">
+                            <a href="@Url.Action("Index")" class="btn btn-outline-secondary">
+                                <i class="fas fa-times me-2"></i>Hủy
+                            </a>
+                            <div>
+                                <button type="reset" class="btn btn-outline-warning me-2">
+                                    <i class="fas fa-undo me-2"></i>Khôi phục
+                                </button>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save me-2"></i>Cập nhật
+                                </button>
+                            </div>
+                        </div>
+                    }
+                </div>
             </div>
         </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Real-time preview
+            $('#Ten_The_Loai').on('input', function() {
+                var name = $(this).val() || 'Tên thể loại';
+                $('#previewName').text(name);
+            });
+
+            // Check for duplicate category name (excluding current category)
+            var nameCheckTimer;
+            $('#Ten_The_Loai').on('input', function() {
+                clearTimeout(nameCheckTimer);
+                var name = $(this).val().trim();
+                
+                if (name.length > 2) {
+                    nameCheckTimer = setTimeout(function() {
+                        checkCategoryName(name, @Model.ID_The_Loai);
+                    }, 500);
+                } else {
+                    clearNameValidation();
+                }
+            });
+
+            // Form validation
+            $('form').on('submit', function(e) {
+                if (!this.checkValidity()) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+                $(this).addClass('was-validated');
+            });
+        });
+
+        function checkCategoryName(name, id) {
+            $.post('@Url.Action("CheckCategoryName")', { tenTheLoai: name, id: id })
+                .done(function(data) {
+                    if (data.exists) {
+                        showNameError('Tên thể loại đã tồn tại!');
+                    } else {
+                        showNameSuccess('Tên thể loại có thể sử dụng');
+                    }
+                })
+                .fail(function() {
+                    showNameError('Có lỗi xảy ra khi kiểm tra tên');
+                });
+        }
+
+        function showNameError(message) {
+            $('#Ten_The_Loai').addClass('is-invalid').removeClass('is-valid');
+            $('#Ten_The_Loai-error').text(message);
+        }
+
+        function showNameSuccess(message) {
+            $('#Ten_The_Loai').addClass('is-valid').removeClass('is-invalid');
+            $('#Ten_The_Loai-error').text(message);
+        }
+
+        function clearNameValidation() {
+            $('#Ten_The_Loai').removeClass('is-invalid is-valid');
+            $('#Ten_The_Loai-error').text('Vui lòng nhập tên thể loại');
+        }
+    </script>
+}

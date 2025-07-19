@@ -1,34 +1,271 @@
-﻿@model IEnumerable<CNPM_Project_web.Model.The_Loai>
+﻿@model IPagedList<CNPM_Project_web.Model.The_Loai>
+@using PagedList
+@using PagedList.Mvc
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Quản lý Thể loại";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="h3 mb-0 text-gray-800">
+                <i class="fas fa-tags me-2"></i>Quản lý Thể loại
+            </h1>
+            <p class="text-muted">Quản lý thông tin các thể loại sách trong hệ thống</p>
+        </div>
+        <div>
+            <a href="@Url.Action("Create")" class="btn btn-primary">
+                <i class="fas fa-plus me-2"></i>Thêm Thể loại
+            </a>
+        </div>
+    </div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Ten_The_Loai)
-        </th>
-        <th></th>
-    </tr>
+    <!-- Alert Messages -->
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fas fa-check-circle me-2"></i>@TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fas fa-exclamation-circle me-2"></i>@TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Ten_The_Loai)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID_The_Loai }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID_The_Loai }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID_The_Loai })
-        </td>
-    </tr>
+    <!-- Search and Filter Card -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <form method="get" class="row g-3">
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <i class="fas fa-search"></i>
+                        </span>
+                        <input type="text" class="form-control" name="searchString" 
+                               value="@ViewBag.CurrentFilter" placeholder="Tìm kiếm tên thể loại...">
+                        <button type="submit" class="btn btn-outline-secondary">
+                            <i class="fas fa-search me-1"></i>Tìm
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <select name="sortOrder" class="form-select" onchange="this.form.submit()">
+                        <option value="">Sắp xếp theo</option>
+                        <option value="name_desc" @(ViewBag.CurrentSort == "name_desc" ? "selected" : "")>Tên A-Z</option>
+                        <option value="" @(ViewBag.CurrentSort == "" ? "selected" : "")>Tên Z-A</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <a href="@Url.Action("Index")" class="btn btn-outline-secondary w-100">
+                        <i class="fas fa-refresh me-2"></i>Làm mới
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Results Card -->
+    <div class="card shadow-sm">
+        <div class="card-header bg-white">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">
+                    <i class="fas fa-list me-2"></i>Danh sách Thể loại
+                </h5>
+                <span class="badge bg-primary">@Model.TotalItemCount thể loại</span>
+            </div>
+        </div>
+        <div class="card-body p-0">
+            @if (Model.Any())
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th width="10%">#</th>
+                                <th width="60%">
+                                    <i class="fas fa-tag me-1"></i>Thể loại
+                                </th>
+                                <th width="30%" class="text-center">
+                                    <i class="fas fa-cogs me-1"></i>Thao tác
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="text-muted">@item.ID_The_Loai</td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="avatar-sm bg-warning rounded-circle d-flex align-items-center justify-content-center me-3">
+                                                <i class="fas fa-tag text-white"></i>
+                                            </div>
+                                            <div>
+                                                <h6 class="mb-0 fw-bold">@item.Ten_The_Loai</h6>
+                                                <small class="text-muted">ID: @item.ID_The_Loai</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="btn-group" role="group">
+                                            <button type="button" class="btn btn-outline-info" 
+                                                    onclick="showCategoryDetails(@item.ID_The_Loai)" 
+                                                    title="Xem chi tiết">
+                                                <i class="fas fa-eye me-1"></i>Chi tiết
+                                            </button>
+                                            <a href="@Url.Action("Edit", new { id = item.ID_The_Loai })" 
+                                               class="btn btn-outline-warning" title="Chỉnh sửa">
+                                                <i class="fas fa-edit me-1"></i>Sửa
+                                            </a>
+                                            <button type="button" class="btn btn-outline-danger" 
+                                                    onclick="confirmDelete(@item.ID_The_Loai, '@item.Ten_The_Loai')" 
+                                                    title="Xóa">
+                                                <i class="fas fa-trash me-1"></i>Xóa
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <div class="text-center py-5">
+                    <i class="fas fa-tags fa-3x text-muted mb-3"></i>
+                    <h5 class="text-muted">Không có thể loại nào</h5>
+                    <p class="text-muted">Bắt đầu bằng cách thêm thể loại đầu tiên</p>
+                    <a href="@Url.Action("Create")" class="btn btn-primary">
+                        <i class="fas fa-plus me-2"></i>Thêm Thể loại
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- Pagination -->
+    @if (Model.PageCount > 1)
+    {
+        <div class="d-flex justify-content-center mt-4">
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page, searchString = ViewBag.CurrentFilter, sortOrder = ViewBag.CurrentSort }))
+        </div>
+    }
+</div>
+
+<!-- Category Details Modal -->
+<div class="modal fade" id="categoryDetailsModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-tag me-2"></i>Chi tiết Thể loại
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div id="categoryDetailsContent">
+                    <div class="text-center">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-danger">
+                    <i class="fas fa-exclamation-triangle me-2"></i>Xác nhận xóa
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Bạn có chắc chắn muốn xóa thể loại <strong id="categoryNameToDelete"></strong>?</p>
+                <p class="text-muted small">Hành động này không thể hoàn tác.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <form id="deleteForm" method="post" style="display: inline;">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash me-2"></i>Xóa
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Show category details
+        function showCategoryDetails(id) {
+            $.get('@Url.Action("GetCategoryInfo")', { id: id })
+                .done(function(data) {
+                    if (data) {
+                        var content = `
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div class="avatar-lg bg-warning rounded-circle d-flex align-items-center justify-content-center me-3">
+                                            <i class="fas fa-tag fa-2x text-white"></i>
+                                        </div>
+                                        <div>
+                                            <h5 class="mb-1">${data.tenTheLoai}</h5>
+                                            <span class="badge bg-secondary">ID: ${data.id}</span>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label fw-bold">Thông tin:</label>
+                                        <div class="card bg-light">
+                                            <div class="card-body">
+                                                <p class="text-muted mb-0">Thể loại sách trong hệ thống</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        $('#categoryDetailsContent').html(content);
+                        $('#categoryDetailsModal').modal('show');
+                    } else {
+                        alert('Không tìm thấy thông tin thể loại');
+                    }
+                })
+                .fail(function() {
+                    alert('Có lỗi xảy ra khi tải thông tin thể loại');
+                });
+        }
+
+        // Confirm delete
+        function confirmDelete(id, name) {
+            $('#categoryNameToDelete').text(name);
+            $('#deleteForm').attr('action', '@Url.Action("Delete")/' + id);
+            $('#deleteModal').modal('show');
+        }
+
+        // Auto-hide alerts after 5 seconds
+        $(document).ready(function() {
+            setTimeout(function() {
+                $('.alert').fadeOut();
+            }, 5000);
+        });
+    </script>
 }
-
-</table>

@@ -1,45 +1,224 @@
 ﻿@model CNPM_Project_web.Model.Tac_Gia
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Chỉnh sửa Tác giả";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit</h2>
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Tac_Gia</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.ID_TAC_GIA)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.TEN_TAC_GIA, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TEN_TAC_GIA, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TEN_TAC_GIA, "", new { @class = "text-danger" })
-            </div>
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="h3 mb-0 text-gray-800">
+                <i class="fas fa-user-edit me-2"></i>Chỉnh sửa Tác giả
+            </h1>
+            <p class="text-muted">Cập nhật thông tin tác giả: @Model.TEN_TAC_GIA</p>
         </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.MO_TA, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.MO_TA, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.MO_TA, "", new { @class = "text-danger" })
-            </div>
+        <div>
+            <a href="@Url.Action("Index")" class="btn btn-outline-secondary">
+                <i class="fas fa-arrow-left me-2"></i>Quay lại
+            </a>
         </div>
+    </div>
 
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+    <!-- Form Card -->
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-white">
+                    <h5 class="mb-0">
+                        <i class="fas fa-edit me-2"></i>Thông tin Tác giả
+                    </h5>
+                </div>
+                <div class="card-body">
+                    @using (Html.BeginForm("Edit", "Tac_Gia", FormMethod.Post, new { @class = "needs-validation", novalidate = "novalidate" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="ID_TAC_GIA" class="form-label">
+                                        <i class="fas fa-hashtag me-1"></i>ID Tác giả
+                                    </label>
+                                    @Html.TextBoxFor(model => model.ID_TAC_GIA, new { 
+                                        @class = "form-control", 
+                                        id = "ID_TAC_GIA",
+                                        @readonly = "readonly"
+                                    })
+                                    <div class="form-text">
+                                        <i class="fas fa-info-circle me-1"></i>ID không thể thay đổi
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="TEN_TAC_GIA" class="form-label">
+                                        <i class="fas fa-user me-1"></i>Tên Tác giả <span class="text-danger">*</span>
+                                    </label>
+                                    @Html.TextBoxFor(model => model.TEN_TAC_GIA, new { 
+                                        @class = "form-control", 
+                                        id = "TEN_TAC_GIA",
+                                        placeholder = "Nhập tên tác giả...",
+                                        required = "required",
+                                        maxlength = "100"
+                                    })
+                                    <div class="invalid-feedback" id="TEN_TAC_GIA-error">
+                                        Vui lòng nhập tên tác giả
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.TEN_TAC_GIA, "", new { @class = "text-danger" })
+                                    <div class="form-text">
+                                        <i class="fas fa-info-circle me-1"></i>Tên tác giả không được trùng lặp
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label for="MO_TA" class="form-label">
+                                        <i class="fas fa-info-circle me-1"></i>Mô tả
+                                    </label>
+                                    @Html.TextAreaFor(model => model.MO_TA, new { 
+                                        @class = "form-control", 
+                                        id = "MO_TA",
+                                        rows = "4",
+                                        placeholder = "Nhập mô tả về tác giả (không bắt buộc)...",
+                                        maxlength = "500"
+                                    })
+                                    <div class="form-text">
+                                        <span id="charCount">@(Model.MO_TA?.Length ?? 0)</span>/500 ký tự
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.MO_TA, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label class="form-label">
+                                        <i class="fas fa-eye me-1"></i>Xem trước
+                                    </label>
+                                    <div class="card bg-light">
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-center mb-2">
+                                                <div class="avatar-sm bg-primary rounded-circle d-flex align-items-center justify-content-center me-3">
+                                                    <i class="fas fa-user text-white"></i>
+                                                </div>
+                                                <div>
+                                                    <h6 class="mb-0 fw-bold" id="previewName">@Model.TEN_TAC_GIA</h6>
+                                                    <small class="text-muted">ID: @Model.ID_TAC_GIA</small>
+                                                </div>
+                                            </div>
+                                            <p class="text-muted mb-0" id="previewDescription">@(string.IsNullOrEmpty(Model.MO_TA) ? "Mô tả tác giả" : Model.MO_TA)</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <div class="d-flex justify-content-between">
+                            <a href="@Url.Action("Index")" class="btn btn-outline-secondary">
+                                <i class="fas fa-times me-2"></i>Hủy
+                            </a>
+                            <div>
+                                <button type="reset" class="btn btn-outline-warning me-2">
+                                    <i class="fas fa-undo me-2"></i>Khôi phục
+                                </button>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save me-2"></i>Cập nhật
+                                </button>
+                            </div>
+                        </div>
+                    }
+                </div>
             </div>
         </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function() {
+            // Character counter for description
+            $('#MO_TA').on('input', function() {
+                var length = $(this).val().length;
+                $('#charCount').text(length);
+                
+                if (length > 450) {
+                    $('#charCount').addClass('text-warning');
+                } else {
+                    $('#charCount').removeClass('text-warning');
+                }
+            });
+
+            // Real-time preview
+            $('#TEN_TAC_GIA').on('input', function() {
+                var name = $(this).val() || 'Tên tác giả';
+                $('#previewName').text(name);
+            });
+
+            $('#MO_TA').on('input', function() {
+                var description = $(this).val() || 'Mô tả tác giả';
+                $('#previewDescription').text(description);
+            });
+
+            // Check for duplicate author name (excluding current author)
+            var nameCheckTimer;
+            $('#TEN_TAC_GIA').on('input', function() {
+                clearTimeout(nameCheckTimer);
+                var name = $(this).val().trim();
+                
+                if (name.length > 2) {
+                    nameCheckTimer = setTimeout(function() {
+                        checkAuthorName(name, @Model.ID_TAC_GIA);
+                    }, 500);
+                } else {
+                    clearNameValidation();
+                }
+            });
+
+            // Form validation
+            $('form').on('submit', function(e) {
+                if (!this.checkValidity()) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+                $(this).addClass('was-validated');
+            });
+        });
+
+        function checkAuthorName(name, id) {
+            $.post('@Url.Action("CheckAuthorName")', { tenTacGia: name, id: id })
+                .done(function(data) {
+                    if (data.exists) {
+                        showNameError('Tên tác giả đã tồn tại!');
+                    } else {
+                        showNameSuccess('Tên tác giả có thể sử dụng');
+                    }
+                })
+                .fail(function() {
+                    showNameError('Có lỗi xảy ra khi kiểm tra tên');
+                });
+        }
+
+        function showNameError(message) {
+            $('#TEN_TAC_GIA').addClass('is-invalid').removeClass('is-valid');
+            $('#TEN_TAC_GIA-error').text(message);
+        }
+
+        function showNameSuccess(message) {
+            $('#TEN_TAC_GIA').addClass('is-valid').removeClass('is-invalid');
+            $('#TEN_TAC_GIA-error').text(message);
+        }
+
+        function clearNameValidation() {
+            $('#TEN_TAC_GIA').removeClass('is-invalid is-valid');
+            $('#TEN_TAC_GIA-error').text('Vui lòng nhập tên tác giả');
+        }
+    </script>
+}
