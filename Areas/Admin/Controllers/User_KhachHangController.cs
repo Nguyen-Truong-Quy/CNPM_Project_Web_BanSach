@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using CNPM_Project_web.Model;
+using System;
 using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using CNPM_Project_web.Model;
 
 namespace CNPM_Project_web.Areas.Admin.Controllers
 {

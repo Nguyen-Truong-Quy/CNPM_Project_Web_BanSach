@@ -66,11 +66,19 @@
                     <span>Danh mục</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "User_KhachHang" ? "active" : "")"
+                   href="@Url.Action("Index", "User_KhachHang")">
+                    <i class="fas fa-users"></i>
+                    <span>User & Khách hàng</span>
+                </a>
+            </li>
             
             <hr>
             
             <li class="nav-item">
-                <a class="nav-link" href="@Url.Action("Index", "Home", new { area = "" })">
+                <a class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "Home" && ViewContext.RouteData.Values["area"] == null ? "active" : "")"
+                   href="@Url.Action("Index", "Home", new { area = "" })">
                     <i class="fas fa-home"></i>
                     <span>Trang chủ</span>
                 </a>
@@ -194,8 +202,15 @@
             const navLinks = document.querySelectorAll('.nav-link');
             
             navLinks.forEach(function(link) {
-                if (link.getAttribute('href') && currentPath.includes(link.getAttribute('href'))) {
-                    link.classList.add('active');
+                const href = link.getAttribute('href');
+                if (href) {
+                    // Chỉ active cho các link Admin, không active cho trang chủ
+                    if (href.includes('/Admin/') && currentPath.includes(href)) {
+                        link.classList.add('active');
+                    } else if (href.includes('Home') && currentPath.includes('Home') && !currentPath.includes('/Admin/')) {
+                        // Chỉ active trang chủ khi không ở trong Admin area
+                        link.classList.add('active');
+                    }
                 }
             });
         });

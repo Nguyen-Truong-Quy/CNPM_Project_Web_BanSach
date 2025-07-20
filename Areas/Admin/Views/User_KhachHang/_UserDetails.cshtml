@@ -1,0 +1,119 @@
+@model CNPM_Project_web.Model.USER
+
+<div class="row">
+    <div class="col-md-6 mb-3">
+        <div class="d-flex align-items-center mb-3">
+            <div class="avatar-lg bg-primary rounded-circle d-flex align-items-center justify-content-center me-3">
+                <i class="fas fa-user text-white fa-2x"></i>
+            </div>
+            <div>
+                <h4 class="mb-1">@Model.HoTen</h4>
+                <p class="text-muted mb-0">ID: @Model.ID_User</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 mb-3">
+        <div class="text-end">
+            @if (Model.TrangThai == true)
+            {
+                <span class="badge bg-success fs-6">
+                    <i class="fas fa-check-circle"></i> Hoạt động
+                </span>
+            }
+            else
+            {
+                <span class="badge bg-danger fs-6">
+                    <i class="fas fa-times-circle"></i> Khóa
+                </span>
+            }
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 mb-3">
+        <label class="form-label fw-bold">
+            <i class="fas fa-envelope text-primary me-2"></i>Email
+        </label>
+        <div class="p-3 bg-light rounded">
+            <a href="mailto:@Model.EMAIL" class="text-decoration-none">
+                @Model.EMAIL
+            </a>
+        </div>
+    </div>
+
+    <div class="col-md-6 mb-3">
+        <label class="form-label fw-bold">
+            <i class="fas fa-phone text-primary me-2"></i>Số điện thoại
+        </label>
+        <div class="p-3 bg-light rounded">
+            <a href="tel:@Model.SoDienThoai" class="text-decoration-none">
+                @Model.SoDienThoai
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 mb-3">
+        <label class="form-label fw-bold">
+            <i class="fas fa-map-marker-alt text-primary me-2"></i>Địa chỉ
+        </label>
+        <div class="p-3 bg-light rounded">
+            @Model.DiaChi
+        </div>
+    </div>
+
+    <div class="col-md-6 mb-3">
+        <label class="form-label fw-bold">
+            <i class="fas fa-user-tag text-primary me-2"></i>Vai trò
+        </label>
+        <div class="p-3 bg-light rounded">
+            <span class="badge bg-info fs-6">@(Model.Role?.TenRole ?? "N/A")</span>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 mb-3">
+        <label class="form-label fw-bold">
+            <i class="fas fa-calendar text-primary me-2"></i>Ngày tạo
+        </label>
+        <div class="p-3 bg-light rounded">
+            <i class="fas fa-clock me-1"></i>
+            @(Model.NgayTao?.ToString("dd/MM/yyyy HH:mm") ?? "N/A")
+        </div>
+    </div>
+
+    <div class="col-md-6 mb-3">
+        <label class="form-label fw-bold">
+            <i class="fas fa-shield-alt text-primary me-2"></i>Trạng thái
+        </label>
+        <div class="p-3 bg-light rounded">
+            @if (Model.TrangThai == true)
+            {
+                <span class="badge bg-success">
+                    <i class="fas fa-check-circle"></i> Hoạt động
+                </span>
+            }
+            else
+            {
+                <span class="badge bg-danger">
+                    <i class="fas fa-times-circle"></i> Khóa
+                </span>
+            }
+        </div>
+    </div>
+</div>
+
+<div class="text-center mt-4">
+    <a href="@Url.Action("Edit", new { id = Model.MaUser })" class="btn btn-warning me-2">
+        <i class="fas fa-edit"></i> Chỉnh sửa
+    </a>
+    <a href="@Url.Action("Details", new { id = Model.MaUser })" class="btn btn-info me-2">
+        <i class="fas fa-eye"></i> Xem chi tiết
+    </a>
+    <button type="button" class="btn btn-danger" onclick="confirmDelete(@Model.MaUser, '@Model.HoTen')">
+        <i class="fas fa-trash"></i> Xóa
+    </button>
+</div> 

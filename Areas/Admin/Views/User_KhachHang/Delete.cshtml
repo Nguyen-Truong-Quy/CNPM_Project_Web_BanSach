@@ -1,0 +1,247 @@
+@model CNPM_Project_web.Model.USER
+
+@{
+    ViewBag.Title = "Xóa User";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="mb-0">
+            <i class="fas fa-user-times text-danger"></i>
+            Xóa User
+        </h2>
+        <a href="@Url.Action("Index")" class="btn btn-outline-secondary">
+            <i class="fas fa-arrow-left"></i> Quay lại
+        </a>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card border-danger">
+                <div class="card-header bg-danger text-white">
+                    <h5 class="mb-0">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Xác nhận xóa User
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <strong>Cảnh báo:</strong> Hành động này không thể hoàn tác. Vui lòng kiểm tra kỹ thông tin trước khi xóa.
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="avatar-lg bg-danger rounded-circle d-flex align-items-center justify-content-center me-3">
+                                    <i class="fas fa-user text-white fa-2x"></i>
+                                </div>
+                                <div>
+                                    <h4 class="mb-1 text-danger">@Model.HoTen</h4>
+                                    <p class="text-muted mb-0">ID: @Model.ID_User</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="text-end">
+                                @if (Model.TrangThai == true)
+                                {
+                                    <span class="badge bg-success fs-6">
+                                        <i class="fas fa-check-circle"></i> Hoạt động
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger fs-6">
+                                        <i class="fas fa-times-circle"></i> Khóa
+                                    </span>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-bold">
+                                <i class="fas fa-envelope text-primary me-2"></i>Email
+                            </label>
+                            <div class="p-3 bg-light rounded">
+                                <a href="mailto:@Model.EMAIL" class="text-decoration-none">
+                                    @Model.EMAIL
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-bold">
+                                <i class="fas fa-phone text-primary me-2"></i>Số điện thoại
+                            </label>
+                            <div class="p-3 bg-light rounded">
+                                <a href="tel:@Model.SoDienThoai" class="text-decoration-none">
+                                    @Model.SoDienThoai
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-bold">
+                                <i class="fas fa-map-marker-alt text-primary me-2"></i>Địa chỉ
+                            </label>
+                            <div class="p-3 bg-light rounded">
+                                @Model.DiaChi
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-bold">
+                                <i class="fas fa-user-tag text-primary me-2"></i>Vai trò
+                            </label>
+                            <div class="p-3 bg-light rounded">
+                                <span class="badge bg-info fs-6">@(Model.Role?.TenRole ?? "N/A")</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-bold">
+                                <i class="fas fa-calendar text-primary me-2"></i>Ngày tạo
+                            </label>
+                            <div class="p-3 bg-light rounded">
+                                <i class="fas fa-clock me-1"></i>
+                                @(Model.NgayTao?.ToString("dd/MM/yyyy HH:mm") ?? "N/A")
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label fw-bold">
+                                <i class="fas fa-shield-alt text-primary me-2"></i>Trạng thái
+                            </label>
+                            <div class="p-3 bg-light rounded">
+                                @if (Model.TrangThai == true)
+                                {
+                                    <span class="badge bg-success">
+                                        <i class="fas fa-check-circle"></i> Hoạt động
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger">
+                                        <i class="fas fa-times-circle"></i> Khóa
+                                    </span>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i>
+                        <strong>Lưu ý:</strong> Hệ thống sẽ kiểm tra xem user này có đang được sử dụng trong các đơn hàng, giỏ hàng hoặc đánh giá không trước khi xóa.
+                    </div>
+
+                    @using (Html.BeginForm("Delete", "User_KhachHang", FormMethod.Post, new { @class = "mt-4" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(m => m.MaUser)
+
+                        <div class="d-flex justify-content-end gap-2">
+                            <a href="@Url.Action("Index")" class="btn btn-secondary">
+                                <i class="fas fa-times"></i> Hủy
+                            </a>
+                            <button type="submit" class="btn btn-danger">
+                                <i class="fas fa-trash"></i> Xác nhận xóa
+                            </button>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="card border-warning">
+                <div class="card-header bg-warning text-dark">
+                    <h6 class="mb-0">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        Cảnh báo
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-2">
+                            <i class="fas fa-times-circle text-danger me-2"></i>
+                            <strong>Không thể hoàn tác</strong>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-times-circle text-danger me-2"></i>
+                            <strong>Dữ liệu sẽ bị mất vĩnh viễn</strong>
+                        </li>
+                        <li class="mb-2">
+                            <i class="fas fa-times-circle text-danger me-2"></i>
+                            <strong>Ảnh hưởng đến hệ thống</strong>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card mt-3 border-info">
+                <div class="card-header bg-info text-white">
+                    <h6 class="mb-0">
+                        <i class="fas fa-shield-alt"></i>
+                        Kiểm tra an toàn
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <p class="mb-2">Hệ thống sẽ kiểm tra:</p>
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-1">
+                            <i class="fas fa-check-circle text-success me-2"></i>
+                            Đơn hàng liên quan
+                        </li>
+                        <li class="mb-1">
+                            <i class="fas fa-check-circle text-success me-2"></i>
+                            Giỏ hàng hiện tại
+                        </li>
+                        <li class="mb-1">
+                            <i class="fas fa-check-circle text-success me-2"></i>
+                            Đánh giá sản phẩm
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card mt-3">
+                <div class="card-header">
+                    <h6 class="mb-0">
+                        <i class="fas fa-undo"></i>
+                        Thao tác khác
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <a href="@Url.Action("Edit", new { id = Model.MaUser })" class="btn btn-warning">
+                            <i class="fas fa-edit"></i> Chỉnh sửa thay vì xóa
+                        </a>
+                        <a href="@Url.Action("Details", new { id = Model.MaUser })" class="btn btn-info">
+                            <i class="fas fa-eye"></i> Xem chi tiết
+                        </a>
+                        <a href="@Url.Action("Index")" class="btn btn-outline-secondary">
+                            <i class="fas fa-list"></i> Danh sách
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Auto-hide alerts
+        setTimeout(function() {
+            $('.alert').fadeOut('slow');
+        }, 5000);
+    </script>
+} 

@@ -1,6 +1,7 @@
 ﻿﻿@model IEnumerable<CNPM_Project_web.Model.UserKhachHangViewModel>
+
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Quản lý người dùng";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
@@ -9,6 +10,77 @@
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h2 class="font-weight-bold">Danh sách người dùng</h2>
         @Html.ActionLink("Tạo tài khoản mới", "Create", null, new { @class = "btn btn-success font-weight-bold" })
+    </div>
+
+    <!-- Search and Filter Section -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="mb-0">
+                <i class="fas fa-search"></i> Tìm kiếm & Bộ lọc
+            </h5>
+        </div>
+        <div class="card-body">
+            @using (Html.BeginForm("Index", "User_KhachHang", FormMethod.Get, new { @class = "row g-3" }))
+            {
+                <div class="col-md-4">
+                    <label class="form-label">
+                        <i class="fas fa-search"></i> Tìm kiếm
+                    </label>
+                    <div class="input-group">
+                        @Html.TextBox("searchString", ViewBag.SearchString as string, new { @class = "form-control", placeholder = "Tìm theo tên, email, số điện thoại..." })
+                        <button type="submit" class="btn btn-outline-secondary">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="col-md-3">
+                    <label class="form-label">
+                        <i class="fas fa-sort"></i> Sắp xếp theo
+                    </label>
+                    <select name="sortOrder" class="form-select">
+                        <option value="">Mặc định</option>
+                        <option value="name" @(ViewBag.CurrentSort == "name" ? "selected" : "")>Tên A-Z</option>
+                        <option value="name_desc" @(ViewBag.CurrentSort == "name_desc" ? "selected" : "")>Tên Z-A</option>
+                        <option value="email" @(ViewBag.CurrentSort == "email" ? "selected" : "")>Email A-Z</option>
+                        <option value="email_desc" @(ViewBag.CurrentSort == "email_desc" ? "selected" : "")>Email Z-A</option>
+                    </select>
+                </div>
+                
+                <div class="col-md-3">
+                    <label class="form-label">
+                        <i class="fas fa-filter"></i> Vai trò
+                    </label>
+                    <select name="roleFilter" class="form-select">
+                        <option value="">Tất cả</option>
+                        <option value="admin" @(ViewBag.RoleFilter == "admin" ? "selected" : "")>Admin</option>
+                        <option value="user" @(ViewBag.RoleFilter == "user" ? "selected" : "")>User</option>
+                    </select>
+                </div>
+                
+                <div class="col-md-2">
+                    <label class="form-label">
+                        <i class="fas fa-list"></i> Hiển thị
+                    </label>
+                    <select name="pageSize" class="form-select">
+                        <option value="10" @(ViewBag.PageSize == 10 ? "selected" : "")>10</option>
+                        <option value="20" @(ViewBag.PageSize == 20 ? "selected" : "")>20</option>
+                        <option value="50" @(ViewBag.PageSize == 50 ? "selected" : "")>50</option>
+                    </select>
+                </div>
+                
+                <div class="col-12">
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-search"></i> Tìm kiếm
+                        </button>
+                        <a href="@Url.Action("Index")" class="btn btn-outline-secondary">
+                            <i class="fas fa-refresh"></i> Làm mới
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
     </div>
 
     <table class="table table-bordered table-hover">
@@ -32,7 +104,7 @@
                         <td>@item.EMAIL</td>
                         <td class="text-lowercase">@item.HO_TEN_KH</td>
                         <td>@item.SDT_KH</td>
-                        <td>@item.TEN_ROLE</td> <!-- Nếu đã thêm TEN_ROLE vào ViewModel -->
+                        <td>@item.TEN_ROLE</td>
                         <td class="text-center">
                             @Html.ActionLink("Sửa", "Edit", new { id = item.ID_User }, new { @class = "btn btn-warning btn-sm mr-1" })
                             @Html.ActionLink("Chi tiết", "Details", new { id = item.ID_User }, new { @class = "btn btn-info btn-sm mr-1 text-white" })
