@@ -147,6 +147,7 @@
     <Compile Include="Areas\Admin\Controllers\Tac_GiaController.cs" />
     <Compile Include="Areas\Admin\Controllers\The_Loai_AdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\Trang_Thai_AdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\User_KhachHangController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
@@ -309,6 +310,10 @@
     <Content Include="Areas\Admin\Views\Tac_Gia\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Tac_Gia\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Tac_Gia\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\User_KhachHang\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\User_KhachHang\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\User_KhachHang\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\User_KhachHang\Edit.cshtml" />
     <None Include="Scripts\jquery-3.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.1.js" />
     <Content Include="Scripts\jquery-3.7.1.min.js" />
@@ -335,10 +340,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Users\Register.cshtml" />
     <Content Include="Views\Users\Login.cshtml" />
-    <Content Include="Views\TrangChu\Home.cshtml" />
-    <Content Include="Views\TrangChu\Home2.cshtml" />
-    <Content Include="Views\GioHang\_LayoutGioHang.cshtml" />
-    <Content Include="Views\ChiTietSanPham\ChiTietSanPham.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Products\ProductList.cshtml" />
     <Content Include="Views\Products\ProductDetails.cshtml" />

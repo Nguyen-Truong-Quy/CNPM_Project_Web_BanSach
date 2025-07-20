@@ -9,8 +9,8 @@ namespace CNPM_Project_web.Helpers
         public static void SendOtp(string toEmail, string otp)
         {
             string fromEmail = "quy1chatgpt@gmail.com";
-            string fromPassword = "xsso fzin hnem uvak"; // App Password
-             
+            string fromPassword = "ctcb wbes csrj ybtv"; // App Password
+
             try
             {
                 var fromAddress = new MailAddress(fromEmail, "Nhà sách HandMake");

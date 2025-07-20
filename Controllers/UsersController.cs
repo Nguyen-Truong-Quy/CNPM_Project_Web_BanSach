@@ -142,48 +142,51 @@ namespace CNPM_Project_web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Login(LoginViewModel model, string returnUrl)
+        public ActionResult Login(LoginViewModel model)
         {
-            if (!ModelState.IsValid) return View(model);
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
 
             try
             {
+                // Tìm người dùng theo Email
                 var user = db.USERS.FirstOrDefault(u => u.EMAIL == model.Email);
+
                 if (user == null || user.PASSWORD != model.Password)
                 {
                     ModelState.AddModelError("", "Email hoặc mật khẩu không đúng.");
                     return View(model);
                 }
 
+                // Tìm khách hàng gắn với user này (nếu có)
                 var khachHang = db.Khach_Hang.FirstOrDefault(k => k.ID_User == user.ID_User);
 
+                // Đăng nhập thành công: lưu thông tin vào Session
                 Session["Email"] = user.EMAIL;
                 Session["UserId"] = user.ID_User;
                 Session["Role"] = user.ID_ROLE;
                 Session["CustomerId"] = khachHang?.MA_KH;
 
-                if (user.ID_ROLE != 1 && !string.IsNullOrEmpty(returnUrl))
-                {
-                    // Redirect về trang trước khi login
-                    return Redirect(returnUrl);
-                }
 
                 if (user.ID_ROLE == 1)
                 {
+                    // ROLE = 1: Quản trị viên
                     return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
                 }
                 else
                 {
+                    // ROLE khác (ví dụ 2 = khách hàng)
                     return RedirectToAction("Index", "Home");
                 }
             }
-            catch
+            catch (Exception ex)
             {
                 ModelState.AddModelError("", "Đã xảy ra lỗi. Vui lòng thử lại sau.");
                 return View(model);
             }
         }
-
 
 
         protected override void Dispose(bool disposing)

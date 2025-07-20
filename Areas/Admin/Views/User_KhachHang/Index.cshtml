@@ -1,0 +1,48 @@
+﻿﻿@model IEnumerable<CNPM_Project_web.Model.UserKhachHangViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="font-weight-bold">Danh sách người dùng</h2>
+        @Html.ActionLink("Tạo tài khoản mới", "Create", null, new { @class = "btn btn-success font-weight-bold" })
+    </div>
+
+    <table class="table table-bordered table-hover">
+        <thead class="thead-dark text-center">
+            <tr>
+                <th style="width: 50px;">STT</th>
+                <th>Email</th>
+                <th>Họ tên</th>
+                <th>Số điện thoại</th>
+                <th>Vai trò</th>
+                <th style="width: 210px;">Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                int stt = 1;
+                foreach (var item in Model)
+                {
+                    <tr class="align-middle">
+                        <td class="text-center">@stt</td>
+                        <td>@item.EMAIL</td>
+                        <td class="text-lowercase">@item.HO_TEN_KH</td>
+                        <td>@item.SDT_KH</td>
+                        <td>@item.TEN_ROLE</td> <!-- Nếu đã thêm TEN_ROLE vào ViewModel -->
+                        <td class="text-center">
+                            @Html.ActionLink("Sửa", "Edit", new { id = item.ID_User }, new { @class = "btn btn-warning btn-sm mr-1" })
+                            @Html.ActionLink("Chi tiết", "Details", new { id = item.ID_User }, new { @class = "btn btn-info btn-sm mr-1 text-white" })
+                            @Html.ActionLink("Xoá", "Delete", new { id = item.ID_User }, new { @class = "btn btn-danger btn-sm", onclick = "return confirm('Bạn có chắc muốn xoá người này không?');" })
+                        </td>
+                    </tr>
+                    stt++;
+                }
+            }
+        </tbody>
+    </table>
+</div>
+

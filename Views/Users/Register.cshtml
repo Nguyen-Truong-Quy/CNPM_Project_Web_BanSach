@@ -1,29 +1,46 @@
-﻿﻿@model CNPM_Project_web.Model.RegisterViewModel
-
+﻿@model CNPM_Project_web.Model.RegisterViewModel
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register form</title>
+    <title>Register Form</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link href="~/CSS/Register.css" rel="stylesheet" />
 </head>
 <body>
     <div class="wrapper">
         <div class="form-header">
-            <div class="title-login">Register</div>
+            <div class="title-login">Đăng Ký</div>
+            <div class="subtitle">Tạo tài khoản mới để bắt đầu</div>
+
             @if (ViewBag.SuccessMessage != null)
             {
                 <div class="alert alert-success">
+                    <i class='bx bx-check-circle'></i>
                     @ViewBag.SuccessMessage
                 </div>
             }
+
             @if (ViewBag.ErrorMessage != null)
             {
                 <div class="alert alert-danger">
+                    <i class='bx bx-error-circle'></i>
                     @ViewBag.ErrorMessage
                 </div>
+            }
+
+            @if (!ViewData.ModelState.IsValid)
+            {
+            <div class="validation-summary-errors">
+                <i class='bx bx-error-circle'></i>
+                <ul>
+                    @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                    {
+                        <li>@error.ErrorMessage</li>
+                    }
+                </ul>
+            </div>
             }
         </div>
 
@@ -31,55 +48,87 @@
         {
             @Html.AntiForgeryToken()
 
-
-
             <div class="input-box">
-                @Html.TextBoxFor(m => m.Email, new { @class = "input-field", type = "email" })
-                @Html.LabelFor(m => m.Email, new { @class = "label" })
+                @Html.TextBoxFor(m => m.Email, new { @class = "input-field", type = "email", placeholder = " ", required = "required" })
+                @Html.LabelFor(m => m.Email, "Địa chỉ Email", new { @class = "label" })
                 <i class='bx bx-envelope icon'></i>
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "field-validation-error" })
             </div>
 
             <div class="input-box">
-                @Html.PasswordFor(m => m.Password, new { @class = "input-field" })
-                @Html.LabelFor(m => m.Password, new { @class = "label" })
+                @Html.PasswordFor(m => m.Password, new { @class = "input-field", placeholder = " ", required = "required" })
+                @Html.LabelFor(m => m.Password, "Mật khẩu", new { @class = "label" })
                 <i class='bx bx-lock-alt icon'></i>
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "field-validation-error" })
             </div>
-
 
             <div class="form-cols">
                 <div class="col-1">
                     <input type="checkbox" id="agree" name="agree" required />
-                    <label for="agree"> I agree to terms & conditions</label>
+                    <label for="agree">Tôi đồng ý với <a href="#" style="color: var(--accent-color);">Điều khoản & Điều kiện</a></label>
                 </div>
             </div>
 
             if (ViewBag.ShowOtpBox == true)
             {
                 <div class="input-box" id="otpBox">
-                    <input type="text" name="Otp" class="input-field" placeholder="Nhập mã OTP" required />
+                    <input type="text" name="Otp" class="input-field" placeholder=" " required />
                     <label class="label">Mã OTP</label>
                     <i class='bx bx-key icon'></i>
+                    <span class="field-validation-error">@ViewBag.OtpError</span>
                 </div>
             }
-            if (!ViewData.ModelState.IsValid)
-            {
-                <div class="alert alert-danger">
-                    @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
-                    {
-                        <div>@error.ErrorMessage</div>
-                    }
-                </div>
-            }
-
 
             <div class="input-box">
-                <button type="submit" class="btn-submit">Sign Up <i class='bx bx-user-plus'></i></button>
+                <button type="submit" class="btn-submit">
+                    <span>@(ViewBag.ShowOtpBox == true ? "Xác nhận OTP" : "Tạo tài khoản")</span>
+                    <i class='bx @(ViewBag.ShowOtpBox == true ? "bx-check" : "bx-user-plus")'></i>
+                </button>
             </div>
 
             <div class="switch-form">
-                <span>Already have an account? <a href="@Url.Action("Login", "Account")">Login</a></span>
+                <span>Đã có tài khoản? <a href="@Url.Action("Login", "Users")">Đăng nhập</a></span>
             </div>
         }
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const inputs = document.querySelectorAll('.input-field');
+
+            // Handle floating labels
+            inputs.forEach(input => {
+                // Check if field has value on load
+                if (input.value && input.value.length > 0) {
+                    input.nextElementSibling.style.top = '-12px';
+                    input.nextElementSibling.style.left = '16px';
+                    input.nextElementSibling.style.fontSize = '12px';
+                    input.nextElementSibling.style.fontWeight = '600';
+                    input.nextElementSibling.style.color = 'var(--accent-color)';
+                    input.nextElementSibling.style.backgroundColor = 'var(--surface)';
+                    input.nextElementSibling.style.padding = '0 8px';
+                }
+
+                input.addEventListener('focus', function () {
+                    this.parentElement.classList.add('focused');
+                });
+
+                input.addEventListener('blur', function () {
+                    if (!this.value) {
+                        this.parentElement.classList.remove('focused');
+                    }
+                });
+            });
+
+            // Auto-focus OTP field if visible
+            const otpBox = document.getElementById('otpBox');
+            if (otpBox && otpBox.style.display !== 'none') {
+                const otpInput = otpBox.querySelector('.input-field');
+                if (otpInput) {
+                    otpInput.focus();
+                }
+            }
+        });
+    </script>
 </body>
 </html>
