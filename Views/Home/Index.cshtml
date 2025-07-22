@@ -1,33 +1,510 @@
 ﻿@{
     ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@*<h1>Test Trang Chủ</h1>
+    <main>
+        <section class="row" aria-labelledby="aspnetTitle">
+            <h1 id="title">ASP.NET</h1>
+            <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+            <p><a href="https://asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
+        </section>
+
+        <div class="row">
+            <section class="col-md-4" aria-labelledby="gettingStartedTitle">
+                <h2 id="gettingStartedTitle">Getting started</h2>
+                <p>
+                    ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
+                    enables a clean separation of concerns and gives you full control over markup
+                    for enjoyable, agile development.
+                </p>
+                <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+            </section>
+            <section class="col-md-4" aria-labelledby="librariesTitle">
+                <h2 id="librariesTitle">Get more libraries</h2>
+                <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+                <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+            </section>
+            <section class="col-md-4" aria-labelledby="hostingTitle">
+                <h2 id="hostingTitle">Web Hosting</h2>
+                <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+                <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+            </section>
+        </div>
+    </main>*@
+
+
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
 }
 
-<main>
-    <section class="row" aria-labelledby="aspnetTitle">
-        <h1 id="title">ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-        <p><a href="https://asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
-    </section>
+/* Header */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 40px;
+    background-color: white;
+    border-bottom: 1px solid #e5e5e5;
+    max-width: 1200px;
+    margin: 30px auto 0 auto;
+    border-radius: 10px 10px 0 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
 
-    <div class="row">
-        <section class="col-md-4" aria-labelledby="gettingStartedTitle">
-            <h2 id="gettingStartedTitle">Getting started</h2>
-            <p>
-                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-                enables a clean separation of concerns and gives you full control over markup
-                for enjoyable, agile development.
-            </p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="librariesTitle">
-            <h2 id="librariesTitle">Get more libraries</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-        </section>
-        <section class="col-md-4" aria-labelledby="hostingTitle">
-            <h2 id="hostingTitle">Web Hosting</h2>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-        </section>
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.header-left img {
+    height: 60px;
+    margin-right: 15px;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+}
+
+.search-bar input {
+    padding: 10px;
+    font-size: 14px;
+    width: 300px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.search-bar button {
+    padding: 10px 18px;
+    margin-left: 5px;
+    background-color: #2874f0;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.header-links {
+    display: flex;
+    align-items: center;
+}
+
+.header-links a {
+    margin: 0 8px;
+    color: black;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.diachi {
+    color: gray;
+    font-size: 14px;
+}
+
+/* Main layout */
+.main-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    gap: 20px;
+    min-height: 600px;
+    background: none;
+}
+
+
+/* Sidebar */
+.sidebar {
+    width: 150px;
+    background-color: white;
+    padding: 15px 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.07);
+    margin-top: 20px;
+    height: fit-content;
+    position: sticky;
+    top: 30px;
+}
+
+.sidebar h3 {
+    margin: 10px 0;
+    font-size: 16px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar ul li {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+}
+
+.sidebar ul li img {
+    width: 28px;
+    height: 28px;
+    margin-right: 8px;
+}
+
+/* Content */
+    .danh-sach {
+        flex: 1;
+        margin-top: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+.flash-sale {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.07);
+    margin-bottom: 25px;
+    /* Xóa margin-left, margin-right */
+}
+
+.flash-sale-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.flash-sale-header h2 {
+    font-size: 20px;
+    margin: 0;
+}
+
+.flash-sale-items {
+    display: flex;
+    gap: 18px;
+    overflow-x: auto;
+}
+
+.flash-sale-item {
+    min-width: 150px;
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    text-align: center;
+    padding: 10px 8px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+}
+
+.flash-sale-item img {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.flash-sale-item .khuyenmai {
+    color: #ff424e;
+    font-weight: bold;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.flash-sale-item .gia {
+    color: #333;
+    font-weight: bold;
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+.flash-sale-item .trangthai {
+    color: #ff424e;
+    font-size: 12px;
+}
+
+.view-all {
+    color: #2874f0;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Footer */
+.footer {
+    display: flex;
+    justify-content: space-between;
+    background-color: #201e1e;
+    padding: 30px 40px;
+    max-width: 1200px;
+    margin: 30px auto 0 auto;
+    border-radius: 0 0 10px 10px;
+    color: #fff;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-section {
+    min-width: 160px;
+    flex: 1;
+}
+
+.footer-section h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.footer-section ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 8px;
+    color: gray;
+}
+
+.footer-section ul li a {
+    text-decoration: none;
+    color: gray;
+}
+
+.footer-section .payment-icons {
+    display: flex;
+    padding-right: 10px;
+}
+
+.footer-section .payment-icons img {
+    width: 40px;
+    padding: 10px 10px;
+}
+
+.footer-section .social-icons img {
+    margin-right: 10px;
+    width: 40px
+}
+
+.qr-code {
+    display: flex;
+}
+
+.qr-code img {
+    width: 100px;
+}
+
+.suggestion-section {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.07);
+    margin-bottom: 25px;
+    /* Xóa margin-left, margin-right */
+}
+.suggestion-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 18px;
+}
+.suggestion-header h2 {
+    font-size: 20px;
+    margin: 0;
+    color: #2874f0;
+}
+.suggestion-desc {
+    font-size: 14px;
+    color: #888;
+    margin-top: 4px;
+}
+.suggestion-items {
+    display: flex;
+    gap: 18px;
+    overflow-x: auto;
+}
+.suggestion-item {
+    min-width: 170px;
+    background: #f8fafd;
+    border: 1px solid #e3e8ee;
+    border-radius: 10px;
+    text-align: center;
+    padding: 12px 10px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.03);
+    transition: box-shadow 0.2s;
+}
+.suggestion-item:hover {
+    box-shadow: 0 4px 16px rgba(40,116,240,0.10);
+}
+.suggestion-item img {
+    width: 100%;
+    height: 110px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+.suggestion-item .book-title {
+    font-weight: bold;
+    font-size: 15px;
+    margin: 8px 0 2px 0;
+    color: #222;
+}
+.suggestion-item .book-author {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 4px;
+}
+.suggestion-item .gia {
+    color: #2874f0;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+</style>
+
+
+<!-- Header -->
+<div class="header">
+    <div class="search-bar">
+        <input type="text" placeholder="Tìm kiếm sách, tác giả, thể loại...">
+        <button>Tìm kiếm</button>
     </div>
-</main>
+    <div class="header-links">
+        <a href="#">Đăng nhập</a>
+        <a href="#">Đăng ký</a>
+        <a href="#">Giỏ hàng</a>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h3>Danh mục</h3>
+        <ul>
+            <li><img src="~/Images/SanPham/HumanBackGround.jpg" alt="icon" />Sách mới</li>
+            <li><img src="~/Images/SanPham/HumanBackGround.jpg" alt="icon" />Gợi ý</li>
+            <li><img src="~/Images/SanPham/HumanBackGround.jpg" alt="icon" />Nổi bật</li>
+        </ul>
+    </div>
+
+    <!-- Danh sách sản phẩm -->
+    <div class="danh-sach">
+        <!-- Sản phẩm mới -->
+        <div class="flash-sale">
+            <div class="flash-sale-header">
+                <h2>Sách mới nhập</h2>
+                <a class="view-all" href="#">Xem tất cả</a>
+            </div>
+            <div class="flash-sale-items">
+                <div class="flash-sale-item">
+                    <img src="~/Images/SanPham/BackgroundRobot.jpg" alt="Sách 1" />
+                    <div class="khuyenmai">Mới</div>
+                    <div class="gia">120.000đ</div>
+                    <div class="trangthai">Còn hàng</div>
+                </div>
+                <div class="flash-sale-item">
+                    <img src="~/Images/SanPham/BackgroundRobot.jpg" alt="Sách 2" />
+                    <div class="khuyenmai">Mới</div>
+                    <div class="gia">150.000đ</div>
+                    <div class="trangthai">Còn hàng</div>
+                </div>
+                <!-- Thêm sách mới khác nếu muốn -->
+            </div>
+        </div>
+
+        <!-- Gợi ý cho bạn -->
+        <div class="suggestion-section">
+            <div class="suggestion-header">
+                <h2>Gợi ý cho bạn</h2>
+                <span class="suggestion-desc">Dựa trên thể loại bạn yêu thích và sách nổi bật</span>
+            </div>
+            <div class="suggestion-items">
+                <div class="suggestion-item">
+                    <img src="~/Images/SanPham/BackgroundRobot.jpg" alt="Gợi ý 1" />
+                    <div class="book-title">Đắc Nhân Tâm</div>
+                    <div class="book-author">Dale Carnegie</div>
+                    <div class="gia">99.000đ</div>
+                </div>
+                <div class="suggestion-item">
+                    <img src="~/Images/SanPham/HumanBackGround.jpg" alt="Gợi ý 2" />
+                    <div class="book-title">Nhà Giả Kim</div>
+                    <div class="book-author">Paulo Coelho</div>
+                    <div class="gia">110.000đ</div>
+                </div>
+                <div class="suggestion-item">
+                    <img src="~/Images/SanPham/BackgroundRobot.jpg" alt="Gợi ý 3" />
+                    <div class="book-title">Muôn Kiếp Nhân Sinh</div>
+                    <div class="book-author">Nguyên Phong</div>
+                    <div class="gia">135.000đ</div>
+                </div>
+                <!-- Thêm sách gợi ý khác nếu muốn -->
+            </div>
+        </div>
+
+        <!-- Sách nổi bật -->
+        <div class="flash-sale">
+            <div class="flash-sale-header">
+                <h2>Sách nổi bật</h2>
+                <a class="view-all" href="#">Xem tất cả</a>
+            </div>
+            <div class="flash-sale-items">
+                <div class="flash-sale-item">
+                    <img src="~/Images/SanPham/BackgroundRobot.jpg" alt="Sách 5" />
+                    <div class="khuyenmai">Hot</div>
+                    <div class="gia">200.000đ</div>
+                    <div class="trangthai">Còn hàng</div>
+                </div>
+                <div class="flash-sale-item">
+                    <img src="~/Images/SanPham/BackgroundRobot.jpg" alt="Sách 6" />
+                    <div class="khuyenmai">Hot</div>
+                    <div class="gia">180.000đ</div>
+                    <div class="trangthai">Còn hàng</div>
+                </div>
+                <!-- Thêm sách nổi bật khác nếu muốn -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+    <div class="footer-section">
+        <h3>Về chúng tôi</h3>
+        <ul>
+            <li><a href="#">Giới thiệu</a></li>
+            <li><a href="#">Liên hệ</a></li>
+            <li><a href="#">Tuyển dụng</a></li>
+        </ul>
+    </div>
+    <div class="footer-section">
+        <h3>Hỗ trợ khách hàng</h3>
+        <ul>
+            <li><a href="#">Hướng dẫn mua hàng</a></li>
+            <li><a href="#">Chính sách đổi trả</a></li>
+            <li><a href="#">Chính sách bảo mật</a></li>
+        </ul>
+    </div>
+    <div class="footer-section">
+        <h3>Thanh toán</h3>
+        <div class="payment-icons">
+            <img src="https://img.icons8.com/color/48/000000/visa.png" alt="Visa" />
+            <img src="https://img.icons8.com/color/48/000000/mastercard.png" alt="Mastercard" />
+        </div>
+    </div>
+    <div class="footer-section">
+        <h3>Kết nối với chúng tôi</h3>
+        <div class="social-icons">
+            <img src="https://img.icons8.com/color/48/000000/facebook.png" alt="Facebook" />
+            <img src="https://img.icons8.com/color/48/000000/instagram-new.png" alt="Instagram" />
+        </div>
+    </div>
+    <div class="footer-section">
+        <h3>QR Code</h3>
+        <div class="qr-code">
+            <img src="https://img.icons8.com/ios-filled/100/000000/qr-code.png" alt="QR Code" />
+        </div>
+    </div>
+</div>
