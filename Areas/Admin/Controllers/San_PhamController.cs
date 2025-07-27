@@ -37,7 +37,7 @@ namespace CNPM_Project_web.Areas.Admin.Controllers
             // Tìm kiếm
             if (!String.IsNullOrEmpty(searchString))
             {
-                products = products.Where(s => 
+                products = products.Where(s =>
                     s.TEN_SP.Contains(searchString) ||
                     s.MA_SP.Contains(searchString) ||
                     s.Danh_Muc.TEN_DANH_MUC.Contains(searchString) ||
@@ -127,13 +127,12 @@ namespace CNPM_Project_web.Areas.Admin.Controllers
             ViewBag.ID_TAC_GIA = new SelectList(db.Tac_Gia, "ID_TAC_GIA", "TEN_TAC_GIA");
             ViewBag.ID_The_Loai = new SelectList(db.The_Loai, "ID_The_Loai", "Ten_The_Loai");
             ViewBag.ID_TRANG_THAI = db.Trang_Thai
-            .Where(t => t.ID_TRANG_THAI == 2 || t.ID_TRANG_THAI == 3)
-            .Select(t => new SelectListItem
-             {
-                Value = t.ID_TRANG_THAI.ToString(),
-                Text = t.TEN_TRANG_THAI
-            })
-            .ToList();
+       .Where(t => t.LoaiTrangThai == "Sản Phẩm")
+       .Select(t => new SelectListItem
+       {
+           Value = t.ID_TRANG_THAI.ToString(),
+           Text = t.TEN_TRANG_THAI
+       });
 
             return View(sp);
         }
@@ -201,7 +200,7 @@ namespace CNPM_Project_web.Areas.Admin.Controllers
             }
             else
             {
-                 TempData["ErrorMessage"] = "Dữ liệu nhập không hợp lệ. Vui lòng kiểm tra các trường bắt buộc.";
+                TempData["ErrorMessage"] = "Dữ liệu nhập không hợp lệ. Vui lòng kiểm tra các trường bắt buộc.";
             }
 
             // Reload lại dropdown nếu model có lỗi
@@ -210,13 +209,12 @@ namespace CNPM_Project_web.Areas.Admin.Controllers
             ViewBag.ID_TAC_GIA = new SelectList(db.Tac_Gia, "ID_TAC_GIA", "TEN_TAC_GIA", san_Pham.ID_TAC_GIA);
             ViewBag.ID_The_Loai = new SelectList(db.The_Loai, "ID_The_Loai", "Ten_The_Loai", san_Pham.ID_The_Loai);
             ViewBag.ID_TRANG_THAI = db.Trang_Thai
-    .       Where(t => t.ID_TRANG_THAI == 2 || t.ID_TRANG_THAI == 3)
-            .Select(t => new SelectListItem
-            {
-                Value = t.ID_TRANG_THAI.ToString(),
-                Text = t.TEN_TRANG_THAI
-            })
-            .ToList();
+     .Where(t => t.LoaiTrangThai == "Sản Phẩm")
+     .Select(t => new SelectListItem
+     {
+         Value = t.ID_TRANG_THAI.ToString(),
+         Text = t.TEN_TRANG_THAI
+     });
             return View(san_Pham);
         }
 
@@ -291,13 +289,14 @@ namespace CNPM_Project_web.Areas.Admin.Controllers
             ViewBag.ID_TAC_GIA = new SelectList(db.Tac_Gia, "ID_TAC_GIA", "TEN_TAC_GIA", san_Pham.ID_TAC_GIA);
             ViewBag.ID_The_Loai = new SelectList(db.The_Loai, "ID_The_Loai", "Ten_The_Loai", san_Pham.ID_The_Loai);
             ViewBag.ID_TRANG_THAI = db.Trang_Thai
-                .Where(t => t.ID_TRANG_THAI == 2 || t.ID_TRANG_THAI == 3)
-                .Select(t => new SelectListItem
-                {
-                    Value = t.ID_TRANG_THAI.ToString(),
-                    Text = t.TEN_TRANG_THAI
-                })
-                .ToList();
+        .Where(t => t.LoaiTrangThai == "Sản Phẩm")
+         .Select(t => new SelectListItem
+         {
+             Value = t.ID_TRANG_THAI.ToString(),
+             Text = t.TEN_TRANG_THAI
+         })
+         .ToList();
+
 
             return View(san_Pham);
         }
@@ -360,10 +359,10 @@ namespace CNPM_Project_web.Areas.Admin.Controllers
         [HttpPost]
         public JsonResult CheckProductName(string tenSP, string maSP = null)
         {
-            var exists = db.San_Pham.Any(p => 
-                p.TEN_SP == tenSP && 
+            var exists = db.San_Pham.Any(p =>
+                p.TEN_SP == tenSP &&
                 (maSP == null || p.MA_SP != maSP));
-            
+
             return Json(new { exists = exists });
         }
 

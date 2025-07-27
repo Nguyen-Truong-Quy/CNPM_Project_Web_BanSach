@@ -1,0 +1,58 @@
+﻿@model CNPM_Project_web.Model.Don_Hang
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>Don_Hang</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.TG_DAT_HANG)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.TG_DAT_HANG)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.TONG_TIEN)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.TONG_TIEN)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Trang_Thai.TEN_TRANG_THAI)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Trang_Thai.TEN_TRANG_THAI)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Khach_Hang.HO_TEN_KH)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Khach_Hang.HO_TEN_KH)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID_DON_HANG }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

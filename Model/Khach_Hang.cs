@@ -17,6 +17,7 @@ namespace CNPM_Project_web.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Khach_Hang()
         {
+            this.Don_Hang = new HashSet<Don_Hang>();
             this.Gio_Hang = new HashSet<Gio_Hang>();
         }
     
@@ -28,6 +29,8 @@ namespace CNPM_Project_web.Model
         public string ANH_DAI_DIEN { get; set; }
         public string ID_User { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Don_Hang> Don_Hang { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Gio_Hang> Gio_Hang { get; set; }
         public virtual USER USER { get; set; }

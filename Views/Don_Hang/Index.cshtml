@@ -1,0 +1,59 @@
+﻿@model IEnumerable<CNPM_Project_web.Model.Don_Hang>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TG_DAT_HANG)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TONG_TIEN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Trang_Thai.TEN_TRANG_THAI)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Khach_Hang.HO_TEN_KH)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TG_DAT_HANG)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TONG_TIEN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Trang_Thai.TEN_TRANG_THAI)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Khach_Hang.HO_TEN_KH)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.ID_DON_HANG }) |
+                @Html.ActionLink("Details", "Details", new { id=item.ID_DON_HANG }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.ID_DON_HANG })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

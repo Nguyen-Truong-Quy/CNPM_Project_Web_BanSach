@@ -1,0 +1,57 @@
+﻿@model CNPM_Project_web.Model.Don_Hang
+@{
+    ViewBag.Title = "Xác nhận thanh toán";
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+
+    var donHang = Model;
+    var chiTiet = donHang.Chi_Tiet_Don_Hang.ToList();
+    var thanhToan = donHang.ThanhToans.FirstOrDefault();
+    var phuongThuc = thanhToan?.Phuong_Thuc_Thanh_Toan?.TEN_PHUONG_THUC ?? "Không rõ";
+}
+
+<div class="container mt-5">
+    <div class="card shadow p-4">
+        <h2 class="text-center text-success">✅ ĐẶT HÀNG THÀNH CÔNG</h2>
+        <p class="text-center text-muted">
+            Mã đơn hàng: <strong>@donHang.ID_DON_HANG</strong>
+        </p>
+
+        <hr />
+
+        <h5 class="mb-3">📦 Chi tiết đơn hàng</h5>
+        <table class="table table-bordered text-center align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>Sản phẩm</th>
+                    <th>Số lượng</th>
+                    <th>Giá bán</th>
+                    <th>Thành tiền</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in chiTiet)
+                {
+                    <tr>
+                        <td>@item.San_Pham?.TEN_SP</td>
+                        <td>@item.SO_LUONG</td>
+                        <td>@(item.GIA_BAN.ToString("N0")) ₫</td>
+                        <td>@(((item.GIA_BAN) * item.SO_LUONG).ToString("N0")) ₫</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div class="text-end mt-3">
+            <p><strong>Khách hàng:</strong> @donHang.Khach_Hang?.HO_TEN_KH</p>
+            <p><strong>Thời gian đặt:</strong> @donHang.TG_DAT_HANG?.ToString("dd/MM/yyyy HH:mm")</p>
+            <p><strong>Phương thức thanh toán:</strong> @phuongThuc</p>
+            <h5 class="text-danger">Tổng tiền: <strong>@donHang.TONG_TIEN?.ToString("N0") ₫</strong></h5>
+        </div>
+
+        <div class="text-center mt-4">
+            <a href="@Url.Action("Trang_Chu", "Home")" class="btn btn-primary btn-lg">
+                🏠 Về trang chủ
+            </a>
+        </div>
+    </div>
+</div>
