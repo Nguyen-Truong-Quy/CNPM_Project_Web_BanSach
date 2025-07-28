@@ -1,0 +1,54 @@
+﻿@model CNPM_Project_web.ViewModel.UserKhachHangViewModel1
+@{
+    ViewBag.Title = "Chi tiết khách hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+    <div class="card mx-auto shadow-sm" style="max-width: 600px;">
+        <div class="card-header bg-info text-white">
+            <h5 class="mb-0"><i class="bx bx-user"></i> @ViewBag.Title</h5>
+        </div>
+        <div class="card-body">
+            <dl class="row mb-3">
+                <dt class="col-sm-4">Mã khách hàng</dt>
+                <dd class="col-sm-8">@Model.MA_KH</dd>
+
+                <dt class="col-sm-4">Họ và tên</dt>
+                <dd class="col-sm-8">@Model.HO_TEN_KH</dd>
+
+                <dt class="col-sm-4">Email</dt>
+                <dd class="col-sm-8">@Model.EMAIL</dd>
+
+                <dt class="col-sm-4">Số điện thoại</dt>
+                <dd class="col-sm-8">@Model.SDT_KH</dd>
+
+                <dt class="col-sm-4">Địa chỉ</dt>
+                <dd class="col-sm-8">@Model.DIA_CHI</dd>
+
+                <dt class="col-sm-4">Vai trò</dt>
+                <dd class="col-sm-8">@Model.TEN_ROLE</dd>
+
+                <dt class="col-sm-4">Ảnh đại diện</dt>
+                <dd class="col-sm-8">
+                    @if (!string.IsNullOrEmpty(Model.ANH_DAI_DIEN))
+                    {
+                        <img src="~@Model.ANH_DAI_DIEN" class="img-fluid rounded" alt="Avatar" />
+                    }
+                    else
+                    {
+                        <span class="text-muted">Chưa có ảnh</span>
+                    }
+                </dd>
+            </dl>
+        </div>
+        <div class="card-footer text-end">
+            <a href="@Url.Action("Edit", new { id = Model.ID_User })" class="btn btn-primary me-2">
+                <i class="bx bx-edit"></i> Chỉnh sửa
+            </a>
+            <a href="@Url.Action("Index")" class="btn btn-secondary">
+                <i class="bx bx-arrow-back"></i> Trở về
+            </a>
+        </div>
+    </div>
+</div>

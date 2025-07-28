@@ -1,48 +1,75 @@
-﻿﻿@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+﻿@model CNPM_Project_web.Model.LoginViewModel
+@{
+    Layout = null;
 }
 
-@model CNPM_Project_web.Model.LoginViewModel
-
-<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-<link href="~/CSS/Login.css" rel="stylesheet" />
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet' />
+<link href="~/CSS/Register.css" rel="stylesheet" />
 
 <div class="wrapper">
     <div class="form-header">
         <div class="title-login">Đăng nhập</div>
+        <div class="subtitle">Nhập thông tin để tiếp tục</div>
     </div>
 
-    @using (Html.BeginForm("Login", "Users", FormMethod.Post, new { @class = "login-form", autocomplete = "off" }))
+    @using (Html.BeginForm("Login", "Users", FormMethod.Post, new { @class = "register-form", autocomplete = "off" }))
     {
         @Html.AntiForgeryToken()
-        @Html.Hidden("returnUrl", Request.QueryString["returnUrl"] ?? "")
-
 
         <div class="input-box">
-            @Html.TextBoxFor(m => m.Email, new { @class = "input-field", required = "required", placeholder = "" })
-            @Html.LabelFor(m => m.Email, new { @class = "label" })
+            @Html.TextBoxFor(m => m.Email, new { @class = "input-field", placeholder = " ", required = "required" })
+            @Html.LabelFor(m => m.Email, "Email", new { @class = "label" })
             <i class='bx bx-user icon'></i>
+            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "field-validation-error" })
         </div>
 
         <div class="input-box">
-            @Html.PasswordFor(m => m.Password, new { @class = "input-field", required = "required", placeholder = "" })
-            @Html.LabelFor(m => m.Password, new { @class = "label" })
+            @Html.PasswordFor(m => m.Password, new { @class = "input-field", placeholder = " ", required = "required" })
+            @Html.LabelFor(m => m.Password, "Mật khẩu", new { @class = "label" })
             <i class='bx bx-lock-alt icon'></i>
+            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "field-validation-error" })
         </div>
 
         <div class="form-cols">
             <div class="col-1"></div>
             <div class="col-2">
-                <a href="#">Quên mật khẩu?</a>
+                <a href="@Url.Action("ForgotPassword", "Users")">Quên mật khẩu?</a>
             </div>
         </div>
 
         <div class="input-box">
-            <button type="submit" class="btn-submit">Đăng nhập <i class='bx bx-log-in'></i></button>
+            <button type="submit" class="btn-submit">
+                <span>Đăng nhập</span>
+                <i class='bx bx-log-in'></i>
+            </button>
         </div>
 
         <div class="switch-form">
             <span>Chưa có tài khoản? <a href="@Url.Action("Register", "Users")">Đăng ký</a></span>
         </div>
     }
+
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const inputs = document.querySelectorAll('.input-field');
+
+        inputs.forEach(input => {
+            // Khi đã có giá trị (autofill hoặc quay lại), nâng label lên
+            if (input.value && input.value.length > 0) {
+                input.nextElementSibling.classList.add('focused');
+            }
+
+            input.addEventListener('focus', function () {
+                this.nextElementSibling.classList.add('focused');
+            });
+
+            input.addEventListener('blur', function () {
+                if (!this.value) {
+                    this.nextElementSibling.classList.remove('focused');
+                }
+            });
+        });
+    });
+</script>
