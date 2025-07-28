@@ -122,13 +122,13 @@
 
                                 <div class="form-group mb-3">
                                     <label class="form-label fw-bold">Giá gốc (VNĐ):</label>
-                                    @Html.TextBoxFor(model => model.GIA_GOC, new { 
-                                        @class = "form-control", 
-                                        @id = "giaGoc", 
-                                        type = "number", 
-                                        min = "0", 
-                                        step = "1000",
-                                        value = Model.GIA_GOC
+                                    @Html.TextBoxFor(model => model.GIA_GOC, new
+                                    {
+                                        @class = "form-control",
+                                        @id = "giaGoc",
+                                        type = "number",
+                                        min = "0",
+                                        step = "1000"
                                     })
                                 </div>
 
@@ -147,12 +147,13 @@
 
                                 <div class="form-group mb-3">
                                     <label class="form-label fw-bold">Giá bán (VNĐ):</label>
-                                    @Html.TextBoxFor(model => model.GIA_BAN, new { 
-                                        @class = "form-control", 
-                                        @id = "giaBan", 
-                                        @readonly = "readonly",
-                                        value = Model.GIA_BAN
+                                    @Html.TextBoxFor(model => model.GIA_BAN, new
+                                    {
+                                        @class = "form-control",
+                                        @id = "giaBan",
+                                        @readonly = "readonly"
                                     })
+
                                 </div>
 
                                 <div class="form-group mb-3">

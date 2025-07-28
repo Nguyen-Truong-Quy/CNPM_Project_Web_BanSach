@@ -1,0 +1,39 @@
+﻿@model CNPM_Project_web.Model.Khach_Hang
+@{
+    ViewBag.Title = "Hồ sơ khách hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Hồ sơ khách hàng</h2>
+    <div class="row">
+        <div class="col-md-4 text-center">
+            @if (!string.IsNullOrEmpty(Model.ANH_DAI_DIEN))
+            {
+                <img src="@Url.Content(Model.ANH_DAI_DIEN)" alt="Ảnh đại diện" class="img-fluid rounded-circle mb-3" style="max-width:200px;" />
+            }
+            else
+            {
+                <img src="~/Content/Images/default-avatar.png" alt="Ảnh đại diện mặc định" class="img-fluid rounded-circle mb-3" style="max-width:200px;" />
+            }
+        </div>
+        <div class="col-md-8">
+            <dl class="row">
+                <dt class="col-sm-4">Họ và tên:</dt>
+                <dd class="col-sm-8">@Model.HO_TEN_KH</dd>
+
+                <dt class="col-sm-4">Email:</dt>
+                <dd class="col-sm-8">@Model.EMAIL</dd>
+
+                <dt class="col-sm-4">Số điện thoại:</dt>
+                <dd class="col-sm-8">@Model.SDT_KH</dd>
+
+                <dt class="col-sm-4">Địa chỉ:</dt>
+                <dd class="col-sm-8">@Model.DIA_CHI</dd>
+            </dl>
+
+            <a href="@Url.Action("Edits", "Users")" class="btn btn-primary me-2">Chỉnh sửa thông tin</a>
+            <a href="@Url.Action("TrangChu", "Home")" class="btn btn-secondary">Về trang chủ</a>
+        </div>
+    </div>
+</div>

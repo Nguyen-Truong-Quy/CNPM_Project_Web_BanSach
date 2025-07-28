@@ -21,5 +21,6 @@ namespace CNPM_Project_web.Model
         public string GHI_CHU { get; set; }
     
         public virtual Don_Hang Don_Hang { get; set; }
+        public virtual Trang_Thai Trang_Thai { get; set; }
     }
 }

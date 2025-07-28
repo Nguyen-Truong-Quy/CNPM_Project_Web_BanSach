@@ -1,0 +1,211 @@
+﻿@model IPagedList<CNPM_Project_web.Model.San_Pham>
+@using PagedList
+@using PagedList.Mvc
+@{
+    ViewBag.Title = "Trang Chủ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid py-4">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="h3 text-gray-800">
+                <i class="fas fa-box me-2"></i>Danh sách Sách
+            </h1>
+            <p class="text-muted">Tất cả sách có trong kho</p>
+        </div>
+        <a href="@Url.Action("Create","Products")" class="btn btn-primary">
+            <i class="fas fa-plus me-2"></i>Thêm Sách
+        </a>
+    </div>
+
+    <!-- Search & Filter -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <form method="get" class="row g-3">
+                <div class="col-md-6">
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-search"></i></span>
+                        <input type="text"
+                               name="searchString"
+                               value="@ViewBag.CurrentFilter"
+                               class="form-control"
+                               placeholder="Tìm kiếm sách, tác giả, mã SP..." />
+                        <button class="btn btn-outline-secondary">
+                            <i class="fas fa-search me-1"></i>Tìm
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <select name="sortOrder"
+                            class="form-select"
+                            onchange="this.form.submit()">
+                        <option value="">Sắp xếp theo</option>
+                        <option value="name_asc" @(ViewBag.CurrentSort == "name_asc" ? "selected" : "")>Tên A → Z</option>
+                        <option value="name_desc" @(ViewBag.CurrentSort == "name_desc" ? "selected" : "")>Tên Z → A</option>
+                        <option value="price_asc" @(ViewBag.CurrentSort == "price_asc" ? "selected" : "")>Giá tăng</option>
+                        <option value="price_desc" @(ViewBag.CurrentSort == "price_desc" ? "selected" : "")>Giá giảm</option>
+                    </select>
+                </div>
+                <div class="col-md-3 text-end">
+                    <a href="@Url.Action("TrangChu","Home")"
+                       class="btn btn-outline-secondary w-100">
+                        <i class="fas fa-sync-alt me-2"></i>Làm mới
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Danh sách Sản phẩm -->
+    <div class="card shadow-sm">
+        <div class="card-header bg-white">
+            <h5 class="mb-0">
+                <i class="fas fa-list me-2"></i>Sách có (@Model.TotalItemCount)
+            </h5>
+        </div>
+        <div class="card-body">
+            @if (Model.Any())
+            {
+                <div class="row g-4">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-xl-3 col-lg-4 col-md-6 mb-4">
+                            <div class="card h-100 shadow-sm">
+                                <div class="position-relative">
+                                    @if (!string.IsNullOrEmpty(item.HINH_ANH))
+                                    {
+                                        <img src="@item.HINH_ANH"
+                                             class="card-img-top"
+                                             style="object-fit:cover; height:200px;"
+                                             alt="@item.TEN_SP" />
+                                    }
+                                    else
+                                    {
+                                        <div class="d-flex align-items-center justify-content-center"
+                                             style="height:200px; background:#f8f9fa;">
+                                            <i class="fas fa-image fa-3x text-muted"></i>
+                                        </div>
+                                    }
+                                    <span class="badge position-absolute top-0 end-0 m-2
+                                                 @(item.Trang_Thai.ID_TRANG_THAI==2 ? "bg-success" : "bg-warning")">
+                                        @item.Trang_Thai.TEN_TRANG_THAI
+                                    </span>
+                                </div>
+                                <div class="card-body d-flex flex-column">
+                                    <h6 class="card-title text-truncate" title="@item.TEN_SP">
+                                        @item.TEN_SP
+                                    </h6>
+                                    <p class="mb-1 small text-muted">
+                                        <i class="fas fa-hashtag me-1"></i>@item.MA_SP
+                                    </p>
+                                    <p class="mb-3 small text-muted">
+                                        <i class="fas fa-user me-1"></i>@item.Tac_Gia.TEN_TAC_GIA
+                                    </p>
+
+                                    <div class="mt-auto">
+                                        <div class="d-flex justify-content-between align-items-center mb-2">
+                                            <div>
+                                                <span class="fw-bold text-primary">
+                                                      @(item.GIA_BAN.HasValue
+                                                                   ? item.GIA_BAN.Value.ToString("N0")
+                                                                                         : "0") ₫
+                                                </span>
+
+
+                                                @if (item.DISCOUNT > 0)
+                                                {
+                                                    <small class="text-decoration-line-through text-muted">
+                                                        @item.GIA_GOC.ToString("N0") ₫
+                                                    </small>
+                                                }
+                                            </div>
+
+                                            <div class="text-end">
+                                                <small class="text-muted">Tồn kho</small>
+                                                <div class="fw-bold">@item.TON_KHO</div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex gap-2">
+                                            < <!-- Mua hàng ẩn trước -->
+                                            <button type="button"
+                                                    class="btn btn-primary btn-sm w-100"
+                                                    onclick="window.location='@Url.Action("ProductDetails","Products", new { id = item.MA_SP })'">
+                                                <i class="fas fa-shopping-cart me-1"></i>Mua hàng
+                                            </button>
+
+                                            <form asp-controller="Cart"
+                                                  asp-action="ThemGioHang"
+                                                  method="post"
+                                                  class="w-50">
+                                                <input type="hidden" name="maSP" value="@item.MA_SP" />
+                                                <input type="hidden" name="soLuong" value="1" />
+                                                <button type="submit"
+                                                        class="btn btn-primary btn-sm w-100">
+                                                    <i class="fas fa-cart-plus me-1"></i>Giỏ hàng
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="text-center py-5 text-muted">
+                    <i class="fas fa-book-open fa-3x mb-3"></i>
+                    <h5>Chưa có sách nào</h5>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- Phân trang -->
+    <div class="d-flex justify-content-center mt-4">
+        @Html.PagedListPager(
+            Model,
+            page => Url.Action("TrangChu", new
+                 {
+                page,
+                searchString = ViewBag.CurrentFilter,
+                sortOrder = ViewBag.CurrentSort
+            }),
+            new PagedListRenderOptions
+                 {
+                DisplayLinkToFirstPage = PagedListDisplayMode.Always,
+                DisplayLinkToPreviousPage = PagedListDisplayMode.Always,
+                DisplayLinkToNextPage = PagedListDisplayMode.Always,
+                DisplayLinkToLastPage = PagedListDisplayMode.Always,
+                DisplayLinkToIndividualPages = true,
+
+                UlElementClasses = new[] { "pagination" },
+                LiElementClasses = new[] { "page-item" },
+            
+
+                FunctionToTransformEachPageLink = (li, a) =>
+                     {
+                    a.AddCssClass("page-link");
+                    li.InnerHtml = a.ToString();
+                    return li;
+                }
+            }
+        )
+    </div>
+</div>
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        function showProductDetails(id) {
+            $.get('@Url.Action("GetProductInfo","Products")', { id })
+             .done(data => {
+                 // hiện modal y hệt bên admin
+             })
+             .fail(() => alert('Lỗi tải sản phẩm'));
+        }
+    </script>
+}

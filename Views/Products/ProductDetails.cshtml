@@ -1,101 +1,113 @@
 ﻿@model CNPM_Project_web.Model.San_Pham
 @{
     ViewBag.Title = "Chi tiết sản phẩm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-@Styles.Render("~/Content/css") <!-- file này phải chứa bootstrap.css -->
-
+@Styles.Render("~/Content/css")
 
 <div class="container mt-4">
     <div class="row">
+        <!-- Ảnh sản phẩm -->
         <div class="col-md-5">
-            <img src="@Model.HINH_ANH" class="img-fluid border" alt="@Model.TEN_SP" />
+            <img src="@Model.HINH_ANH" class="img-fluid border rounded" alt="@Model.TEN_SP" />
         </div>
+
+        <!-- Thông tin sản phẩm -->
         <div class="col-md-7">
             <h2>@Model.TEN_SP</h2>
             <p><strong>Tác giả:</strong> @Model.Tac_Gia.TEN_TAC_GIA</p>
             <p><strong>Nhà xuất bản:</strong> @Model.Nha_Xuat_Ban.TEN_NXB</p>
             <p><strong>Thể loại:</strong> @Model.The_Loai.Ten_The_Loai</p>
             <p><strong>Tình trạng:</strong> @Model.Trang_Thai.TEN_TRANG_THAI</p>
+
             <hr />
-            <p><strong>Giá gốc:</strong> <del>@Model.GIA_GOC.ToString("N0")₫</del></p>
-            <p><strong>Giảm giá:</strong> @Model.DISCOUNT%</p>
-            <h4 class="text-danger">Giá bán: @string.Format("{0:#,##0} ₫", Model.GIA_BAN)</h4>
+            <p><strong>Giá gốc:</strong> <del>@Model.GIA_GOC.ToString("N0") ₫</del></p>
+            <p><strong>Giảm giá:</strong> @Model.DISCOUNT %</p>
+            <h4 class="text-danger fw-bold">Giá bán: @Model.GIA_BAN.Value.ToString("N0") ₫</h4>
             <p><strong>Số lượng còn lại:</strong> @Model.TON_KHO</p>
             <hr />
-            @using (Html.BeginForm("ThemGioHang", "Cart", FormMethod.Post))
+
+            <!-- Nhập số lượng và xem thành tiền -->
+            <div class="mb-3">
+                <label class="form-label"><strong>Số lượng:</strong></label>
+                <div class="input-group" style="width: 160px;">
+                    <button type="button" id="btnGiam" class="btn btn-outline-secondary">−</button>
+                    <input type="number" name="soLuong" id="soLuong" class="form-control text-center" value="1" min="1" />
+                    <button type="button" id="btnTang" class="btn btn-outline-secondary">+</button>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <strong>Thành tiền: </strong>
+                <span id="thanhTien" class="text-danger fw-bold fs-5"></span>
+            </div>
+
+            <!-- FORM MUA NGAY -->
+            @using (Html.BeginForm("MuaNgay", "Don_Hang", FormMethod.Post))
             {
+                @Html.AntiForgeryToken()
                 @Html.Hidden("maSP", Model.MA_SP)
+                <input type="hidden" id="hiddenSoLuong" name="soLuong" value="1" />
 
-                <div class="mb-3">
-                    <label><strong>Số lượng:</strong></label>
-                    <div class="input-group" style="width: 150px;">
-                        <button type="button" id="btnGiam" class="btn btn-outline-secondary">−</button>
-                        <input type="number" name="soLuong" id="soLuong" class="form-control text-center" value="1" min="1" />
-                        <button type="button" id="btnTang" class="btn btn-outline-secondary">+</button>
-                    </div>
-                </div>
-
-                <div class="mb-3">
-                    <strong>Thành tiền: </strong>
-                    <span id="thanhTien" class="text-danger fw-bold fs-5">@Model.GIA_BAN.Value.ToString("N0") ₫</span>
-                </div>
-
-                <button type="submit" class="btn btn-primary">🛒 Thêm vào giỏ hàng</button>
+                <button type="submit" class="btn btn-success btn-lg">
+                    <i class="fas fa-credit-card me-1"></i> Mua ngay
+                </button>
             }
 
-            <a href="@Url.Action("ProductList", "Products")" class="btn btn-secondary">Quay lại</a>
+            <a href="@Url.Action("ProductList", "Products")" class="btn btn-secondary mt-3">Quay lại</a>
         </div>
     </div>
 
-    <!-- Mô tả toàn chiều ngang -->
+    <!-- Mô tả -->
     <div class="row mt-4">
         <div class="col-12">
             <h4>Mô tả sản phẩm</h4>
-            <div class="border p-3" style="background-color:#f9f9f9;">
+            <div class="border p-3 bg-light">
                 @Html.Raw(Model.MO_TA)
             </div>
         </div>
     </div>
 </div>
+
+<!-- Script -->
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const giaBan = parseFloat("@Model.GIA_BAN.Value");
         const tonKho = parseInt("@Model.TON_KHO");
         const qtyInput = document.getElementById("soLuong");
+        const hiddenSoLuong = document.getElementById("hiddenSoLuong");
         const thanhTienEl = document.getElementById("thanhTien");
-        const btnGiam = document.getElementById("btnGiam");
         const btnTang = document.getElementById("btnTang");
+        const btnGiam = document.getElementById("btnGiam");
 
         function updateThanhTien() {
             let qty = parseInt(qtyInput.value) || 1;
             if (qty < 1) qty = 1;
             if (qty > tonKho) qty = tonKho;
             qtyInput.value = qty;
+            hiddenSoLuong.value = qty;
+
             let total = giaBan * qty;
             thanhTienEl.innerText = total.toLocaleString('vi-VN') + " ₫";
         }
 
+        qtyInput.addEventListener("input", updateThanhTien);
+        btnTang.addEventListener("click", function () {
+            let current = parseInt(qtyInput.value) || 1;
+            if (current < tonKho) {
+                qtyInput.value = current + 1;
+                updateThanhTien();
+            }
+        });
         btnGiam.addEventListener("click", function () {
-            let current = parseInt(qtyInput.value);
+            let current = parseInt(qtyInput.value) || 1;
             if (current > 1) {
                 qtyInput.value = current - 1;
                 updateThanhTien();
             }
         });
 
-        btnTang.addEventListener("click", function () {
-            let current = parseInt(qtyInput.value);
-            if (current < tonKho) {
-                qtyInput.value = current + 1;
-                updateThanhTien();
-            }
-        });
-
-        qtyInput.addEventListener("input", updateThanhTien);
-
-        updateThanhTien(); // khởi tạo ban đầu
+        updateThanhTien();
     });
 </script>
-
-

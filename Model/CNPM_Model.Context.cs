@@ -37,6 +37,7 @@ namespace CNPM_Project_web.Model
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<San_Pham> San_Pham { get; set; }
         public virtual DbSet<Tac_Gia> Tac_Gia { get; set; }
+        public virtual DbSet<ThanhToan> ThanhToans { get; set; }
         public virtual DbSet<The_Loai> The_Loai { get; set; }
         public virtual DbSet<Trang_Thai> Trang_Thai { get; set; }
         public virtual DbSet<USER> USERS { get; set; }

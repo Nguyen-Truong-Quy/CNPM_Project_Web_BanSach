@@ -14,20 +14,12 @@ namespace CNPM_Project_web.Model
     
     public partial class Gio_Hang
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Gio_Hang()
-        {
-            this.Don_Hang = new HashSet<Don_Hang>();
-        }
-    
         public int ID_GIO_HANG { get; set; }
         public string MA_KH { get; set; }
         public string MA_SP { get; set; }
         public int SO_LUONG { get; set; }
         public Nullable<System.DateTime> NGAY_TAO { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Don_Hang> Don_Hang { get; set; }
         public virtual Khach_Hang Khach_Hang { get; set; }
         public virtual San_Pham San_Pham { get; set; }
     }

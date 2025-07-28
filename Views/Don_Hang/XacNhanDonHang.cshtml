@@ -1,0 +1,58 @@
+﻿@model CNPM_Project_web.Model.Don_Hang
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string ngayDat = Model.TG_DAT_HANG?.ToString("dd/MM/yyyy HH:mm") ?? "";
+    string tenKH = Model.Khach_Hang?.HO_TEN_KH ?? "";
+    var chiTietList = Model.Chi_Tiet_Don_Hang.ToList();
+}
+<div class="container mt-5">
+    <h2 class="mb-4">Xác nhận đơn hàng</h2>
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <p><strong>Mã đơn hàng:</strong> @Model.ID_DON_HANG</p>
+            <p><strong>Ngày đặt:</strong> @ngayDat</p>
+            <p><strong>Trạng thái:</strong> @Model.Trang_Thai.TEN_TRANG_THAI</p>
+            <p><strong>Khách hàng:</strong> @tenKH</p>
+            <p><strong>Tổng tiền:</strong> <span class="text-danger">@Model.TONG_TIEN.ToString("N0") ₫</span></p>
+            <h5 class="mt-4">Danh sách sản phẩm</h5>
+            <table class="table table-bordered mt-2">
+                <thead>
+                    <tr>
+                        <th>Sản phẩm</th>
+                        <th>SL</th>
+                        <th>Đơn giá</th>
+                        <th>Thành tiền</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in chiTietList)
+                    {
+                        decimal giaBan = item.GIA_BAN;
+                        decimal thanhTien = giaBan * item.SO_LUONG;
+                        <tr>
+                            <td>@item.San_Pham.TEN_SP</td>
+                            <td>@item.SO_LUONG</td>
+                            <td>@(giaBan.ToString("N0")) ₫</td>
+                            <td>@(thanhTien.ToString("N0")) ₫</td>
+                        </tr>
+                    }
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+    <div class="card shadow-sm p-4">
+        <h4>Gửi xác nhận thanh toán</h4>
+        @using (Html.BeginForm("XacNhanDonHang", "Don_Hang", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.Hidden("idDonHang", Model.ID_DON_HANG)
+            <div class="mb-3">
+                <label>Ảnh thanh toán:</label>
+                <input type="file" name="ImageUpload" class="form-control" required />
+            </div>
+            <button class="btn btn-success">Gửi thanh toán</button>
+            <a href="@Url.Action("TrangChu","Home")" class="btn btn-secondary ms-2">Về trang chủ</a>
+        }
+    </div>
+</div>

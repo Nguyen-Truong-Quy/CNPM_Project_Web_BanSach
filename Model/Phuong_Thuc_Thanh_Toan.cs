@@ -17,13 +17,13 @@ namespace CNPM_Project_web.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Phuong_Thuc_Thanh_Toan()
         {
-            this.Don_Hang = new HashSet<Don_Hang>();
+            this.ThanhToans = new HashSet<ThanhToan>();
         }
     
         public int ID_THANH_TOAN { get; set; }
         public string TEN_PHUONG_THUC { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Don_Hang> Don_Hang { get; set; }
+        public virtual ICollection<ThanhToan> ThanhToans { get; set; }
     }
 }

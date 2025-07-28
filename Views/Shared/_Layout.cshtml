@@ -1,25 +1,109 @@
-﻿<!DOCTYPE html>
-<html>
+﻿@using System.Web
+@{
+    Layout = null;
+    // Lấy email từ Session hoặc Cookie
+    var email = Session["Email"] as string;
+    if (string.IsNullOrEmpty(email))
+    {
+        var cookie = Request.Cookies["UserInfo"];
+        if (cookie != null)
+        {
+            email = cookie["Email"];
+            // Thiết lập lại Session nếu cần
+            Session["Email"] = email;
+        }
+    }
+    bool isAuthenticated = !string.IsNullOrEmpty(email);
+}
+<!DOCTYPE html>
+<html lang="vi">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - CNPM Project</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Bootstrap CSS -->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <!-- FontAwesome -->
+    <link href="~/Content/fontawesome/css/all.min.css" rel="stylesheet" />
+    <link href="~/Content/site.css" rel="stylesheet" />
 </head>
-
 <body>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
-    
+    <!-- HEADER -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="@Url.Action("TrangChu","Home")">
+                <i class="fas fa-book-reader me-1"></i>CNPM BookStore
+            </a>
+            <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#mainNav"
+                    aria-controls="mainNav" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("TrangChu","Home")">Trang Chủ</a>
+                    </li>
+                    @* Thêm link tĩnh khác nếu cần *@
+                </ul>
+
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    @if (isAuthenticated)
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle"
+                               href="#"
+                               id="userDropdown"
+                               role="button"
+                               data-bs-toggle="dropdown"
+                               aria-expanded="false">
+                                <i class="fas fa-user-circle me-1"></i>@email
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                <li>
+                                    <a class="dropdown-item"
+                                       href="@Url.Action("Ho_So_Khach_Hang","Users")">
+                                        Hồ sơ
+                                    </a>
+                                </li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li>
+                                    <a class="dropdown-item text-danger"
+                                       href="@Url.Action("Logout","Users")">
+                                        Đăng xuất
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Login","Users")">
+                                <i class="fas fa-sign-in-alt me-1"></i>Đăng nhập
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="@Url.Action("Register","Users")">
+                                <i class="fas fa-user-plus me-1"></i>Đăng ký
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
     </nav>
-    <div class="container body-content">
+    <!-- /HEADER -->
+
+    <div class="container-fluid py-4">
         @RenderBody()
-        <hr />
-        @*<footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>*@
     </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    <!-- Scripts -->
+    <script src="~/Scripts/jquery-3.6.0.min.js"></script>
+    <script src="~/Scripts/bootstrap.bundle.min.js"></script>
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

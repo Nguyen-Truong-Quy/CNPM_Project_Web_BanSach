@@ -1,0 +1,51 @@
+﻿@model CNPM_Project_web.ViewModel.MuaNgayViewModel
+@{
+    ViewBag.Title = "Xác nhận đơn hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4">Xác nhận đơn hàng</h2>
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <h4 class="mb-3">@Model.TenSanPham</h4>
+            <p><strong>Đơn giá:</strong> @Model.GiaBan.ToString("N0") ₫</p>
+            <p><strong>Số lượng:</strong> @Model.SoLuong</p>
+            <p>
+                <strong>Thành tiền:</strong>
+                <span class="text-danger fw-bold">
+                    @((Model.GiaBan * Model.SoLuong)) ₫
+                </span>
+            </p>
+        </div>
+    </div>
+
+    @using (Html.BeginForm("XacNhanDonHang", "Don_Hang", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.MaSP)
+        @Html.HiddenFor(model => model.SoLuong)
+
+        <div class="mb-3">
+            <label class="form-label">Họ tên người nhận</label>
+            @Html.TextBoxFor(model => model.HoTen, new { @class = "form-control", required = "required" })
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Số điện thoại</label>
+            @Html.TextBoxFor(model => model.SDT, new { @class = "form-control", required = "required" })
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Địa chỉ giao hàng</label>
+            @Html.TextAreaFor(model => model.DiaChi, new { @class = "form-control", rows = 3, required = "required" })
+        </div>
+
+        <button type="submit" class="btn btn-success btn-lg">
+            <i class="fas fa-check-circle me-1"></i> Xác nhận đặt hàng
+        </button>
+
+        <a href="@Url.Action("ProductDetails", "Products", new { id = Model.MaSP })" class="btn btn-secondary ms-2">Quay lại</a>
+    }
+</div>

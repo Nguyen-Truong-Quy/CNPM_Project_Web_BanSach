@@ -19,22 +19,22 @@ namespace CNPM_Project_web.Model
         {
             this.Chi_Tiet_Don_Hang = new HashSet<Chi_Tiet_Don_Hang>();
             this.Lich_Su_Don_Hang = new HashSet<Lich_Su_Don_Hang>();
+            this.ThanhToans = new HashSet<ThanhToan>();
         }
     
         public int ID_DON_HANG { get; set; }
         public string MA_KH { get; set; }
-        public Nullable<int> ID_GIO_HANG { get; set; }
         public Nullable<System.DateTime> TG_DAT_HANG { get; set; }
         public int ID_TRANG_THAI { get; set; }
         public decimal TONG_TIEN { get; set; }
-        public int ID_THANH_TOAN { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Chi_Tiet_Don_Hang> Chi_Tiet_Don_Hang { get; set; }
-        public virtual Gio_Hang Gio_Hang { get; set; }
+        public virtual Trang_Thai Trang_Thai { get; set; }
+        public virtual Khach_Hang Khach_Hang { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Lich_Su_Don_Hang> Lich_Su_Don_Hang { get; set; }
-        public virtual Phuong_Thuc_Thanh_Toan Phuong_Thuc_Thanh_Toan { get; set; }
-        public virtual Trang_Thai Trang_Thai { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ThanhToan> ThanhToans { get; set; }
     }
 }
