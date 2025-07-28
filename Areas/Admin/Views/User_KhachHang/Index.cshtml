@@ -1,120 +1,361 @@
-﻿﻿@model IEnumerable<CNPM_Project_web.Model.UserKhachHangViewModel>
+﻿@model IEnumerable<CNPM_Project_web.Model.UserKhachHangViewModel>
 
 @{
     ViewBag.Title = "Quản lý người dùng";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-<div class="container mt-4">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2 class="font-weight-bold">Danh sách người dùng</h2>
-        @Html.ActionLink("Tạo tài khoản mới", "Create", null, new { @class = "btn btn-success font-weight-bold" })
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="h3 mb-0 text-gray-800">
+                <i class="fas fa-users me-2"></i>Quản lý User & Khách hàng
+            </h1>
+            <p class="text-muted">Quản lý thông tin người dùng và khách hàng trong hệ thống</p>
+        </div>
+        <div>
+            <a href="@Url.Action("Create")" class="btn btn-primary">
+                <i class="fas fa-plus me-2"></i>Thêm User
+            </a>
+        </div>
     </div>
 
-    <!-- Search and Filter Section -->
-    <div class="card mb-4">
-        <div class="card-header">
-            <h5 class="mb-0">
-                <i class="fas fa-search"></i> Tìm kiếm & Bộ lọc
-            </h5>
+    <!-- Alert Messages -->
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fas fa-check-circle me-2"></i>@TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fas fa-exclamation-circle me-2"></i>@TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <!-- Search and Filter Card -->
+    <div class="card shadow-sm mb-4">
         <div class="card-body">
-            @using (Html.BeginForm("Index", "User_KhachHang", FormMethod.Get, new { @class = "row g-3" }))
-            {
+            <form method="get" action="@Url.Action("Index")" class="row g-3">
                 <div class="col-md-4">
-                    <label class="form-label">
-                        <i class="fas fa-search"></i> Tìm kiếm
-                    </label>
                     <div class="input-group">
-                        @Html.TextBox("searchString", ViewBag.SearchString as string, new { @class = "form-control", placeholder = "Tìm theo tên, email, số điện thoại..." })
-                        <button type="submit" class="btn btn-outline-secondary">
+                        <span class="input-group-text">
                             <i class="fas fa-search"></i>
+                        </span>
+                        <input type="text" class="form-control" name="searchString" 
+                               value="@ViewBag.SearchString" placeholder="Tìm kiếm tên, email, số điện thoại...">
+                        <button type="submit" class="btn btn-outline-secondary">
+                            <i class="fas fa-search me-1"></i>Tìm
                         </button>
                     </div>
                 </div>
-                
                 <div class="col-md-3">
-                    <label class="form-label">
-                        <i class="fas fa-sort"></i> Sắp xếp theo
-                    </label>
-                    <select name="sortOrder" class="form-select">
-                        <option value="">Mặc định</option>
+                    <select name="sortOrder" class="form-select" onchange="this.form.submit()">
+                        <option value="">Sắp xếp theo</option>
                         <option value="name" @(ViewBag.CurrentSort == "name" ? "selected" : "")>Tên A-Z</option>
                         <option value="name_desc" @(ViewBag.CurrentSort == "name_desc" ? "selected" : "")>Tên Z-A</option>
                         <option value="email" @(ViewBag.CurrentSort == "email" ? "selected" : "")>Email A-Z</option>
                         <option value="email_desc" @(ViewBag.CurrentSort == "email_desc" ? "selected" : "")>Email Z-A</option>
                     </select>
                 </div>
-                
                 <div class="col-md-3">
-                    <label class="form-label">
-                        <i class="fas fa-filter"></i> Vai trò
-                    </label>
-                    <select name="roleFilter" class="form-select">
-                        <option value="">Tất cả</option>
+                    <select name="roleFilter" class="form-select" onchange="this.form.submit()">
+                        <option value="">Tất cả vai trò</option>
                         <option value="admin" @(ViewBag.RoleFilter == "admin" ? "selected" : "")>Admin</option>
-                        <option value="user" @(ViewBag.RoleFilter == "user" ? "selected" : "")>User</option>
+                        <option value="user" @(ViewBag.RoleFilter == "user" ? "selected" : "")>Người dùng</option>
                     </select>
                 </div>
-                
                 <div class="col-md-2">
-                    <label class="form-label">
-                        <i class="fas fa-list"></i> Hiển thị
-                    </label>
-                    <select name="pageSize" class="form-select">
-                        <option value="10" @(ViewBag.PageSize == 10 ? "selected" : "")>10</option>
-                        <option value="20" @(ViewBag.PageSize == 20 ? "selected" : "")>20</option>
-                        <option value="50" @(ViewBag.PageSize == 50 ? "selected" : "")>50</option>
-                    </select>
+                    <a href="@Url.Action("Index")" class="btn btn-outline-secondary w-100">
+                        <i class="fas fa-refresh me-2"></i>Làm mới
+                    </a>
                 </div>
-                
-                <div class="col-12">
-                    <div class="d-flex gap-2">
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-search"></i> Tìm kiếm
-                        </button>
-                        <a href="@Url.Action("Index")" class="btn btn-outline-secondary">
-                            <i class="fas fa-refresh"></i> Làm mới
+            </form>
+        </div>
+    </div>
+
+    <!-- Results Card -->
+    <div class="card shadow-sm">
+        <div class="card-header bg-white">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">
+                    <i class="fas fa-list me-2"></i>Danh sách User & Khách hàng
+                </h5>
+                <div class="d-flex align-items-center gap-2">
+                    @if (!string.IsNullOrEmpty(ViewBag.RoleFilter))
+                    {
+                        <span class="badge bg-info">
+                            <i class="fas fa-filter me-1"></i>
+                            @(ViewBag.RoleFilter == "admin" ? "Admin" : "Người dùng")
+                        </span>
+                    }
+                    @if (!string.IsNullOrEmpty(ViewBag.SearchString))
+                    {
+                        <span class="badge bg-warning">
+                            <i class="fas fa-search me-1"></i>
+                            Tìm: "@ViewBag.SearchString"
+                        </span>
+                    }
+                    <span class="badge bg-primary">@Model.Count() người dùng</span>
+                </div>
+            </div>
+        </div>
+        <div class="card-body p-0">
+            @if (Model.Any())
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th width="10%">#</th>
+                                <th width="60%">
+                                    <i class="fas fa-user me-1"></i>Thông tin User
+                                </th>
+                                <th width="30%" class="text-center">
+                                    <i class="fas fa-cogs me-1"></i>Thao tác
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="text-muted">@item.ID_User</td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="avatar-sm bg-primary rounded-circle d-flex align-items-center justify-content-center me-3">
+                                                <i class="fas fa-user text-white"></i>
+                                            </div>
+                                            <div>
+                                                <h6 class="mb-0 fw-bold">@item.HO_TEN_KH</h6>
+                                                <div class="text-muted small">
+                                                    <i class="fas fa-envelope me-1"></i>@item.EMAIL
+                                                </div>
+                                                <div class="text-muted small">
+                                                    <i class="fas fa-phone me-1"></i>@item.SDT_KH
+                                                </div>
+                                                <div class="mt-1">
+                                                    <span class="badge @(item.TEN_ROLE?.ToLower().Contains("admin") == true ? "bg-danger" : "bg-info") me-1">
+                                                        @(item.TEN_ROLE ?? "N/A")
+                                                    </span>
+                                                    <span class="badge bg-secondary">@item.MA_KH</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="btn-group" role="group">
+                                            <button type="button" class="btn btn-outline-info" 
+                                                    onclick="showUserDetails('@item.ID_User', '@item.HO_TEN_KH', '@item.EMAIL', '@item.SDT_KH', '@item.DIA_CHI', '@item.MA_KH', '@item.TEN_ROLE')" 
+                                                    title="Xem chi tiết">
+                                                <i class="fas fa-eye me-1"></i>Chi tiết
+                                            </button>
+                                            <a href="@Url.Action("Edit", new { id = item.ID_User })" 
+                                               class="btn btn-outline-warning" title="Chỉnh sửa">
+                                                <i class="fas fa-edit me-1"></i>Sửa
+                                            </a>
+                                            <button type="button" class="btn btn-outline-danger" 
+                                                    onclick="confirmDelete('@item.ID_User', '@item.HO_TEN_KH')" 
+                                                    title="Xóa">
+                                                <i class="fas fa-trash me-1"></i>Xóa
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <div class="text-center py-5">
+                    <i class="fas fa-users fa-3x text-muted mb-3"></i>
+                    <h5 class="text-muted">Không có người dùng nào</h5>
+                    <p class="text-muted">
+                        @if (!string.IsNullOrEmpty(ViewBag.SearchString) || !string.IsNullOrEmpty(ViewBag.RoleFilter))
+                        {
+                            <span>Không tìm thấy kết quả phù hợp với bộ lọc hiện tại.</span>
+                        }
+                        else
+                        {
+                            <span>Bắt đầu bằng cách thêm người dùng đầu tiên</span>
+                        }
+                    </p>
+                    @if (!string.IsNullOrEmpty(ViewBag.SearchString) || !string.IsNullOrEmpty(ViewBag.RoleFilter))
+                    {
+                        <a href="@Url.Action("Index")" class="btn btn-outline-secondary me-2">
+                            <i class="fas fa-times me-2"></i>Xóa bộ lọc
                         </a>
-                    </div>
+                    }
+                    <a href="@Url.Action("Create")" class="btn btn-primary">
+                        <i class="fas fa-plus me-2"></i>Thêm User
+                    </a>
                 </div>
             }
         </div>
     </div>
-
-    <table class="table table-bordered table-hover">
-        <thead class="thead-dark text-center">
-            <tr>
-                <th style="width: 50px;">STT</th>
-                <th>Email</th>
-                <th>Họ tên</th>
-                <th>Số điện thoại</th>
-                <th>Vai trò</th>
-                <th style="width: 210px;">Thao tác</th>
-            </tr>
-        </thead>
-        <tbody>
-            @{
-                int stt = 1;
-                foreach (var item in Model)
-                {
-                    <tr class="align-middle">
-                        <td class="text-center">@stt</td>
-                        <td>@item.EMAIL</td>
-                        <td class="text-lowercase">@item.HO_TEN_KH</td>
-                        <td>@item.SDT_KH</td>
-                        <td>@item.TEN_ROLE</td>
-                        <td class="text-center">
-                            @Html.ActionLink("Sửa", "Edit", new { id = item.ID_User }, new { @class = "btn btn-warning btn-sm mr-1" })
-                            @Html.ActionLink("Chi tiết", "Details", new { id = item.ID_User }, new { @class = "btn btn-info btn-sm mr-1 text-white" })
-                            @Html.ActionLink("Xoá", "Delete", new { id = item.ID_User }, new { @class = "btn btn-danger btn-sm", onclick = "return confirm('Bạn có chắc muốn xoá người này không?');" })
-                        </td>
-                    </tr>
-                    stt++;
-                }
-            }
-        </tbody>
-    </table>
 </div>
+
+<!-- User Details Modal -->
+<div class="modal fade" id="userDetailsModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-user-circle text-primary me-2"></i>
+                    Chi tiết User & Khách hàng
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <!-- Thông tin người dùng -->
+                    <div class="col-md-6">
+                        <div class="card border-primary">
+                            <div class="card-header bg-primary text-white">
+                                <h6 class="mb-0">
+                                    <i class="fas fa-user me-2"></i>Thông tin người dùng
+                                </h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-2">
+                                    <strong>ID:</strong> <span id="modalUserId"></span>
+                                </div>
+                                <div class="mb-2">
+                                    <strong>Email:</strong> <span id="modalEmail"></span>
+                                </div>
+                                <div class="mb-2">
+                                    <strong>Vai trò:</strong> <span id="modalRole"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Thông tin khách hàng -->
+                    <div class="col-md-6">
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white">
+                                <h6 class="mb-0">
+                                    <i class="fas fa-user-tie me-2"></i>Thông tin khách hàng
+                                </h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-2">
+                                    <strong>Mã KH:</strong> <span id="modalMaKH"></span>
+                                </div>
+                                <div class="mb-2">
+                                    <strong>Họ tên:</strong> <span id="modalHoTen"></span>
+                                </div>
+                                <div class="mb-2">
+                                    <strong>Số điện thoại:</strong> <span id="modalSDT"></span>
+                                </div>
+                                <div class="mb-2">
+                                    <strong>Địa chỉ:</strong> <span id="modalDiaChi"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#" id="modalEditLink" class="btn btn-primary">
+                    <i class="fas fa-edit me-2"></i>Chỉnh sửa
+                </a>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times me-2"></i>Đóng
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-danger">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    Xác nhận xóa
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Bạn có chắc chắn muốn xóa user <strong id="deleteUserName"></strong>?</p>
+                <p class="text-muted small">Hành động này không thể hoàn tác.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times me-1"></i>Hủy
+                </button>
+                <form id="deleteForm" method="post" style="display: inline;">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash me-1"></i>Xóa
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function showUserDetails(userId, hoTen, email, sdt, diaChi, maKH, role) {
+            // Populate modal with user data
+            $('#modalUserId').text(userId);
+            $('#modalEmail').text(email);
+            $('#modalRole').text(role || 'N/A');
+            $('#modalMaKH').text(maKH);
+            $('#modalHoTen').text(hoTen);
+            $('#modalSDT').text(sdt);
+            $('#modalDiaChi').text(diaChi);
+            
+            // Set edit link
+            $('#modalEditLink').attr('href', '@Url.Action("Edit")/' + userId);
+            
+            // Show modal
+            $('#userDetailsModal').modal('show');
+        }
+
+        function confirmDelete(userId, userName) {
+            $('#deleteUserName').text(userName);
+            $('#deleteForm').attr('action', '@Url.Action("Delete")/' + userId);
+            $('#deleteModal').modal('show');
+        }
+
+        // Auto-hide alerts
+        setTimeout(function() {
+            $('.alert').fadeOut('slow');
+        }, 3000);
+
+        // Debug function to check if form is working
+        $(document).ready(function() {
+            console.log('Form ready');
+            $('form').on('submit', function() {
+                console.log('Form submitted');
+            });
+        });
+    </script>
+}
+
+<style>
+    .avatar-sm {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .table-hover tbody tr:hover {
+        background-color: rgba(102, 126, 234, 0.05);
+    }
+    
+    .btn-group .btn {
+        font-size: 0.8rem;
+    }
+</style>
 

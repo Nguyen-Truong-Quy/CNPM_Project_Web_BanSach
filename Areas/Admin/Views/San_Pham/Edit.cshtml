@@ -1,181 +1,276 @@
 ﻿@model CNPM_Project_web.Model.San_Pham
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Chỉnh sửa sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" rel="stylesheet" />
-<style>
-    body {
-        background-color: white;
-        color: black;
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="h3 mb-0 text-gray-800">
+                <i class="fas fa-edit me-2"></i>Chỉnh sửa sản phẩm
+            </h1>
+            <p class="text-muted">Cập nhật thông tin sản phẩm trong hệ thống</p>
+        </div>
+        <div>
+            <a href="@Url.Action("Index")" class="btn btn-outline-secondary">
+                <i class="fas fa-arrow-left me-2"></i>Quay lại
+            </a>
+        </div>
+    </div>
+
+    <!-- Alert Messages -->
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fas fa-check-circle me-2"></i>@TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fas fa-exclamation-circle me-2"></i>@TempData["ErrorMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
     }
 
-    .form-control {
-        width: 100% !important;
-    }
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
 
-    .form-group {
-        margin-bottom: 20px;
-    }
-
-    img#imagePreview {
-        max-width: 100%;
-        height: auto;
-        border: 1px solid #ddd;
-        padding: 5px;
-        margin-top: 10px;
-    }
-
-    label {
-        font-weight: bold;
-    }
-</style>
-
-<h2>Edit</h2>
-
-@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
-{
-    @Html.AntiForgeryToken()
-
-<div class="container">
-    <h4>Chỉnh sửa sản phẩm</h4>
-    <hr />
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-    @Html.HiddenFor(model => model.MA_SP)
-
-    <div class="row">
-        <div class="col-md-6 col-sm-12">
-            <div class="form-group">
-                <label>Ảnh xem trước:</label><br />
-                <img id="imagePreview"
-                     src="@(Model.HINH_ANH ?? "#")"
-                     style="max-width: 100%; max-height:100%; @(string.IsNullOrEmpty(Model.HINH_ANH) ? "display:none;" : "")" />
+        <div class="card shadow-sm">
+            <div class="card-header bg-white">
+                <h5 class="mb-0">
+                    <i class="fas fa-info-circle me-2"></i>Thông tin sản phẩm
+                </h5>
             </div>
-            <div class="form-group">
-                <label class="control-label">Chọn cách thêm ảnh:</label>
-                <div>
-                    <label>
-                        <input type="radio" name="chonAnh" value="file" @(ViewBag.IsImageUrl != null && !(bool)ViewBag.IsImageUrl ? "checked" : "") onchange="toggleImageInput()" />
-                        Tải ảnh từ máy
-                    </label>
-                    <label style="margin-left:20px;">
-                        <input type="radio" name="chonAnh" value="url" @(ViewBag.IsImageUrl != null && (bool)ViewBag.IsImageUrl ? "checked" : "") onchange="toggleImageInput()" />
-                        Dán URL ảnh
-                    </label>
+            <div class="card-body">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.MA_SP)
+
+                <div class="row">
+                    <!-- Cột ảnh -->
+                    <div class="col-md-6">
+                        <div class="card border-primary">
+                            <div class="card-header bg-primary text-white">
+                                <h6 class="mb-0">
+                                    <i class="fas fa-image me-2"></i>Hình ảnh sản phẩm
+                                </h6>
+                            </div>
+                            <div class="card-body">
+                                <!-- Ảnh hiện tại -->
+                                <div class="text-center mb-3">
+                                    <img id="imagePreview" 
+                                         src="@(string.IsNullOrEmpty(Model.HINH_ANH) ? "/Images/SanPham/default.jpg" : Model.HINH_ANH)" 
+                                         class="img-fluid rounded" 
+                                         style="max-height: 300px; border: 2px solid #dee2e6;"
+                                         alt="Ảnh sản phẩm" />
+                                </div>
+
+                                <!-- Chọn cách thêm ảnh -->
+                                <div class="mb-3">
+                                    <label class="form-label fw-bold">Chọn cách thêm ảnh:</label>
+                                    <div class="form-check">
+                                        <input type="radio" name="chonAnh" value="file" id="radioFile" 
+                                               @(ViewBag.IsImageUrl != null && !(bool)ViewBag.IsImageUrl ? "checked" : "") 
+                                               onchange="toggleImageInput()" class="form-check-input" />
+                                        <label for="radioFile" class="form-check-label">Tải ảnh từ máy</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input type="radio" name="chonAnh" value="url" id="radioUrl" 
+                                               @(ViewBag.IsImageUrl != null && (bool)ViewBag.IsImageUrl ? "checked" : "") 
+                                               onchange="toggleImageInput()" class="form-check-input" />
+                                        <label for="radioUrl" class="form-check-label">Dán URL ảnh</label>
+                                    </div>
+                                </div>
+
+                                <!-- Input file -->
+                                <div class="form-group" id="chonAnhFile" style="display:none;">
+                                    <label class="form-label fw-bold">Chọn ảnh từ máy:</label>
+                                    <input type="file" name="ImageFile" id="ImageFile" class="form-control" 
+                                           accept="image/*" onchange="previewImageFromFile()" />
+                                </div>
+
+                                <!-- Input URL -->
+                                <div class="form-group" id="chonAnhUrl">
+                                    <label class="form-label fw-bold">URL ảnh:</label>
+                                    <input type="text" name="ImageUrl" id="ImageUrl" class="form-control"
+                                           value="@Model.HINH_ANH" oninput="previewImageFromUrl()" 
+                                           placeholder="Nhập URL ảnh..." />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cột thông tin -->
+                    <div class="col-md-6">
+                        <div class="card border-success">
+                            <div class="card-header bg-success text-white">
+                                <h6 class="mb-0">
+                                    <i class="fas fa-info-circle me-2"></i>Thông tin cơ bản
+                                </h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group mb-3">
+                                    <label class="form-label fw-bold">Tên sản phẩm:</label>
+                                    @Html.EditorFor(model => model.TEN_SP, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.TEN_SP, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label class="form-label fw-bold">Giá gốc (VNĐ):</label>
+                                    @Html.TextBoxFor(model => model.GIA_GOC, new { 
+                                        @class = "form-control", 
+                                        @id = "giaGoc", 
+                                        type = "number", 
+                                        min = "0", 
+                                        step = "1000",
+                                        value = Model.GIA_GOC
+                                    })
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label class="form-label fw-bold">Giảm giá (%):</label>
+                                    @Html.TextBoxFor(model => model.DISCOUNT, new { 
+                                        @class = "form-control", 
+                                        @id = "discount", 
+                                        type = "number", 
+                                        min = "0", 
+                                        max = "100", 
+                                        step = "1",
+                                        value = Model.DISCOUNT
+                                    })
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label class="form-label fw-bold">Giá bán (VNĐ):</label>
+                                    @Html.TextBoxFor(model => model.GIA_BAN, new { 
+                                        @class = "form-control", 
+                                        @id = "giaBan", 
+                                        @readonly = "readonly",
+                                        value = Model.GIA_BAN
+                                    })
+                                </div>
+
+                                <div class="form-group mb-3">
+                                    <label class="form-label fw-bold">Tồn kho:</label>
+                                    @Html.EditorFor(model => model.TON_KHO, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mô tả -->
+                <div class="card border-info mt-4">
+                    <div class="card-header bg-info text-white">
+                        <h6 class="mb-0">
+                            <i class="fas fa-align-left me-2"></i>Mô tả sản phẩm
+                        </h6>
+                    </div>
+                    <div class="card-body">
+                        @Html.TextAreaFor(model => model.MO_TA, new { @class = "form-control", @id = "MO_TA", rows = 8 })
+                        @Html.ValidationMessageFor(model => model.MO_TA, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <!-- Thông tin phân loại -->
+                <div class="card border-warning mt-4">
+                    <div class="card-header bg-warning text-dark">
+                        <h6 class="mb-0">
+                            <i class="fas fa-tags me-2"></i>Phân loại sản phẩm
+                        </h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label class="form-label fw-bold">Danh mục:</label>
+                                    @Html.DropDownList("ID_DANH_MUC", null, "Chọn danh mục", htmlAttributes: new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label class="form-label fw-bold">Tác giả:</label>
+                                    @Html.DropDownList("ID_TAC_GIA", null, "Chọn tác giả", htmlAttributes: new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label class="form-label fw-bold">Thể loại:</label>
+                                    @Html.DropDownList("ID_The_Loai", null, "Chọn thể loại", htmlAttributes: new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-3">
+                                    <label class="form-label fw-bold">Nhà xuất bản:</label>
+                                    @Html.DropDownList("ID_NXB", null, "Chọn NXB", htmlAttributes: new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trạng thái -->
+                <div class="card border-secondary mt-4">
+                    <div class="card-header bg-secondary text-white">
+                        <h6 class="mb-0">
+                            <i class="fas fa-toggle-on me-2"></i>Trạng thái sản phẩm
+                        </h6>
+                    </div>
+                    <div class="card-body">
+                        @{
+                            var trangThaiList = ViewBag.ID_TRANG_THAI as List<SelectListItem>;
+                        }
+                        <div class="row">
+                            @foreach (var item in trangThaiList)
+                            {
+                                <div class="col-md-3">
+                                    <div class="form-check">
+                                        <input type="radio" name="ID_TRANG_THAI" value="@item.Value" 
+                                               id="trangThai_@item.Value" @(item.Selected ? "checked" : "") 
+                                               class="form-check-input" />
+                                        <label for="trangThai_@item.Value" class="form-check-label">@item.Text</label>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Buttons -->
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-primary me-2">
+                        <i class="fas fa-save me-2"></i>Lưu thay đổi
+                    </button>
+                    <a href="@Url.Action("Index")" class="btn btn-outline-secondary">
+                        <i class="fas fa-times me-2"></i>Hủy
+                    </a>
                 </div>
             </div>
-
-            <div class="form-group" id="chonAnhFile" style="display:none;">
-                @Html.Label("Chọn ảnh từ máy", htmlAttributes: new { @class = "control-label" })
-                <input type="file" name="ImageFile" id="ImageFile" class="form-control" accept="image/*" onchange="previewImageFromFile()" />
-            </div>
-
-            <div class="form-group" id="chonAnhUrl">
-                @Html.Label("URL ảnh", htmlAttributes: new { @class = "control-label" })
-                <input type="text" name="ImageUrl" id="ImageUrl" class="form-control"
-                       value="@Model.HINH_ANH" oninput="previewImageFromUrl()" />
-            </div>
         </div>
-
-        <div class="col-md-6 col-sm-12">
-            <div class="form-group">
-                @Html.LabelFor(model => model.TEN_SP)
-                @Html.EditorFor(model => model.TEN_SP, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TEN_SP, "", new { @class = "text-danger" })
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.GIA_GOC)
-                @Html.TextBoxFor(model => model.GIA_GOC, new { @class = "form-control", @id = "giaGoc", type = "number", min = "0", step = "1000" })
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.DISCOUNT)
-                @Html.TextBoxFor(model => model.DISCOUNT, new { @class = "form-control", @id = "discount", type = "number", min = "0", max = "100", step = "1" })
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.GIA_BAN)
-                @Html.TextBoxFor(model => model.GIA_BAN, new { @class = "form-control", @id = "giaBan", @readonly = "readonly" })
-            </div>
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.MO_TA)
-        @Html.TextAreaFor(model => model.MO_TA, new { @class = "form-control", @id = "MO_TA", rows = 10 })
-        @Html.ValidationMessageFor(model => model.MO_TA, "", new { @class = "text-danger" })
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.TON_KHO)
-        @Html.EditorFor(model => model.TON_KHO, new { htmlAttributes = new { @class = "form-control" } })
-    </div>
-
-    <div class="form-group">
-        @Html.Label("Danh mục")
-        @Html.DropDownList("ID_DANH_MUC", null, "Chọn danh mục", htmlAttributes: new { @class = "form-control" })
-    </div>
-
-    <div class="form-group">
-        @Html.Label("Tác giả")
-        @Html.DropDownList("ID_TAC_GIA", null, "Chọn tác giả", htmlAttributes: new { @class = "form-control" })
-    </div>
-
-    <div class="form-group">
-        @Html.Label("Thể loại")
-        @Html.DropDownList("ID_The_Loai", null, "Chọn thể loại", htmlAttributes: new { @class = "form-control" })
-    </div>
-
-    <div class="form-group">
-        @Html.Label("Nhà xuất bản")
-        @Html.DropDownList("ID_NXB", null, "Chọn NXB", htmlAttributes: new { @class = "form-control" })
-    </div>
-
-    <div class="form-group">
-        @Html.Label("Trạng thái")
-        @{
-            var trangThaiList = ViewBag.ID_TRANG_THAI as List<SelectListItem>;
-        }
-        @foreach (var item in trangThaiList)
-        {
-            <div class="radio">
-                <label>
-                    @Html.RadioButtonFor(model => model.ID_TRANG_THAI, item.Value, item.Selected) @item.Text
-                </label>
-            </div>
-        }
-    </div>
-
-    <div class="form-group text-center">
-        <input type="submit" value="Lưu thay đổi" class="btn btn-success" />
-    </div>
-    <div>
-        @Html.ActionLink("Hủy", "Index", new { @class = "btn btn-sm btn-outline-secondary" })
-    </div>
+    }
 </div>
-}
 
 <!-- CKEditor -->
 <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
 <script>
     CKEDITOR.replace('MO_TA', {
-        removePlugins: 'notification'
+        removePlugins: 'notification',
+        height: 200
     });
 </script>
-
 
 <script>
     function toggleImageInput() {
         const selected = document.querySelector('input[name="chonAnh"]:checked').value;
         document.getElementById("chonAnhFile").style.display = selected === "file" ? "block" : "none";
         document.getElementById("chonAnhUrl").style.display = selected === "url" ? "block" : "none";
-        document.addEventListener('DOMContentLoaded', function () {
-            toggleImageInput();         // Cập nhật hiển thị input ảnh
-            previewImageFromUrl();      // Nếu là URL thì hiển thị
-            tinhGiaBan();               // Tính giá bán
-
-            document.getElementById('giaGoc').addEventListener('input', tinhGiaBan);
-            document.getElementById('discount').addEventListener('input', tinhGiaBan);
-        });
     }
 
     function previewImageFromFile() {
@@ -199,8 +294,8 @@
             preview.src = url;
             preview.style.display = "block";
         } else {
-            preview.src = "#";
-            preview.style.display = "none";
+            preview.src = "/Images/SanPham/default.jpg";
+            preview.style.display = "block";
         }
     }
 
@@ -219,11 +314,28 @@
     }
 
     document.addEventListener('DOMContentLoaded', function () {
+        // Khởi tạo các giá trị
         toggleImageInput();
         previewImageFromUrl();
         tinhGiaBan();
 
+        // Thêm event listeners
         document.getElementById('giaGoc').addEventListener('input', tinhGiaBan);
         document.getElementById('discount').addEventListener('input', tinhGiaBan);
     });
 </script>
+
+<style>
+    .form-control:focus {
+        border-color: #80bdff;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+    
+    .card {
+        border-radius: 0.5rem;
+    }
+    
+    .card-header {
+        border-radius: 0.5rem 0.5rem 0 0 !important;
+    }
+</style>

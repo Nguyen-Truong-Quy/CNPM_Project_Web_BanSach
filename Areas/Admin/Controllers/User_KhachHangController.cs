@@ -1,9 +1,10 @@
-﻿using CNPM_Project_web.Model;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using CNPM_Project_web.Model;
 
 namespace CNPM_Project_web.Areas.Admin.Controllers
 {
@@ -92,10 +93,14 @@ namespace CNPM_Project_web.Areas.Admin.Controllers
             return View(model);
         }
 
-
-        public ActionResult Index()
+        public ActionResult Index(string searchString, string sortOrder, string roleFilter, int? pageSize)
         {
-            var list = (from u in db.USERS
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.EmailSortParm = sortOrder == "email" ? "email_desc" : "email";
+
+            // Get all data first
+            var query = from u in db.USERS
                         join k in db.Khach_Hang on u.ID_User equals k.ID_User
                         join r in db.Roles on u.ID_ROLE equals r.ID_ROLE
                         select new UserKhachHangViewModel
@@ -110,11 +115,59 @@ namespace CNPM_Project_web.Areas.Admin.Controllers
                             SDT_KH = k.SDT_KH,
                             DIA_CHI = k.DIA_CHI,
                             ANH_DAI_DIEN = k.ANH_DAI_DIEN
-                        }).ToList();
+                        };
 
-            return View(list); // <-- kiểu đúng: List<UserKhachHangViewModel>
+            // Apply search filter
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                searchString = searchString.ToLower();
+                query = query.Where(u => 
+                    (u.HO_TEN_KH != null && u.HO_TEN_KH.ToLower().Contains(searchString)) ||
+                    (u.EMAIL != null && u.EMAIL.ToLower().Contains(searchString)) ||
+                    (u.SDT_KH != null && u.SDT_KH.ToLower().Contains(searchString)) ||
+                    (u.DIA_CHI != null && u.DIA_CHI.ToLower().Contains(searchString))
+                );
+            }
+
+            // Apply role filter
+            if (!String.IsNullOrEmpty(roleFilter))
+            {
+                if (roleFilter == "admin")
+                {
+                    query = query.Where(u => u.TEN_ROLE != null && u.TEN_ROLE.ToLower().Contains("admin"));
+                }
+                else if (roleFilter == "user")
+                {
+                    query = query.Where(u => u.TEN_ROLE != null && u.TEN_ROLE.ToLower().Contains("user"));
+                }
+            }
+
+            // Apply sorting
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    query = query.OrderByDescending(u => u.HO_TEN_KH);
+                    break;
+                case "email":
+                    query = query.OrderBy(u => u.EMAIL);
+                    break;
+                case "email_desc":
+                    query = query.OrderByDescending(u => u.EMAIL);
+                    break;
+                default:
+                    query = query.OrderBy(u => u.HO_TEN_KH);
+                    break;
+            }
+
+            // Set ViewBag values
+            ViewBag.SearchString = searchString;
+            ViewBag.RoleFilter = roleFilter;
+            ViewBag.PageSize = pageSize ?? 10;
+
+            // Execute query and return
+            var result = query.ToList();
+            return View(result);
         }
-
 
         public ActionResult Details(string id)
         {
@@ -130,7 +183,7 @@ namespace CNPM_Project_web.Areas.Admin.Controllers
                             EMAIL = u.EMAIL,
                             PASSWORD = u.PASSWORD,
                             ID_ROLE = u.ID_ROLE,
-                            TEN_ROLE = r.TEN_ROLE,  // <-- THÊM DÒNG NÀY
+                            TEN_ROLE = r.TEN_ROLE,
                             MA_KH = k.MA_KH,
                             HO_TEN_KH = k.HO_TEN_KH,
                             SDT_KH = k.SDT_KH,
@@ -142,7 +195,6 @@ namespace CNPM_Project_web.Areas.Admin.Controllers
 
             return View(data);
         }
-
 
         [HttpGet]
         public ActionResult Edit(string id)
@@ -216,68 +268,76 @@ namespace CNPM_Project_web.Areas.Admin.Controllers
             return View(model);
         }
 
-
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Delete(string id)
         {
-            var khach = db.Khach_Hang.FirstOrDefault(k => k.ID_User == id);
             var user = db.USERS.Find(id);
-
-            if (khach != null) db.Khach_Hang.Remove(khach);
-            if (user != null) db.USERS.Remove(user);
-
-            db.SaveChanges();
+            if (user != null)
+            {
+                var khach = db.Khach_Hang.FirstOrDefault(k => k.ID_User == id);
+                if (khach != null)
+                {
+                    db.Khach_Hang.Remove(khach);
+                }
+                db.USERS.Remove(user);
+                db.SaveChanges();
+            }
             return RedirectToAction("Index");
         }
 
         private void CheckValues(UserKhachHangViewModel model)
         {
-            if (string.IsNullOrWhiteSpace(model.EMAIL))
-            {
-                ModelState.AddModelError("EMAIL", "Email không được để trống");
-            }
-            else if (!model.EMAIL.EndsWith("@gmail.com"))
-            {
-                ModelState.AddModelError("EMAIL", "Email phải có đuôi @gmail.com");
-            }
-
-            if (string.IsNullOrWhiteSpace(model.PASSWORD))
-            {
-                ModelState.AddModelError("PASSWORD", "Mật khẩu không được để trống");
-            }
-            else if (model.PASSWORD.Length < 8 || !System.Text.RegularExpressions.Regex.IsMatch(model.PASSWORD, @"\d"))
-            {
-                ModelState.AddModelError("PASSWORD", "Mật khẩu phải có ít nhất 8 ký tự và chứa ít nhất 1 số");
-            }
-
-            if (model.ID_ROLE == 0)
-            {
-                ModelState.AddModelError("ID_ROLE", "Vui lòng chọn vai trò");
-            }
-
-            if (string.IsNullOrWhiteSpace(model.HO_TEN_KH))
+            if (string.IsNullOrEmpty(model.HO_TEN_KH))
             {
                 ModelState.AddModelError("HO_TEN_KH", "Họ tên không được để trống");
             }
 
-            if (string.IsNullOrWhiteSpace(model.SDT_KH))
+            if (string.IsNullOrEmpty(model.EMAIL))
+            {
+                ModelState.AddModelError("EMAIL", "Email không được để trống");
+            }
+            else if (!IsValidEmail(model.EMAIL))
+            {
+                ModelState.AddModelError("EMAIL", "Email không hợp lệ");
+            }
+
+            if (string.IsNullOrEmpty(model.SDT_KH))
             {
                 ModelState.AddModelError("SDT_KH", "Số điện thoại không được để trống");
             }
-            else if (!System.Text.RegularExpressions.Regex.IsMatch(model.SDT_KH, @"^0\d{9}$"))
-            {
-                ModelState.AddModelError("SDT_KH", "Số điện thoại phải gồm 10 chữ số và bắt đầu bằng số 0");
-            }
 
-            if (string.IsNullOrWhiteSpace(model.DIA_CHI))
+            if (string.IsNullOrEmpty(model.DIA_CHI))
             {
                 ModelState.AddModelError("DIA_CHI", "Địa chỉ không được để trống");
             }
 
-            // Tuỳ chọn bật lại nếu cần:
-            // if (string.IsNullOrWhiteSpace(model.ANH_DAI_DIEN))
-            // {
-            //     ModelState.AddModelError("ANH_DAI_DIEN", "Ảnh đại diện không được để trống");
-            // }
+            if (string.IsNullOrEmpty(model.PASSWORD))
+            {
+                ModelState.AddModelError("PASSWORD", "Mật khẩu không được để trống");
+            }
+        }
+
+        private bool IsValidEmail(string email)
+        {
+            try
+            {
+                var addr = new System.Net.Mail.MailAddress(email);
+                return addr.Address == email;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db.Dispose();
+            }
+            base.Dispose(disposing);
         }
     }
 }

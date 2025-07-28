@@ -1,37 +1,370 @@
 ﻿@model CNPM_Project_web.Model.San_Pham
+
 @{
     ViewBag.Title = "Chi tiết sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<div class="container mt-4">
-    <div class="row">
-        <div class="col-md-5">
-            <img src="@Model.HINH_ANH" class="img-fluid border" alt="@Model.TEN_SP" />
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h1 class="h3 mb-0 text-gray-800">
+                <i class="fas fa-box me-2"></i>Chi tiết sản phẩm
+            </h1>
+            <p class="text-muted">Thông tin chi tiết sản phẩm trong hệ thống</p>
         </div>
-        <div class="col-md-7">
-            <h2>@Model.TEN_SP</h2>
-            <p><strong>Tác giả:</strong> @Model.Tac_Gia.TEN_TAC_GIA</p>
-            <p><strong>Nhà xuất bản:</strong> @Model.Nha_Xuat_Ban.TEN_NXB</p>
-            <p><strong>Thể loại:</strong> @Model.The_Loai.Ten_The_Loai</p>
-            <p><strong>Tình trạng:</strong> @Model.Trang_Thai.TEN_TRANG_THAI</p>
-            <hr />
-            <p><strong>Giá gốc:</strong> <del>@Model.GIA_GOC.ToString("N0")₫</del></p>
-            <p><strong>Giảm giá:</strong> @Model.DISCOUNT%</p>
-            <h4 class="text-danger">Giá bán: @string.Format("{0:#,##0} ₫", Model.GIA_BAN)</h4>
-            <p><strong>Số lượng còn lại:</strong> @Model.TON_KHO</p>
-            <hr />
-            @Html.ActionLink("Sửa", "Edit", new { id = Model.MA_SP }, new { @class = "btn btn-primary" })
-            <a href="@Url.Action("Index", "San_Pham")" class="btn btn-secondary">Quay lại</a>
+        <div class="d-flex gap-2">
+            <button type="button" class="btn btn-outline-secondary" onclick="toggleSidebar()">
+                <i class="fas fa-bars me-2"></i>Ẩn/Hiện Menu
+            </button>
+            <a href="@Url.Action("Edit", new { id = Model.MA_SP })" class="btn btn-primary">
+                <i class="fas fa-edit me-2"></i>Chỉnh sửa
+            </a>
         </div>
     </div>
 
-    <!-- Mô tả toàn chiều ngang -->
-    <div class="row mt-4">
+    <div class="row">
         <div class="col-12">
-            <h4>Mô tả sản phẩm</h4>
-            <div class="border p-3" style="background-color:#f9f9f9;">
-                @Html.Raw(Model.MO_TA)
+            <!-- Hình ảnh và thông tin cơ bản -->
+            <div class="row mb-4">
+                <div class="col-md-4">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-info text-white">
+                            <h5 class="mb-0">
+                                <i class="fas fa-image me-2"></i>
+                                Hình ảnh sản phẩm
+                            </h5>
+                        </div>
+                        <div class="card-body text-center">
+                            <img src="@Model.HINH_ANH" class="img-fluid rounded" alt="@Model.TEN_SP" style="max-height: 400px; object-fit: contain;" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-8">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">
+                                <i class="fas fa-info-circle me-2"></i>
+                                Thông tin cơ bản
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row mb-3">
+                                <div class="col-md-3 col-sm-4">
+                                    <label class="form-label fw-bold text-muted">Mã sản phẩm:</label>
+                                </div>
+                                <div class="col-md-9 col-sm-8">
+                                    <p class="form-control-plaintext fw-bold">@Model.MA_SP</p>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-3 col-sm-4">
+                                    <label class="form-label fw-bold text-muted">Tên sản phẩm:</label>
+                                </div>
+                                <div class="col-md-9 col-sm-8">
+                                    <p class="form-control-plaintext fw-bold fs-5">@Model.TEN_SP</p>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-3 col-sm-4">
+                                    <label class="form-label fw-bold text-muted">Tác giả:</label>
+                                </div>
+                                <div class="col-md-9 col-sm-8">
+                                    <p class="form-control-plaintext fw-bold">@Model.Tac_Gia.TEN_TAC_GIA</p>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-3 col-sm-4">
+                                    <label class="form-label fw-bold text-muted">Nhà xuất bản:</label>
+                                </div>
+                                <div class="col-md-9 col-sm-8">
+                                    <p class="form-control-plaintext fw-bold">@Model.Nha_Xuat_Ban.TEN_NXB</p>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-3 col-sm-4">
+                                    <label class="form-label fw-bold text-muted">Thể loại:</label>
+                                </div>
+                                <div class="col-md-9 col-sm-8">
+                                    <p class="form-control-plaintext fw-bold">@Model.The_Loai.Ten_The_Loai</p>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-3 col-sm-4">
+                                    <label class="form-label fw-bold text-muted">Trạng thái:</label>
+                                </div>
+                                <div class="col-md-9 col-sm-8">
+                                    <span class="badge @(Model.Trang_Thai.TEN_TRANG_THAI.ToLower().Contains("còn") ? "bg-success" : "bg-danger") fs-6">
+                                        @Model.Trang_Thai.TEN_TRANG_THAI
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Thông tin giá và tồn kho -->
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-warning text-dark">
+                            <h5 class="mb-0">
+                                <i class="fas fa-tags me-2"></i>
+                                Thông tin giá
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row mb-3">
+                                <div class="col-md-4 col-sm-4">
+                                    <label class="form-label fw-bold text-muted">Giá gốc:</label>
+                                </div>
+                                <div class="col-md-8 col-sm-8">
+                                    <p class="form-control-plaintext fw-bold text-decoration-line-through">
+                                        @Model.GIA_GOC.ToString("N0")₫
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-4 col-sm-4">
+                                    <label class="form-label fw-bold text-muted">Chiết khấu:</label>
+                                </div>
+                                <div class="col-md-8 col-sm-8">
+                                    <p class="form-control-plaintext fw-bold text-danger">
+                                        @Model.DISCOUNT%
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-4 col-sm-4">
+                                    <label class="form-label fw-bold text-muted">Giá bán:</label>
+                                </div>
+                                <div class="col-md-8 col-sm-8">
+                                    <p class="form-control-plaintext fw-bold fs-4 text-danger">
+                                        @string.Format("{0:#,##0} ₫", Model.GIA_BAN)
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0">
+                                <i class="fas fa-warehouse me-2"></i>
+                                Thông tin kho
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row mb-3">
+                                <div class="col-md-4 col-sm-4">
+                                    <label class="form-label fw-bold text-muted">Số lượng tồn:</label>
+                                </div>
+                                <div class="col-md-8 col-sm-8">
+                                    <p class="form-control-plaintext fw-bold fs-4">
+                                        @Model.TON_KHO cuốn
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-4 col-sm-4">
+                                    <label class="form-label fw-bold text-muted">Danh mục:</label>
+                                </div>
+                                <div class="col-md-8 col-sm-8">
+                                    <p class="form-control-plaintext fw-bold">@Model.Danh_Muc.TEN_DANH_MUC</p>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-4 col-sm-4">
+                                    <label class="form-label fw-bold text-muted">Ngày tạo:</label>
+                                </div>
+                                <div class="col-md-8 col-sm-8">
+                                    <p class="form-control-plaintext fw-bold">@Model.NGAY_TAO.ToString("dd/MM/yyyy")</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mô tả sản phẩm -->
+            <div class="card shadow-sm mb-4">
+                <div class="card-header bg-secondary text-white">
+                    <h5 class="mb-0">
+                        <i class="fas fa-file-alt me-2"></i>
+                        Mô tả sản phẩm
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="border rounded p-4" style="background-color: #f8f9fa;">
+                        @Html.Raw(Model.MO_TA)
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex gap-2 justify-content-center">
+                        <a href="@Url.Action("Edit", new { id = Model.MA_SP })" class="btn btn-primary">
+                            <i class="fas fa-edit me-2"></i>Chỉnh sửa
+                        </a>
+                        <a href="@Url.Action("Index")" class="btn btn-secondary">
+                            <i class="fas fa-arrow-left me-2"></i>Quay lại
+                        </a>
+                        <button type="button" class="btn btn-danger" onclick="confirmDelete('@Model.MA_SP', '@Model.TEN_SP')">
+                            <i class="fas fa-trash me-2"></i>Xóa
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-danger">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    Xác nhận xóa
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Bạn có chắc chắn muốn xóa sản phẩm <strong id="deleteProductName"></strong>?</p>
+                <p class="text-muted small">Hành động này không thể hoàn tác.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    <i class="fas fa-times me-1"></i>Hủy
+                </button>
+                <form id="deleteForm" method="post" style="display: inline;">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-danger">
+                        <i class="fas fa-trash me-1"></i>Xóa
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function confirmDelete(productId, productName) {
+            $('#deleteProductName').text(productName);
+            $('#deleteForm').attr('action', '@Url.Action("Delete")/' + productId);
+            $('#deleteModal').modal('show');
+        }
+
+        function toggleSidebar() {
+            const sidebar = document.querySelector('.sidebar');
+            const mainContent = document.querySelector('.main-content');
+            
+            if (sidebar) {
+                sidebar.classList.toggle('collapsed');
+                mainContent.classList.toggle('expanded');
+            }
+        }
+
+        // Auto-hide sidebar on mobile
+        if (window.innerWidth < 768) {
+            document.addEventListener('DOMContentLoaded', function() {
+                const sidebar = document.querySelector('.sidebar');
+                if (sidebar) {
+                    sidebar.classList.add('collapsed');
+                }
+            });
+        }
+    </script>
+}
+
+<style>
+    .form-control-plaintext {
+        padding: 0.375rem 0;
+        margin-bottom: 0;
+        color: #495057;
+        background-color: transparent;
+        border: solid transparent;
+        border-width: 1px 0;
+        font-size: 1rem;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+    
+    .card {
+        border: 1px solid #e3e6f0;
+        box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+    }
+    
+    .card-header {
+        border-bottom: 1px solid rgba(0,0,0,.125);
+    }
+    
+    .text-muted {
+        color: #6c757d !important;
+    }
+    
+    .fw-bold {
+        font-weight: 600 !important;
+    }
+    
+    .fs-4 {
+        font-size: 1.5rem !important;
+    }
+    
+    .fs-5 {
+        font-size: 1.25rem !important;
+    }
+
+    /* Sidebar toggle styles */
+    .sidebar.collapsed {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+    }
+
+    .main-content.expanded {
+        margin-left: 0 !important;
+        width: 100% !important;
+        transition: all 0.3s ease;
+    }
+
+    /* Responsive text wrapping */
+    @media (max-width: 768px) {
+        .form-control-plaintext {
+            font-size: 0.9rem;
+        }
+        
+        .col-sm-4 {
+            margin-bottom: 0.5rem;
+        }
+        
+        .col-sm-8 {
+            margin-bottom: 1rem;
+        }
+    }
+
+    /* Ensure long text doesn't overflow */
+    .form-control-plaintext a,
+    .form-control-plaintext p {
+        word-break: break-word;
+        overflow-wrap: break-word;
+        max-width: 100%;
+    }
+</style>

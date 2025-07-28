@@ -160,6 +160,8 @@
     <Compile Include="Helpers\ValidationHelper.cs" />
     <Compile Include="Lib\VNPayConfig.cs" />
     <Compile Include="Lib\VnPayLibrary.cs" />
+    <Compile Include="Model\CartViewModel.cs" />
+    <Compile Include="Model\CheckoutViewModel.cs" />
     <Compile Include="Model\Chi_Tiet_Don_Hang.cs">
       <DependentUpon>CNPM_Model.tt</DependentUpon>
     </Compile>
@@ -244,6 +246,7 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="CSS\CreateProduct.css" />
+    <Content Include="CSS\DetailsUser.css" />
     <Content Include="CSS\Login.css" />
     <Content Include="CSS\Register.css" />
     <Content Include="favicon.ico" />
@@ -348,6 +351,7 @@
     <Content Include="Views\Order\NhapThongTinDatHang.cshtml" />
     <Content Include="Views\Order\XacNhanThanhToan.cshtml" />
     <Content Include="Views\Cart\ThongBaoChuaDangNhap.cshtml" />
+    <Content Include="Views\Order\DatHangTuChon.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
