@@ -73,9 +73,16 @@
                     <span>User & Khách hàng</span>
                 </a>
             </li>
-            
+            <li class="nav-item">
+                <a class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "ThanhToan" ? "active" : "")"
+                   href="@Url.Action("DanhSach", "ThanhToan")">
+                    <i class="fas fa-users"></i>
+                    <span>Xác nhận thanh toán</span>
+                </a>
+            </li>
+
             <hr>
-            
+
             <li class="nav-item">
                 <a class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "Home" && ViewContext.RouteData.Values["area"] == null ? "active" : "")"
                    href="@Url.Action("Index", "Home", new { area = "" })">
@@ -107,13 +114,25 @@
             </div>
             
             <div class="header-right">
-                <div class="user-menu">
-                    <div class="user-avatar">
-                        <i class="fas fa-user"></i>
+                @if (Session["UserId"] != null)
+                {
+                    <div class="dropdown">
+                        <button class="btn btn-light dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user"></i> @Session["Email"]
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <li><a class="dropdown-item" href="@Url.Action("Profile", "User")">Thông tin tài khoản</a></li>
+                            <li><a class="dropdown-item text-danger" href="@Url.Action("Logout", "Users", new { area = "" })">Đăng xuất</a></li>
+                        </ul>
                     </div>
-                    <span>Admin</span>
-                    <i class="fas fa-chevron-down"></i>
-                </div>
+                }
+                else
+                {
+            <a href="@Url.Action("Login", "Users", new { area = "" })" class="btn btn-outline-primary">
+                <i class="fas fa-sign-in-alt"></i> Đăng nhập
+            </a>
+                }
+
             </div>
         </header>
 
