@@ -1,8 +1,10 @@
 ﻿using CNPM_Project_web.Model;
 using System;
+using System.Data.Entity.Infrastructure;
 using System.IO;
 using System.Linq;
 using System.Web;
+using System.Data.Entity.Infrastructure;
 using System.Web.Mvc;
 
 namespace CNPM_Project_web.Areas.Admin.Controllers
@@ -175,61 +177,68 @@ namespace CNPM_Project_web.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(UserKhachHangViewModel model, HttpPostedFileBase AnhUpload)
         {
-            CheckValues(model);
-            ViewBag.RoleList = new SelectList(db.Roles.ToList(), "ID_ROLE", "TEN_ROLE", model.ID_ROLE);
-
             if (ModelState.IsValid)
             {
                 var user = db.USERS.Find(model.ID_User);
-                if (user != null)
+                var kh = db.Khach_Hang.Find(model.MA_KH);
+
+                if (user != null && kh != null)
                 {
-                    user.EMAIL = model.EMAIL;
                     user.PASSWORD = model.PASSWORD;
                     user.ID_ROLE = model.ID_ROLE;
-                }
 
-                var khach = db.Khach_Hang.FirstOrDefault(k => k.ID_User == model.ID_User);
-                if (khach != null)
-                {
-                    khach.HO_TEN_KH = model.HO_TEN_KH;
-                    khach.SDT_KH = model.SDT_KH;
-                    khach.DIA_CHI = model.DIA_CHI;
-                    khach.EMAIL = model.EMAIL;
+                    kh.HO_TEN_KH = model.HO_TEN_KH;
+                    kh.SDT_KH = model.SDT_KH;
+                    kh.DIA_CHI = model.DIA_CHI;
 
+                    // Xử lý ảnh đại diện mới nếu có upload
                     if (AnhUpload != null && AnhUpload.ContentLength > 0)
                     {
                         string fileName = Path.GetFileName(AnhUpload.FileName);
-                        string folderPath = Server.MapPath("~/Content/Uploads/KhachHang/");
-                        if (!Directory.Exists(folderPath)) Directory.CreateDirectory(folderPath);
-
-                        string filePath = Path.Combine(folderPath, fileName);
-                        AnhUpload.SaveAs(filePath);
-
-                        khach.ANH_DAI_DIEN = "/Content/Uploads/KhachHang/" + fileName;
+                        string path = Path.Combine(Server.MapPath("~/Content/Upload/KhachHang"), fileName);
+                        AnhUpload.SaveAs(path);
+                        kh.ANH_DAI_DIEN = "~/Content/Upload/KhachHang" + fileName;
                     }
+
+                    db.SaveChanges();
+                    TempData["Success"] = "Cập nhật người dùng thành công!";
+                    return RedirectToAction("Index");
                 }
 
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                ModelState.AddModelError("", "Không tìm thấy người dùng.");
             }
 
+         
             return View(model);
         }
 
 
-        public ActionResult Delete(string id)
-        {
-            var khach = db.Khach_Hang.FirstOrDefault(k => k.ID_User == id);
-            var user = db.USERS.Find(id);
 
+     // thêm ở đầu file
+
+        public ActionResult Delete(string id)
+            {
+        var khach = db.Khach_Hang.FirstOrDefault(k => k.ID_User == id);
+        var user = db.USERS.Find(id);
+
+        try
+        {
             if (khach != null) db.Khach_Hang.Remove(khach);
             if (user != null) db.USERS.Remove(user);
-
             db.SaveChanges();
-            return RedirectToAction("Index");
+            TempData["Success"] = "Xóa khách hàng thành công.";
+        }
+        catch (DbUpdateException)
+        {
+            // vài trường hợp: nếu còn Don_Hang tham chiếu tới MA_KH
+            TempData["Error"] = "Không thể xóa khách hàng này vì còn đơn hàng liên quan.";
         }
 
-        private void CheckValues(UserKhachHangViewModel model)
+        return RedirectToAction("Index");
+    }
+
+
+    private void CheckValues(UserKhachHangViewModel model)
         {
             if (string.IsNullOrWhiteSpace(model.EMAIL))
             {
@@ -280,4 +289,5 @@ namespace CNPM_Project_web.Areas.Admin.Controllers
             // }
         }
     }
+
 }

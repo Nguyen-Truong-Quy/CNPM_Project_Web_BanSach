@@ -10,7 +10,7 @@ using CNPM_Project_web.Model;
 
 namespace CNPM_Project_web.Areas.Admin.Controllers
 {
-    public class Don_HangController : Controller
+    public class Don_HangAdminController : Controller
     {
         private Web_Entities db = new Web_Entities();
 

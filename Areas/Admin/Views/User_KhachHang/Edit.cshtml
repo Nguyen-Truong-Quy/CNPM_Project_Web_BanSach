@@ -17,13 +17,14 @@
         <div class="col-md-6">
             <h5 class="text-primary font-weight-bold">Tài khoản người dùng</h5>
 
-           
+
 
             <div class="form-group">
                 <label>Mật khẩu</label>
-                @Html.PasswordFor(m => m.PASSWORD, new { @class = "form-control", placeholder = "Nhập mật khẩu" })
+                @Html.TextBoxFor(m => m.PASSWORD, new { @class = "form-control", @type = "password", placeholder = "Nhập mật khẩu mới (nếu cần)" })
                 @Html.ValidationMessageFor(m => m.PASSWORD, "", new { @class = "text-danger" })
             </div>
+
 
             <div class="form-group">
                 <label>Vai trò</label>
