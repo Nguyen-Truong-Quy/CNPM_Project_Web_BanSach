@@ -100,6 +100,74 @@ namespace CNPM_Project_web.Controllers
             // 8. Chuyển sang trang xác nhận
             return RedirectToAction("XacNhanDonHang", new { id = dh.ID_DON_HANG });
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DatHangTuGio(string[] chonSP)
+        {
+            var userId = Session["UserId"]?.ToString();
+            if (string.IsNullOrEmpty(userId))
+                return RedirectToAction("Login", "Users");
+
+            var kh = db.Khach_Hang.FirstOrDefault(k => k.ID_User == userId);
+            if (kh == null)
+                return RedirectToAction("Create", "Users");
+
+            if (chonSP == null || chonSP.Length == 0)
+            {
+                TempData["ErrorMessage"] = "Vui lòng chọn ít nhất 1 sản phẩm để đặt hàng.";
+                return RedirectToAction("XemGioHang", "Cart");
+            }
+
+            var gioHang = db.Gio_Hang
+                            .Include(g => g.San_Pham)
+                            .Where(g => g.MA_KH == kh.MA_KH && chonSP.Contains(g.MA_SP))
+                            .ToList();
+
+            if (gioHang == null || !gioHang.Any())
+            {
+                TempData["ErrorMessage"] = "Không tìm thấy sản phẩm nào hợp lệ trong giỏ hàng.";
+                return RedirectToAction("XemGioHang", "Cart");
+            }
+
+            decimal tongTien = 0;
+            foreach (var item in gioHang)
+            {
+                if (item.San_Pham.GIA_BAN == null || item.San_Pham.TON_KHO < item.SO_LUONG)
+                {
+                    TempData["ErrorMessage"] = $"Sản phẩm {item.San_Pham.TEN_SP} không đủ tồn kho hoặc chưa có giá bán.";
+                    return RedirectToAction("XemGioHang", "Cart");
+                }
+                tongTien += item.San_Pham.GIA_BAN.Value * item.SO_LUONG;
+            }
+
+            var dh = new Don_Hang
+            {
+                MA_KH = kh.MA_KH,
+                TG_DAT_HANG = DateTime.Now,
+                ID_TRANG_THAI = db.Trang_Thai.First(t => t.TEN_TRANG_THAI == "Mới").ID_TRANG_THAI,
+                TONG_TIEN = tongTien
+            };
+            db.Don_Hang.Add(dh);
+            db.SaveChanges();
+
+            foreach (var item in gioHang)
+            {
+                db.Chi_Tiet_Don_Hang.Add(new Chi_Tiet_Don_Hang
+                {
+                    ID_DON_HANG = dh.ID_DON_HANG,
+                    MA_SP = item.MA_SP,
+                    SO_LUONG = item.SO_LUONG,
+                    GIA_BAN = item.San_Pham.GIA_BAN.Value
+                });
+
+                item.San_Pham.TON_KHO -= item.SO_LUONG;
+                db.Gio_Hang.Remove(item);
+            }
+
+            db.SaveChanges();
+            return RedirectToAction("XacNhanDonHang", "Don_Hang", new { id = dh.ID_DON_HANG });
+        }
+
 
 
         // GET: Don_Hang/XacNhanDonHang/5
@@ -139,28 +207,37 @@ namespace CNPM_Project_web.Controllers
                 Directory.CreateDirectory(folder);
             ImageUpload.SaveAs(Path.Combine(folder, fileName));
 
+            // Lấy đơn hàng
+            var donHang = db.Don_Hang.Find(idDonHang);
+            if (donHang == null)
+            {
+                TempData["Error"] = "Không tìm thấy đơn hàng.";
+                return RedirectToAction("DanhSachDonHang");
+            }
+
             // Tạo bản ghi ThanhToan
             var tt = new ThanhToan
             {
                 ID_DON_HANG = idDonHang,
                 ID_PHUONG_THUC = 1,
-                GIA_BAN = db.Don_Hang.Find(idDonHang).TONG_TIEN,
+                GIA_BAN = donHang.TONG_TIEN,
                 ID_TRANG_THAI = db.Trang_Thai
                                    .First(t => t.TEN_TRANG_THAI == "Chờ xác nhận")
                                    .ID_TRANG_THAI,
-                AnhThanhToan = "/Image/ThanhToan/" + fileName
+                AnhThanhToan = "/Image/ThanhToan/" + fileName,
+                ThoiGianThanhToan = donHang.TG_DAT_HANG // ✅ Gán đúng
             };
             db.ThanhToans.Add(tt);
 
             // Cập nhật trạng thái đơn
-            var dh = db.Don_Hang.Find(idDonHang);
-            dh.ID_TRANG_THAI = tt.ID_TRANG_THAI;
+            donHang.ID_TRANG_THAI = tt.ID_TRANG_THAI;
 
             db.SaveChanges();
 
             TempData["Success"] = "Gửi xác nhận thanh toán thành công!";
             return RedirectToAction("ChiTietDonHang", new { id = idDonHang });
         }
+
 
         // GET: Don_Hang/ChiTietDonHang/5
         public ActionResult ChiTietDonHang(int id)

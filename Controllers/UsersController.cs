@@ -112,31 +112,38 @@ namespace CNPM_Project_web.Controllers
         [HttpGet]
         public ActionResult Login()
         {
-            // Nếu đã có session, vào thẳng
             if (Session["UserId"] != null)
             {
-                var role = (int)Session["Role"];
-                if (role == 1)
+                int role = (int)Session["Role"];
+                if (role == 5)
                     return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
                 return RedirectToAction("TrangChu", "Home");
             }
 
-            // Nếu có cookie nhưng session mất (reload), thì refill session
             var cookie = Request.Cookies["UserInfo"];
             if (cookie != null && !string.IsNullOrEmpty(cookie["UserId"]))
             {
-                Session["UserId"] = cookie["UserId"];
+                var userIdFromCookie = cookie["UserId"];
+
+                Session["UserId"] = userIdFromCookie;
                 Session["Email"] = cookie["Email"];
                 Session["Role"] = int.Parse(cookie["Role"] ?? "2");
 
-                var role = (int)Session["Role"];
-                if (role == 1)
-                    return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+                var kh = db.Khach_Hang.FirstOrDefault(k => k.ID_User == userIdFromCookie);
+                if (kh != null)
+                    Session["CustomerId"] = kh.MA_KH;
+
+                int role = (int)Session["Role"];
+                if (role == 5)
+                    return RedirectToAction("Index", "San_Pham", new { area = "Admin" });
+
                 return RedirectToAction("TrangChu", "Home");
             }
 
+
             return View();
         }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -145,13 +152,10 @@ namespace CNPM_Project_web.Controllers
             if (!ModelState.IsValid)
                 return View(model);
 
-            // Chuẩn hóa đầu vào
             var emailInput = model.Email?.Trim().ToLower();
             var pwdInput = model.Password?.Trim();
 
-            // Tìm user không phân biệt hoa–thường
-            var user = db.USERS
-                        .FirstOrDefault(u => u.EMAIL.ToLower() == emailInput);
+            var user = db.USERS.FirstOrDefault(u => u.EMAIL.ToLower() == emailInput);
 
             if (user == null || user.PASSWORD.Trim() != pwdInput)
             {
@@ -159,10 +163,13 @@ namespace CNPM_Project_web.Controllers
                 return View(model);
             }
 
-            // Tạo session + cookie
             Session["UserId"] = user.ID_User;
             Session["Email"] = user.EMAIL;
             Session["Role"] = user.ID_ROLE;
+
+            var kh = db.Khach_Hang.FirstOrDefault(k => k.ID_User == user.ID_User);
+            if (kh != null)
+                Session["CustomerId"] = kh.MA_KH;
 
             var loginCookie = new HttpCookie("UserInfo")
             {
@@ -174,11 +181,13 @@ namespace CNPM_Project_web.Controllers
             };
             Response.Cookies.Add(loginCookie);
 
-            // Redirect theo role
-            if (user.ID_ROLE == 1)
-                return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
-            return RedirectToAction("TrangChu", "Home");
+            // ✅ Redirect theo Role
+            if (user.ID_ROLE == 5) // Quản trị viên
+                return RedirectToAction("Index", "San_Pham", new { area = "Admin" });
+
+            return RedirectToAction("TrangChu", "Home"); // Người dùng thường
         }
+
 
         public ActionResult Logout()
         {

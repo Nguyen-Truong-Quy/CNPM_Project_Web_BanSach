@@ -38,11 +38,11 @@
                 <div class="fw-bold">@Model.TON_KHO</div>
             </div>
         </div>
-        <div class="d-flex gap-2 mt-auto">
+        <div class="d-flex gap-2 mt-2">
             <a href="@Url.Action("ProductDetails", "Products", new { id = Model.MA_SP })" class="btn btn-outline-info btn-sm w-100">
                 <i class="fas fa-eye me-1"></i>Chi tiết
             </a>
-            <form action="@Url.Action("ThemGioHang","Cart")" method="post" class="w-50">
+            <form action="@Url.Action("MuaNgay","Don_Hang")" method="post" class="w-50">
                 <input type="hidden" name="maSP" value="@Model.MA_SP" />
                 <input type="hidden" name="soLuong" value="1" />
                 <button type="submit" class="btn btn-primary btn-sm w-100">

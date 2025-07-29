@@ -1,0 +1,36 @@
+﻿@model CNPM_Project_web.Model.ThanhToan
+@{
+    ViewBag.Title = "ChiTiet";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h3>Chi tiết thanh toán</h3>
+
+<table class="table table-striped">
+    <tr><th>Mã đơn hàng:</th><td>@Model.ID_DON_HANG</td></tr>
+    <tr><th>Phương thức:</th><td>@Model.Phuong_Thuc_Thanh_Toan.TEN_PHUONG_THUC</td></tr>
+    <tr><th>Số tiền:</th><td>@Model.GIA_BAN?.ToString("N0") ₫</td></tr>
+    <tr><th>Thời gian:</th><td>@Model.ThoiGianThanhToan?.ToString("dd/MM/yyyy HH:mm")</td></tr>
+    <tr><th>Trạng thái:</th><td>@Model.Trang_Thai.TEN_TRANG_THAI</td></tr>
+    <tr>
+        <th>Ảnh thanh toán:</th>
+        <td>
+            @if (!string.IsNullOrEmpty(Model.AnhThanhToan))
+            {
+                <img src="@Model.AnhThanhToan" alt="Ảnh hóa đơn" style="max-height:300px;" />
+            }
+            else
+            {
+                <span>Không có ảnh.</span>
+            }
+        </td>
+    </tr>
+</table>
+
+<div class="d-flex gap-2 mt-4">
+    <form method="post" action="@Url.Action("XacNhan", new { id = Model.ID_THANHTOAN })">
+        <button class="btn btn-success" type="submit">✔ Xác nhận thanh toán</button>
+    </form>
+    <a href="@Url.Action("DanhSach")" class="btn btn-secondary">↩ Quay lại</a>
+</div>
+

@@ -20,19 +20,17 @@ using CNPM_Project_web.Model;
         // GET: Cart
         public ActionResult XemGioHang()
         {
-            if (Session["CustomerId"] == null)
+            var maKH = Session["CustomerId"]?.ToString();
+            if (string.IsNullOrEmpty(maKH))
             {
-                // Lưu lại URL gốc để chuyển về sau khi đăng nhập
-                Session["ReturnUrl"] = Url.Action("XemGioHang", "Cart");
-
-                // Chuyển sang trang đăng nhập
+                TempData["ErrorMessage"] = "Bạn chưa đăng nhập. (Session null)";
                 return RedirectToAction("Login", "Users");
             }
 
-            string maKH = Session["CustomerId"].ToString();
             var gio = db.Gio_Hang.Where(g => g.MA_KH == maKH).ToList();
             return View(gio);
         }
+
 
 
 

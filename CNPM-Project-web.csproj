@@ -149,6 +149,7 @@
     <Compile Include="Areas\Admin\Controllers\RolesController.cs" />
     <Compile Include="Areas\Admin\Controllers\San_PhamController.cs" />
     <Compile Include="Areas\Admin\Controllers\Tac_GiaController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ThanhToanController.cs" />
     <Compile Include="Areas\Admin\Controllers\The_Loai_AdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\Trang_Thai_AdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\User_KhachHangController.cs" />
@@ -352,6 +353,8 @@
     <Content Include="Areas\Admin\Views\Don_HangAdmin\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Don_HangAdmin\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Don_HangAdmin\_DonHangDetailsPartial.cshtml" />
+    <Content Include="Areas\Admin\Views\ThanhToan\DanhSach.cshtml" />
+    <Content Include="Areas\Admin\Views\ThanhToan\ChiTiet.cshtml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />

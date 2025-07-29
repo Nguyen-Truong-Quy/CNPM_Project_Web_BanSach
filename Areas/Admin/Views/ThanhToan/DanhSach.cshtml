@@ -1,0 +1,56 @@
+﻿@model List<CNPM_Project_web.Model.ThanhToan>
+@{
+    ViewBag.Title = "DanhSach";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+@{
+    ViewBag.Title = "Quản lý thanh toán";
+}
+
+<h3>Danh sách hóa đơn thanh toán</h3>
+
+<form method="get" class="row mb-3">
+    <div class="col-md-3">
+        <label>Từ ngày</label>
+        <input type="date" name="tuNgay" class="form-control" value="@Request["tuNgay"]" />
+    </div>
+    <div class="col-md-3">
+        <label>Đến ngày</label>
+        <input type="date" name="denNgay" class="form-control" value="@Request["denNgay"]" />
+    </div>
+    <div class="col-md-3">
+        <label>Trạng thái</label>
+        @Html.DropDownList("trangThai", (SelectList)ViewBag.ListTrangThai, "-- Tất cả --", new { @class = "form-control" })
+    </div>
+    <div class="col-md-3 d-flex align-items-end">
+        <button type="submit" class="btn btn-primary">Lọc</button>
+    </div>
+</form>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID Hóa đơn</th>
+            <th>Đơn hàng</th>
+            <th>Trạng thái</th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ID_THANHTOAN</td>
+                <td>@item.ID_DON_HANG</td>
+                <td>@item.Trang_Thai.TEN_TRANG_THAI</td>
+                <td>
+                    <a href="@Url.Action("ChiTiet", new { id = item.ID_THANHTOAN })" class="btn btn-info btn-sm">Chi tiết</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
