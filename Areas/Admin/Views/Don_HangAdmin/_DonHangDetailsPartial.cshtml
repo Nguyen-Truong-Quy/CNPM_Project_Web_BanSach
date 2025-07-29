@@ -1,0 +1,52 @@
+﻿@model CNPM_Project_web.Model.Don_Hang
+
+@{
+    // Logic xác định hành động và trạng thái tiếp theo (giữ nguyên)
+    string nextActionText = "";
+    bool canUpdate = false;
+    switch (Model.ID_TRANG_THAI)
+    {
+        case 2: nextActionText = "Xác nhận & Giao hàng"; canUpdate = true; break;
+        case 3: nextActionText = "Bắt đầu giao hàng"; canUpdate = true; break;
+        case 4: nextActionText = "Xác nhận đã giao"; canUpdate = true; break;
+    }
+}
+
+<div class="container-fluid">
+    <h4>Chi tiết đơn hàng #@Model.ID_DON_HANG</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-6">
+            <p><strong>Khách hàng:</strong> @Model.Khach_Hang.HO_TEN_KH</p>
+            <p><strong>Số điện thoại:</strong> @Model.Khach_Hang.SDT_KH</p>
+            <p><strong>Địa chỉ giao hàng:</strong> @Model.Khach_Hang.DIA_CHI</p>
+        </div>
+        <div class="col-md-6">
+            <p><strong>Ngày đặt:</strong> @Model.TG_DAT_HANG.Value.ToString("dd/MM/yyyy HH:mm")</p>
+            <p><strong>Tổng tiền:</strong> @Model.TONG_TIEN.ToString("N0") VNĐ</p>
+
+            <!-- ================================================================ -->
+            <!-- DÒNG TRẠNG THÁI ĐÃ ĐƯỢC SỬA LẠI -->
+            <!-- ================================================================ -->
+            <p>
+                <strong>Trạng thái hiện tại:</strong>
+                @if (Model.Trang_Thai != null)
+                {
+                    <span class="badge text-bg-info">@Model.Trang_Thai.TEN_TRANG_THAI</span>
+                }
+                else
+                {
+                    <span class="badge text-bg-secondary">Không xác định</span>
+                }
+            </p>
+        </div>
+    </div>
+
+    <h5>Các sản phẩm trong đơn:</h5>
+    <table class="table table-bordered table-sm">
+        <!-- ... Giữ nguyên phần bảng sản phẩm ... -->
+    </table>
+</div>
+
+<!-- Div truyền dữ liệu (giữ nguyên) -->
+<div id="modal-action-data" data-order-id="@Model.ID_DON_HANG" data-can-update="@canUpdate.ToString().ToLower()" data-next-action-text="@nextActionText"></div>

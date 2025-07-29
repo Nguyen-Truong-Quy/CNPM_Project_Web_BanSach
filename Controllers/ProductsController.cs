@@ -26,10 +26,11 @@ namespace CNPM_Project_web.Controllers
         }
         public ActionResult ProductDetails(string id)
         {
-            var sanPham = db.San_Pham.Find(id);
-            if (sanPham == null || sanPham.Trang_Thai.TEN_TRANG_THAI != "Bình thường")
+            var sp = db.San_Pham.FirstOrDefault(x => x.MA_SP == id);
+            if (sp == null)
                 return HttpNotFound();
-            return View(sanPham); // View tên ProductDetails.cshtml
+
+            return View(sp);
         }
 
     }

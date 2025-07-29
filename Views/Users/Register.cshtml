@@ -1,4 +1,8 @@
 ﻿@model CNPM_Project_web.Model.RegisterViewModel
+    @{ 
+        Layout = null;
+    }
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,15 +36,15 @@
 
             @if (!ViewData.ModelState.IsValid)
             {
-            <div class="validation-summary-errors">
-                <i class='bx bx-error-circle'></i>
-                <ul>
-                    @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
-                    {
-                        <li>@error.ErrorMessage</li>
-                    }
-                </ul>
-            </div>
+                <div class="validation-summary-errors">
+                    <i class='bx bx-error-circle'></i>
+                    <ul>
+                        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                        {
+                            <li>@error.ErrorMessage</li>
+                        }
+                    </ul>
+                </div>
             }
         </div>
 
@@ -61,12 +65,11 @@
                 <i class='bx bx-lock-alt icon'></i>
                 @Html.ValidationMessageFor(m => m.Password, "", new { @class = "field-validation-error" })
             </div>
-
-            <div class="form-cols">
-                <div class="col-1">
-                    <input type="checkbox" id="agree" name="agree" required />
-                    <label for="agree">Tôi đồng ý với <a href="#" style="color: var(--accent-color);">Điều khoản & Điều kiện</a></label>
-                </div>
+            <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" id="agree" required />
+                <label class="form-check-label" for="agree">
+                    Tôi đồng ý với <a href="#" class="link-success">Điều khoản &amp; Điều kiện</a>
+                </label>
             </div>
 
             if (ViewBag.ShowOtpBox == true)
@@ -118,6 +121,7 @@
                         this.parentElement.classList.remove('focused');
                     }
                 });
+
             });
 
             // Auto-focus OTP field if visible

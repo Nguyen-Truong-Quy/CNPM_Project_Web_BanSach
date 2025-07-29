@@ -10,5 +10,6 @@ obj/
 *.cache
 *.pdb
 *.dll
+packages/
 
 

@@ -1,0 +1,50 @@
+﻿@model IEnumerable<CNPM_Project_web.Model.UserKhachHangViewModel>
+
+@{
+    //Layout = "~/Views/Shared/_Layout.cshtml"; // Dùng layout chính
+    ViewBag.Title = "Danh sách người dùng (Admin)";
+}
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2><i class="bx bx-user"></i> Danh sách nhân viên bán hàng trong hệ thống</h2>
+        <a href="@Url.Action("Create")" class="btn btn-success">
+            <i class="bx bx-plus"></i> Thêm mới
+        </a>
+    </div>
+
+    <table class="table table-bordered table-hover table-striped shadow-sm">
+        <thead class="table-dark">
+            <tr>
+                <th>Email</th>
+                <th>Mật khẩu</th>
+                <th>Vai trò</th>
+                <th class="text-center">Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.EMAIL</td>
+                    <td>@item.PASSWORD</td>
+                    <td>@item.TEN_ROLE</td>
+                    <td class="text-center">
+                        <a href="@Url.Action("Edit", new { id = item.ID_User })" class="btn btn-sm btn-primary me-1">
+                            <i class="bx bx-edit"></i> Sửa
+                        </a>
+                        <a href="@Url.Action("Details", new { id = item.ID_User })" class="btn btn-sm btn-info me-1">
+                            <i class="bx bx-show"></i> Xem
+                        </a>
+                        <a href="@Url.Action("Delete", new { id = item.ID_User })" class="btn btn-sm btn-danger"
+                           onclick="return confirm('Bạn chắc chắn muốn xóa?')">
+                            <i class="bx bx-trash"></i> Xóa
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

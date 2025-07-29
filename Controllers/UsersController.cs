@@ -218,6 +218,201 @@ namespace CNPM_Project_web.Controllers
 
             return View(khach);
         }
+        [HttpGet]
+        public ActionResult ForgotPassword()
+        {
+            return View(new ForgotPasswordViewModel());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ForgotPassword(ForgotPasswordViewModel model)
+        {
+            var email = model.Email?.Trim().ToLower();
+            var user = db.USERS.FirstOrDefault(u => u.EMAIL.ToLower() == email);
+
+            if (user == null)
+            {
+                ModelState.AddModelError("", "Email không tồn tại.");
+                return View(model);
+            }
+
+            // Nếu chưa nhập OTP → gửi OTP
+            if (string.IsNullOrEmpty(model.OTP) && string.IsNullOrEmpty(model.NewPassword))
+            {
+                var otp = new Random().Next(100000, 999999).ToString();
+                TempData["OTP"] = otp;
+                TempData["Email"] = email;
+                TempData.Keep();
+
+                try
+                {
+                    EmailService.SendOtp(email, otp);
+                    ViewBag.ShowOtpBox = true;
+                    ViewBag.SuccessMessage = "Mã OTP đã được gửi đến email của bạn.";
+                }
+                catch
+                {
+                    ModelState.AddModelError("", "Không thể gửi OTP. Vui lòng thử lại.");
+                }
+
+                return View(model);
+            }
+
+            // Nếu nhập OTP nhưng chưa có mật khẩu mới
+            if (!string.IsNullOrEmpty(model.OTP) && string.IsNullOrEmpty(model.NewPassword))
+            {
+                var otpFromTemp = TempData["OTP"] as string;
+                if (model.OTP == otpFromTemp)
+                {
+                    ViewBag.ShowOtpBox = true;
+                    ViewBag.ShowPasswordBox = true;
+                    TempData["OTP_Validated"] = true;
+                    TempData.Keep();
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Mã OTP không chính xác.");
+                    ViewBag.ShowOtpBox = true;
+                }
+
+                return View(model);
+            }
+
+            // Nhập mật khẩu mới sau khi đúng OTP
+            if (TempData["OTP_Validated"]?.ToString() == "True")
+            {
+                user.PASSWORD = model.NewPassword.Trim();
+                db.SaveChanges();
+                TempData["SuccessMessage"] = "Mật khẩu đã được cập nhật.";
+                return RedirectToAction("Login");
+            }
+
+            ModelState.AddModelError("", "Vui lòng thực hiện đúng quy trình.");
+            return View(model);
+        }
+        [HttpGet]
+        public ActionResult Chinh_Sua_Thong_Tin()
+        {
+            if (Session["UserId"] == null)
+                return RedirectToAction("Login", "Users");
+
+            var idUser = Session["UserId"].ToString();
+            var khach = db.Khach_Hang.FirstOrDefault(k => k.ID_User == idUser);
+
+            if (khach == null)
+                return RedirectToAction("Create", "Users");
+
+            var model = new UserKhachHangViewModel1
+            {
+                ID_User = khach.ID_User,
+                HO_TEN_KH = khach.HO_TEN_KH,
+                SDT_KH = khach.SDT_KH,
+                DIA_CHI = khach.DIA_CHI,
+                ANH_DAI_DIEN = khach.ANH_DAI_DIEN
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Chinh_Sua_Thong_Tin(UserKhachHangViewModel1 model, HttpPostedFileBase AnhUpload)
+        {
+            CheckValues(model, true);
+            if (!ModelState.IsValid)
+                return View(model);
+
+            if (Session["UserId"] == null || model.ID_User != Session["UserId"].ToString())
+                return RedirectToAction("Login", "Users");
+
+            // Kiểm tra hợp lệ các trường khách hàng
+            if (string.IsNullOrWhiteSpace(model.HO_TEN_KH))
+                ModelState.AddModelError("HO_TEN_KH", "Họ tên không được để trống");
+            if (string.IsNullOrWhiteSpace(model.SDT_KH) || !System.Text.RegularExpressions.Regex.IsMatch(model.SDT_KH, @"^0\d{9}$"))
+                ModelState.AddModelError("SDT_KH", "Số điện thoại phải gồm 10 số và bắt đầu bằng 0");
+            if (string.IsNullOrWhiteSpace(model.DIA_CHI))
+                ModelState.AddModelError("DIA_CHI", "Địa chỉ không được để trống");
+
+            if (!ModelState.IsValid)
+                return View(model);
+
+            var khach = db.Khach_Hang.FirstOrDefault(k => k.ID_User == model.ID_User);
+            if (khach == null)
+                return HttpNotFound();
+
+            khach.HO_TEN_KH = model.HO_TEN_KH;
+            khach.SDT_KH = model.SDT_KH;
+            khach.DIA_CHI = model.DIA_CHI;
+
+            if (AnhUpload != null && AnhUpload.ContentLength > 0)
+            {
+                var fileName = System.IO.Path.GetFileName(AnhUpload.FileName);
+                var path = System.IO.Path.Combine(Server.MapPath("~/Content/Uploads"), fileName);
+                AnhUpload.SaveAs(path);
+                khach.ANH_DAI_DIEN = "~/Content/Uploads/" + fileName;
+            }
+
+            db.SaveChanges();
+            TempData["SuccessMessage"] = "Cập nhật thông tin thành công.";
+            return RedirectToAction("Ho_So_Khach_Hang");
+        }
+
+
+
+        private void CheckValues(UserKhachHangViewModel1 model, bool isEdit = false)
+        {
+            if (!isEdit) // Kiểm tra khi tạo mới (tức là cần check email + password)
+            {
+                if (string.IsNullOrWhiteSpace(model.EMAIL))
+                {
+                    ModelState.AddModelError("EMAIL", "Email không được để trống");
+                }
+                else if (!model.EMAIL.EndsWith("@gmail.com"))
+                {
+                    ModelState.AddModelError("EMAIL", "Email phải có đuôi @gmail.com");
+                }
+
+                if (string.IsNullOrWhiteSpace(model.PASSWORD))
+                {
+                    ModelState.AddModelError("PASSWORD", "Mật khẩu không được để trống");
+                }
+                else if (model.PASSWORD.Length < 8 || !System.Text.RegularExpressions.Regex.IsMatch(model.PASSWORD, @"\\d"))
+                {
+                    ModelState.AddModelError("PASSWORD", "Mật khẩu phải có ít nhất 8 ký tự và chứa ít nhất 1 số");
+                }
+
+                if (model.ID_ROLE == 0)
+                {
+                    ModelState.AddModelError("ID_ROLE", "Vui lòng chọn vai trò");
+                }
+            }
+
+            if (string.IsNullOrWhiteSpace(model.HO_TEN_KH))
+            {
+                ModelState.AddModelError("HO_TEN_KH", "Họ tên không được để trống");
+            }
+
+            if (string.IsNullOrWhiteSpace(model.SDT_KH))
+            {
+                ModelState.AddModelError("SDT_KH", "Số điện thoại không được để trống");
+            }
+            else if (!System.Text.RegularExpressions.Regex.IsMatch(model.SDT_KH, @"^0\d{9}$"))
+            {
+                ModelState.AddModelError("SDT_KH", "Số điện thoại phải gồm 10 chữ số và bắt đầu bằng số 0");
+            }
+
+            if (string.IsNullOrWhiteSpace(model.DIA_CHI))
+            {
+                ModelState.AddModelError("DIA_CHI", "Địa chỉ không được để trống");
+            }
+
+            // Nếu cần ảnh bắt buộc:
+            // if (string.IsNullOrWhiteSpace(model.ANH_DAI_DIEN))
+            // {
+            //     ModelState.AddModelError("ANH_DAI_DIEN", "Ảnh đại diện không được để trống");
+            // }
+        }
 
     }
 }

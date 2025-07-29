@@ -357,3 +357,34 @@ body {
     outline: 2px solid var(--accent-color);
     outline-offset: 2px;
 }
+/* Biến wrapper thành cột flex */
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    /* nếu muốn full viewport: thêm height:100vh; */
+}
+
+/* Form chính là flex container */
+.register-form {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* chiếm hết không gian có thể */
+}
+
+/* Phần thân form (inputs) chiếm không gian trên */
+.form-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px; /* khe giữa các input */
+}
+
+/* Phần footer (nút + link) luôn ở đáy */
+.form-footer {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Giữ nguyên style cũ cho .btn-submit, .switch-form… */

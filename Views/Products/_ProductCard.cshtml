@@ -54,8 +54,9 @@
                 <div class="d-flex gap-2">
                     <button type="button"
                             class="btn btn-outline-info btn-sm w-50"
-                            onclick="showProductDetails('@Model.MA_SP')">
-                        <i class="fas fa-eye me-1"></i>Chi tiết
+                            <a href="@Url.Action("ProductDetails", "Products", new { id = Model.MA_SP })" class="btn btn-outline-info btn-sm w-100">
+    <i class="fas fa-eye me-1"></i>Chi tiết
+</a>
                     </button>
                     <form asp-controller="Cart"
                           asp-action="ThemGioHang"
