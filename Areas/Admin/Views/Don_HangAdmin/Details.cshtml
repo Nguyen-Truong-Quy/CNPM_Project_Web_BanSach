@@ -5,7 +5,6 @@
 }
 
 <!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -13,41 +12,28 @@
 </head>
 <body>
     <div>
-        <h4>Don_Hang</h4>
+        <h4>Đơn hàng</h4>
         <hr />
         <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.TG_DAT_HANG)
-            </dt>
-    
+            <!-- Các trường TG_DAT_HANG, TONG_TIEN, ... -->
+
+            <dt>Ảnh xác nhận thanh toán</dt>
             <dd>
-                @Html.DisplayFor(model => model.TG_DAT_HANG)
+                @if (Model.ThanhToans != null && Model.ThanhToans.Any())
+                {
+                    foreach (var tt in Model.ThanhToans)
+                    {
+                        <img src="@Url.Content(tt.AnhThanhToan)"
+                             alt="Hoá đơn đơn #@tt.ID_DON_HANG"
+                             class="img-thumbnail mb-2"
+                             style="max-width:300px;" />
+                    }
+                }
+                else
+                {
+                    <span class="text-muted">Chưa có ảnh xác nhận thanh toán.</span>
+                }
             </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.TONG_TIEN)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.TONG_TIEN)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Trang_Thai.TEN_TRANG_THAI)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Trang_Thai.TEN_TRANG_THAI)
-            </dd>
-    
-            <dt>
-                @Html.DisplayNameFor(model => model.Khach_Hang.HO_TEN_KH)
-            </dt>
-    
-            <dd>
-                @Html.DisplayFor(model => model.Khach_Hang.HO_TEN_KH)
-            </dd>
-    
         </dl>
     </div>
     <p>

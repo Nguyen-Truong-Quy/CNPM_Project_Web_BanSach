@@ -375,7 +375,7 @@
     <Content Include="Views\Order\NhapThongTinDatHang.cshtml" />
     <Content Include="Views\Order\XacNhanThanhToan.cshtml" />
     <Content Include="Views\Cart\ThongBaoChuaDangNhap.cshtml" />
-    <Content Include="Views\Users\DonHangCuaToi.cshtml" />
+    <Content Include="Views\Don_Hang\DonHangCuaToi.cshtml" />
     <Content Include="Views\Home\TrangChu.cshtml" />
     <Content Include="Views\Products\_ProductCard.cshtml" />
     <Content Include="Views\Don_Hang\Create.cshtml" />

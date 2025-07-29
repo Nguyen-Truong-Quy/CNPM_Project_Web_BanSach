@@ -113,20 +113,7 @@ namespace CNPM_Project_web.Areas.Admin.Controllers
 
 
 
-        // GET: Admin/Don_Hang/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Don_Hang don_Hang = db.Don_Hang.Find(id);
-            if (don_Hang == null)
-            {
-                return HttpNotFound();
-            }
-            return View(don_Hang);
-        }
+      
 
         // GET: Admin/Don_Hang/Create
         public ActionResult Create()
@@ -190,18 +177,23 @@ namespace CNPM_Project_web.Areas.Admin.Controllers
             return View(don_Hang);
         }
 
-        // GET: Admin/Don_Hang/Delete/5
-        public ActionResult Delete(int? id)
+        // thêm using System.Data.Entity; ở đầu file để dùng Include()
+
+        // GET: Admin/Don_Hang/Details/5
+        public ActionResult Details(int? id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Don_Hang don_Hang = db.Don_Hang.Find(id);
+
+            var don_Hang = db.Don_Hang
+                             .Include(d => d.Trang_Thai)
+                             .Include(d => d.Khach_Hang)
+                             .Include(d => d.ThanhToans)          // ← load list ảnh thanh toán
+                             .FirstOrDefault(d => d.ID_DON_HANG == id);
+
             if (don_Hang == null)
-            {
                 return HttpNotFound();
-            }
+
             return View(don_Hang);
         }
 

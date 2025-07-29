@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
@@ -6,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using CNPM_Project_web.Model;
+using CNPM_Project_web.ViewModel;
 
 namespace CNPM_Project_web.Controllers
 {
@@ -181,22 +183,43 @@ namespace CNPM_Project_web.Controllers
         // GET: Don_Hang/DonHangCuaToi
         public ActionResult DonHangCuaToi()
         {
-            var userId = Session["UserId"]?.ToString();
+            var userId = Session["UserId"] as string;
             if (string.IsNullOrEmpty(userId))
                 return RedirectToAction("Login", "Users");
 
-            var kh = db.Khach_Hang.FirstOrDefault(k => k.ID_User == userId);
-            if (kh == null)
-                return HttpNotFound();
+            var maKH = db.Khach_Hang
+                         .Where(k => k.ID_User == userId)
+                         .Select(k => k.MA_KH)
+                         .FirstOrDefault();
+            if (maKH == null)
+                return RedirectToAction("Create", "Users");
 
-            var list = db.Don_Hang
+            // 1) Lấy về List<Don_Hang> trước (LINQ-to-Entities → SQL)
+            var donHangs = db.Don_Hang
+                .Where(d => d.MA_KH == maKH)
                 .Include(d => d.Trang_Thai)
-                .Where(d => d.MA_KH == kh.MA_KH)
                 .OrderByDescending(d => d.TG_DAT_HANG)
+                .ToList();  // ← đây
+
+            // 2) Chuyển sang ViewModel (LINQ-to-Objects)
+            var listVm = donHangs
+                .Select((d, idx) => new DonHangViewModel
+                {
+                    STT = idx + 1,
+                    ID_DON_HANG = d.ID_DON_HANG,
+                    TenKhachHang = d.Khach_Hang.HO_TEN_KH,
+                    NgayDat = d.TG_DAT_HANG,
+                    TongTien = d.TONG_TIEN,
+                    TrangThaiDonHang = d.Trang_Thai.TEN_TRANG_THAI,
+                    TrangThaiThanhToan = d.ThanhToans.Any() ? "Đã gửi" : "Chưa gửi",
+                    // Vì ở Index không cần chi tiết, ta để list rỗng
+                    ChiTietSanPham = new List<ChiTietSPViewModel>()
+                })
                 .ToList();
 
-            return View(list);
+            return View("DonHangCuaToi", listVm);
         }
+
 
         protected override void Dispose(bool disposing)
         {
