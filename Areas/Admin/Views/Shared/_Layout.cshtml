@@ -84,18 +84,14 @@
             <hr>
 
             <li class="nav-item">
-                <a class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "Home" && ViewContext.RouteData.Values["area"] == null ? "active" : "")"
-                   href="@Url.Action("Index", "Home", new { area = "" })">
+                <a class="nav-link @(ViewContext.RouteData.Values["controller"].ToString() == "ThongKe" && ViewContext.RouteData.Values["area"] == null ? "active" : "")"
+                   href="@Url.Action("Index", "ThongKe", new { area = "" })">
                     <i class="fas fa-home"></i>
-                    <span>Trang chủ</span>
+                    <span>Thống Kê</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fas fa-cog"></i>
-                    <span>Cài đặt</span>
-                </a>
-            </li>
+
         </ul>
     </nav>
 

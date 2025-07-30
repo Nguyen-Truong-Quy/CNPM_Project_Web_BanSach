@@ -1,233 +1,40 @@
-﻿@model IEnumerable<CNPM_Project_web.Model.Don_Hang>
-@using CNPM_Project_web.Model
-
+﻿@model List<CNPM_Project_web.ViewModel.GiaoHangViewModel>
 @{
-    ViewBag.Title = "Quản lý Đơn hàng";
+    ViewBag.Title = "Xác nhận giao hàng";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
-    var currentStatus = ViewBag.CurrentStatus as string ?? "Tất cả";
 }
 
-<style>
-    .nav-tabs .nav-link {
-        color: #007bff;
-    }
+<h2 class="mb-4">Xác nhận giao hàng</h2>
 
-        .nav-tabs .nav-link.active {
-            font-weight: bold;
-            border-color: #dee2e6 #dee2e6 #fff;
-            color: #495057;
-        }
-
-    .status-badge {
-        cursor: pointer;
-        padding: 5px 10px;
-        border-radius: 12px;
-        color: white;
-        font-size: 12px;
-    }
-
-    .status-choxacnhanthanhtoan {
-        background-color: #ffc107;
-        color: black !important;
-    }
-
-    .status-chogiaohang {
-        background-color: #17a2b8;
-    }
-
-    .status-danggiaohang {
-        background-color: #007bff;
-    }
-
-    .status-hoanthanh {
-        background-color: #28a745;
-    }
-
-    .status-dahuy {
-        background-color: #dc3545;
-    }
-
-    .status-moi {
-        background-color: #6c757d;
-    }
-</style>
-
-<h2>@ViewBag.Title</h2>
-
-<!-- Dãy các Tab trạng thái -->
-<ul class="nav nav-tabs mb-3">
-    <li class="nav-item">
-        <a class="nav-link @(currentStatus == "Tất cả" ? "active" : "")" href="@Url.Action("Index", new { status = "Tất cả" })">Tất cả</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link @(currentStatus == "Chờ xác nhận" ? "active" : "")" href="@Url.Action("Index", new { status = "Chờ xác nhận" })">Chờ xác nhận</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link @(currentStatus == "Chờ giao hàng" ? "active" : "")" href="@Url.Action("Index", new { status = "Chờ giao hàng" })">Chờ giao hàng</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link @(currentStatus == "Đang giao hàng" ? "active" : "")" href="@Url.Action("Index", new { status = "Đang giao hàng" })">Đang giao hàng</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link @(currentStatus == "Hoàn thành" ? "active" : "")" href="@Url.Action("Index", new { status = "Hoàn thành" })">Hoàn thành</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link @(currentStatus == "Đã hủy" ? "active" : "")" href="@Url.Action("Index", new { status = "Đã hủy" })">Đã hủy</a>
-    </li>
-</ul>
-
-<!-- Bảng hiển thị danh sách đơn hàng -->
-<table class="table table-hover table-bordered">
-    <thead class="thead-light">
+<table class="table table-bordered table-hover">
+    <thead>
         <tr>
-            <th>Mã ĐH</th>
+            <th>Mã đơn</th>
             <th>Khách hàng</th>
             <th>Ngày đặt</th>
             <th>Tổng tiền</th>
-            <th class="text-center">Trạng thái</th>
+            <th>Trạng thái</th>
+            <th>Cập nhật</th>
         </tr>
     </thead>
     <tbody>
-        @if (!Model.Any())
+        @foreach (var item in Model)
         {
             <tr>
-                <td colspan="5" class="text-center">Không có đơn hàng nào ở trạng thái này.</td>
+                <td>@item.ID_DON_HANG</td>
+                <td>@item.TenKhachHang</td>
+                <td>@item.NgayDat.ToString("dd/MM/yyyy")</td>
+                <td>@String.Format("{0:#,##0}₫", item.TongTien)</td>
+                <td>@item.TrangThai</td>
+                <td>
+                    @using (Html.BeginForm("CapNhatTrangThai", "Don_HangAdmin", FormMethod.Post))
+                    {
+                        @Html.Hidden("idDonHang", item.ID_DON_HANG)
+                        @Html.DropDownList("idTrangThaiMoi", new SelectList(item.DanhSachTrangThai, "Value", "Text"), new { @class = "form-select d-inline-block w-auto me-2" })
+                        <button type="submit" class="btn btn-success btn-sm">Cập nhật</button>
+                    }
+                </td>
             </tr>
-        }
-        else
-        {
-            foreach (var item in Model)
-            {
-                string statusClass = "";
-                switch (item.Trang_Thai.TEN_TRANG_THAI)
-                {
-                    case "Mới": statusClass = "status-moi"; break;
-                    case "Chờ xác nhận thanh toán": statusClass = "status-choxacnhanthanhtoan"; break;
-                    case "Chờ giao hàng": statusClass = "status-chogiaohang"; break;
-                    case "Đang giao hàng": statusClass = "status-danggiaohang"; break;
-                    case "Hoàn thành": statusClass = "status-hoanthanh"; break;
-                    case "Đã hủy": statusClass = "status-dahuy"; break;
-                    default: statusClass = "status-moi"; break;
-                }
-                <tr>
-                    <td>#@item.ID_DON_HANG</td>
-                    <td>@Html.DisplayFor(modelItem => item.Khach_Hang.HO_TEN_KH)</td>
-                    <td>@Html.DisplayFor(modelItem => item.TG_DAT_HANG)</td>
-                    <td>@item.TONG_TIEN.ToString("N0") VNĐ</td>
-                    <td class="text-center">
-                        <!-- ================================================================ -->
-                        <!-- ĐOẠN MÃ ĐÃ ĐƯỢC SỬA CHO BOOTSTRAP 5 -->
-                        <!-- ================================================================ -->
-                        <span class="status-badge @statusClass"
-                              data-bs-toggle="modal"
-                              data-bs-target="#orderDetailsModal"
-                              data-id="@item.ID_DON_HANG">
-                            @Html.DisplayFor(modelItem => item.Trang_Thai.TEN_TRANG_THAI)
-                        </span>
-                    </td>
-                </tr>
-            }
         }
     </tbody>
 </table>
-
-<!-- ================================================================ -->
-<!-- CHỈ CÓ MỘT KHUNG MODAL DUY NHẤT ĐƯỢC ĐẶT Ở ĐÂY -->
-<!-- ================================================================ -->
-<div class="modal fade" id="orderDetailsModal" tabindex="-1" aria-labelledby="orderDetailsModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="orderDetailsModalLabel">Chi tiết Đơn hàng</h5>
-                <!-- Nút đóng (X) theo cú pháp Bootstrap 5 -->
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p class="text-center">Đang tải dữ liệu...</p>
-            </div>
-            <div class="modal-footer">
-                <!-- Nút Quay lại theo cú pháp Bootstrap 5 -->
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Quay lại</button>
-                <!-- Nơi đặt nút Cập nhật trạng thái -->
-                <div id="modal-action-button-placeholder"></div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- ================================================================ -->
-<!-- CHỈ CÓ MỘT KHỐI SCRIPT DUY NHẤT ĐƯỢC ĐẶT Ở ĐÂY -->
-<!-- ================================================================ -->
-@section scripts {
-    <script>
-   $(document).ready(function () {
-        // ================================================================
-        // SỰ KIỆN ĐÃ ĐƯỢC SỬA CHO BOOTSTRAP 5
-        // ================================================================
-        $('#orderDetailsModal').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget);
-            var orderId = button.data('id');
-            var modal = $(this);
-
-            modal.find('.modal-body').html('<p class="text-center">Đang tải dữ liệu...</p>');
-            $('#modal-action-button-placeholder').empty();
-
-            // Gọi AJAX để lấy Partial View
-            $.ajax({
-                url: '@Url.Action("_DonHangDetailsPartial", "Don_Hang")',
-                type: 'GET',
-                data: { id: orderId },
-                success: function (response) {
-                    modal.find('.modal-body').html(response);
-
-                    var actionData = $('#modal-action-data');
-                    var canUpdate = actionData.data('can-update');
-                    var nextActionText = actionData.data('next-action-text');
-                    var orderIdForUpdate = actionData.data('order-id');
-
-                    if (canUpdate) {
-                        var updateButton = $('<button></button>', {
-                            text: nextActionText,
-                            id: 'updateStatusBtn',
-                            'class': 'btn btn-primary',
-                            'data-order-id': orderIdForUpdate
-                        });
-                        $('#modal-action-button-placeholder').html(updateButton);
-                    }
-                },
-                error: function () {
-                    modal.find('.modal-body').html('<p class="text-center text-danger">Không thể tải dữ liệu chi tiết.</p>');
-                }
-            });
-        });
-        // Gắn sự kiện click cho nút cập nhật động
-        $(document).on('click', '#updateStatusBtn', function () {
-            var button = $(this);
-            var orderId = button.data('order-id');
-
-            if (confirm('Bạn có chắc chắn muốn cập nhật trạng thái cho đơn hàng này?')) {
-                button.prop('disabled', true).text('Đang xử lý...');
-
-                $.ajax({
-                    url: '@Url.Action("UpdateOrderStatus", "Don_Hang")',
-                    type: 'POST',
-                    data: { id: orderId },
-                    success: function (response) {
-                        if (response.success) {
-                            alert(response.message);
-                            location.reload();
-                        } else {
-                            alert('Lỗi: ' + response.message);
-                            button.prop('disabled', false).text('Thử lại');
-                        }
-                    },
-                    error: function () {
-                        alert('Đã có lỗi xảy ra trong quá trình kết nối đến máy chủ.');
-                        button.prop('disabled', false).text('Thử lại');
-                    }
-                });
-            }
-        });
-    });
-    </script>
-}

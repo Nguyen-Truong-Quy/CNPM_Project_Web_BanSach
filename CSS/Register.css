@@ -388,3 +388,41 @@ body {
 }
 
 /* Giữ nguyên style cũ cho .btn-submit, .switch-form… */
+/* ===== OTP section styling ===== */
+.otp-section {
+    margin: 24px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+    .otp-section .checkbox-group {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+.otp-box {
+    position: relative;
+    margin-top: 8px;
+}
+
+    .otp-box .input-field {
+        width: 100%;
+        padding-left: 48px; /* chừa chỗ cho icon */
+    }
+
+    .otp-box .icon {
+        position: absolute;
+        left: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 20px;
+        color: var(--text-secondary);
+    }
+
+    /* Khi focus vào OTP */
+    .otp-box .input-field:focus {
+        border-color: var(--accent-color);
+        box-shadow: 0 0 0 4px rgba(102,126,234,0.1);
+    }

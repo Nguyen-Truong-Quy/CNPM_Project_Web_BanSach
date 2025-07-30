@@ -151,6 +151,7 @@
     <Compile Include="Areas\Admin\Controllers\Tac_GiaController.cs" />
     <Compile Include="Areas\Admin\Controllers\ThanhToanController.cs" />
     <Compile Include="Areas\Admin\Controllers\The_Loai_AdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ThongKeController.cs" />
     <Compile Include="Areas\Admin\Controllers\Trang_Thai_AdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\User_KhachHangController.cs" />
     <Compile Include="Areas\QuanLyCuaHang\Controllers\USERs_QuanLyCuaHangController.cs" />
@@ -238,9 +239,13 @@
     <Compile Include="Model\UserKhachHangViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\ChiTietSPViewModel.cs" />
+    <Compile Include="ViewModel\DoanhThuThang.cs" />
     <Compile Include="ViewModel\DonHangViewModel.cs" />
     <Compile Include="ViewModel\ForgotPasswordViewModel.cs" />
+    <Compile Include="ViewModel\GiaoHangViewModel.cs" />
     <Compile Include="ViewModel\MuaNgayViewModel.cs" />
+    <Compile Include="ViewModel\SanPhamBanChay.cs" />
+    <Compile Include="ViewModel\ThongKeViewModel.cs" />
     <Compile Include="ViewModel\UserCreateViewModel.cs" />
     <Compile Include="ViewModel\UserKhachHangViewModel.cs" />
     <Compile Include="ViewModel\UserKhachHangViewModel1.cs" />
@@ -355,6 +360,8 @@
     <Content Include="Areas\Admin\Views\Don_HangAdmin\_DonHangDetailsPartial.cshtml" />
     <Content Include="Areas\Admin\Views\ThanhToan\DanhSach.cshtml" />
     <Content Include="Areas\Admin\Views\ThanhToan\ChiTiet.cshtml" />
+    <Content Include="Areas\Admin\Views\Don_HangAdmin\ChiTietDonHang.cshtml" />
+    <Content Include="Areas\Admin\Views\ThongKe\Index.cshtml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -384,7 +391,7 @@
     <Content Include="Views\Order\NhapThongTinDatHang.cshtml" />
     <Content Include="Views\Order\XacNhanThanhToan.cshtml" />
     <Content Include="Views\Cart\ThongBaoChuaDangNhap.cshtml" />
-    <Content Include="Views\Users\DonHangCuaToi.cshtml" />
+    <Content Include="Views\Don_Hang\DonHangCuaToi.cshtml" />
     <Content Include="Views\Home\TrangChu.cshtml" />
     <Content Include="Views\Products\_ProductCard.cshtml" />
     <Content Include="Views\Don_Hang\Create.cshtml" />

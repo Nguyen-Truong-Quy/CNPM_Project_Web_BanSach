@@ -1,0 +1,52 @@
+﻿@model CNPM_Project_web.ViewModel.ThongKeViewModel
+@{
+    ViewBag.Title = "Thống kê đơn hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Thống kê tổng quan</h2>
+
+<div class="row mb-4">
+    <div class="col-md-4">
+        <div class="card p-3 shadow-sm">
+            <h5>Tổng đơn hàng</h5>
+            <h3>@Model.TongDonHang</h3>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card p-3 shadow-sm">
+            <h5>Tổng doanh thu</h5>
+            <h3>@String.Format("{0:#,##0} ₫", Model.TongDoanhThu)</h3>
+        </div>
+    </div>
+</div>
+
+<h4>Số đơn theo trạng thái</h4>
+<table class="table table-bordered">
+    <tr>
+        <th>Trạng thái</th>
+        <th>Số lượng</th>
+    </tr>
+    @foreach (var item in Model.SoLuongTheoTrangThai)
+    {
+        <tr>
+            <td>@item.Key</td>
+            <td>@item.Value</td>
+        </tr>
+    }
+</table>
+
+<h4>Top 5 sản phẩm bán chạy</h4>
+<table class="table table-striped">
+    <tr>
+        <th>Tên sản phẩm</th>
+        <th>Số lượng bán</th>
+    </tr>
+    @foreach (var sp in Model.TopSanPhamBanChay)
+    {
+        <tr>
+            <td>@sp.TenSanPham</td>
+            <td>@sp.SoLuong</td>
+        </tr>
+    }
+</table>

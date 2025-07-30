@@ -15,17 +15,18 @@
     @using (Html.BeginForm("Login", "Users", FormMethod.Post, new { @class = "register-form", autocomplete = "off" }))
     {
         @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger", style = "margin-bottom: 16px;" })
 
         <div class="input-box">
-            @Html.TextBoxFor(m => m.Email, new { @class = "input-field", placeholder = " ", required = "required" })
-            @Html.LabelFor(m => m.Email, "Email", new { @class = "label" })
+            @Html.TextBoxFor(m => m.Email, new { @class = "input-field", placeholder = " ", required = "required", autocomplete = "off" })
+            <label class="label">Email</label>
             <i class='bx bx-user icon'></i>
             @Html.ValidationMessageFor(m => m.Email, "", new { @class = "field-validation-error" })
         </div>
 
         <div class="input-box">
-            @Html.PasswordFor(m => m.Password, new { @class = "input-field", placeholder = " ", required = "required" })
-            @Html.LabelFor(m => m.Password, "Mật khẩu", new { @class = "label" })
+            @Html.PasswordFor(m => m.Password, new { @class = "input-field", placeholder = " ", required = "required", id = "Password", autocomplete = "off" })
+            <label class="label">Mật khẩu</label>
             <i class='bx bx-lock-alt icon'></i>
             @Html.ValidationMessageFor(m => m.Password, "", new { @class = "field-validation-error" })
         </div>
@@ -51,7 +52,6 @@
             <span>Quay về trang chủ <a href="@Url.Action("TrangChu", "Home")">Trang Chủ</a></span>
         </div>
     }
-
 </div>
 
 <script>
@@ -59,7 +59,7 @@
         const inputs = document.querySelectorAll('.input-field');
 
         inputs.forEach(input => {
-            // Khi đã có giá trị (autofill hoặc quay lại), nâng label lên
+            // Nếu đã có value, giữ label nổi
             if (input.value && input.value.length > 0) {
                 input.nextElementSibling.classList.add('focused');
             }
@@ -74,5 +74,14 @@
                 }
             });
         });
+
+        // Restore password nếu đăng nhập sai
+        const passwordInput = document.getElementById('Password');
+        const passwordValue = '@(Model != null && !string.IsNullOrEmpty(Model.Password) ? Model.Password : "")';
+
+        if (passwordInput && passwordValue.length > 0) {
+            passwordInput.value = passwordValue;
+            passwordInput.nextElementSibling.classList.add('focused');
+        }
     });
 </script>
